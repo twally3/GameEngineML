@@ -14,6 +14,7 @@
 		505D1A5123A2F4EB00813A05 /* Game_EngineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A5023A2F4EB00813A05 /* Game_EngineUITests.swift */; };
 		505D1A6023A2FCCF00813A05 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A5F23A2FCCF00813A05 /* GameView.swift */; };
 		505D1A6223A3024000813A05 /* MyShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A6123A3024000813A05 /* MyShaders.metal */; };
+		505D1A6423A313B100813A05 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A6323A313B100813A05 /* Types.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		505D1A5223A2F4EB00813A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505D1A5F23A2FCCF00813A05 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		505D1A6123A3024000813A05 /* MyShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShaders.metal; sourceTree = "<group>"; };
+		505D1A6323A313B100813A05 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				505D1A5E23A2FA2C00813A05 /* Other Files */,
 				505D1A5F23A2FCCF00813A05 /* GameView.swift */,
 				505D1A6123A3024000813A05 /* MyShaders.metal */,
+				505D1A6323A313B100813A05 /* Types.swift */,
 			);
 			path = "Game Engine";
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				505D1A6223A3024000813A05 /* MyShaders.metal in Sources */,
 				505D1A6023A2FCCF00813A05 /* GameView.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
+				505D1A6423A313B100813A05 /* Types.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
