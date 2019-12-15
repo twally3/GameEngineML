@@ -2,8 +2,6 @@ import MetalKit
 
 class Renderer: NSObject {
     
-    var gameObject = Player()
-    
 }
 
 extension Renderer: MTKViewDelegate {
@@ -17,8 +15,7 @@ extension Renderer: MTKViewDelegate {
         let commandBuffer = Engine.commandQueue.makeCommandBuffer()
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         
-        gameObject.update(deltaTime: 1 / Float(view.preferredFramesPerSecond))
-        gameObject.render(renderCommandEncoder: renderCommandEncoder!)
+        SceneManager.tickScene(renderCommandEncoder: renderCommandEncoder!, deltaTime: 1 / Float(view.preferredFramesPerSecond))
         
         renderCommandEncoder?.endEncoding()
         commandBuffer?.present(drawable)
