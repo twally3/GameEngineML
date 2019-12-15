@@ -26,3 +26,7 @@ struct Vertex: sizeable {
 }
 
 extension SIMD3: sizeable where Scalar == Float {}
+
+struct ModelConstants: sizeable {
+    var modelMatrix = matrix_identity_float4x4
+}
