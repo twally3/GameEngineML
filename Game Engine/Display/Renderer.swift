@@ -2,7 +2,7 @@ import MetalKit
 
 class Renderer: NSObject {
     
-    var gameObject: GameObject = GameObject()
+    var gameObject = Player()
     
 }
 
