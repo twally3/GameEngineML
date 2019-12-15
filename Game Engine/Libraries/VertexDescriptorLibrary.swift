@@ -24,28 +24,27 @@ class VertexDescriptorLibrary {
 
 protocol VertexDescriptor {
     var name: String { get }
-    var vertexDescriptor: MTLVertexDescriptor { get }
+    var vertexDescriptor: MTLVertexDescriptor! { get }
 }
 
 public struct Basic_VertexDescriptor: VertexDescriptor {
     var name: String = "Basic Vertex Descriptor"
     
-    var vertexDescriptor: MTLVertexDescriptor {
-        let vd = MTLVertexDescriptor()
+    var vertexDescriptor: MTLVertexDescriptor!
+    
+    init() {
+        vertexDescriptor = MTLVertexDescriptor()
         
         // Position
-        vd.attributes[0].format = .float3
-        vd.attributes[0].bufferIndex = 0
-        vd.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.attributes[0].offset = 0
         
         // Colour
-        vd.attributes[1].format = .float4
-        vd.attributes[1].bufferIndex = 0
-        vd.attributes[1].offset = SIMD3<Float>.size
+        vertexDescriptor.attributes[1].format = .float4
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        vertexDescriptor.attributes[1].offset = SIMD3<Float>.size
         
-        vd.layouts[0].stride = Vertex.stride
-        
-        
-        return vd
+        vertexDescriptor.layouts[0].stride = Vertex.stride
     }
 }

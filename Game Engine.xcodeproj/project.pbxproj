@@ -28,6 +28,9 @@
 		50BC8EC223A67591003544A5 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EC123A67591003544A5 /* Node.swift */; };
 		50BC8EC523A6771B003544A5 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EC423A6771B003544A5 /* Renderable.swift */; };
 		50BC8EC923A6AAF9003544A5 /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EC823A6AAF9003544A5 /* Maths.swift */; };
+		50BC8ECC23A6B5D6003544A5 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ECB23A6B5D6003544A5 /* Scene.swift */; };
+		50BC8ECE23A6BBCF003544A5 /* SandboxScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */; };
+		50BC8ED123A6BD65003544A5 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ED023A6BD65003544A5 /* SceneManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		50BC8EC123A67591003544A5 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		50BC8EC423A6771B003544A5 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		50BC8EC823A6AAF9003544A5 /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
+		50BC8ECB23A6B5D6003544A5 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxScene.swift; sourceTree = "<group>"; };
+		50BC8ED023A6BD65003544A5 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +132,7 @@
 		505D1A3123A2F4E800813A05 /* Game Engine */ = {
 			isa = PBXGroup;
 			children = (
+				50BC8ECF23A6BD55003544A5 /* Managers */,
 				50BC8EC723A6AAE7003544A5 /* Maths */,
 				50BC8EB823A66979003544A5 /* GameShiz */,
 				505D1A6523A3819700813A05 /* Core */,
@@ -210,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				50BC8EC123A67591003544A5 /* Node.swift */,
+				50BC8ECA23A6B5C7003544A5 /* Scenes */,
 				50BC8EC623A6784E003544A5 /* GameObjects */,
 				50BC8EC323A676FF003544A5 /* Protocols */,
 			);
@@ -239,6 +247,23 @@
 				50BC8EC823A6AAF9003544A5 /* Maths.swift */,
 			);
 			path = Maths;
+			sourceTree = "<group>";
+		};
+		50BC8ECA23A6B5C7003544A5 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				50BC8ECB23A6B5D6003544A5 /* Scene.swift */,
+				50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		50BC8ECF23A6BD55003544A5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				50BC8ED023A6BD65003544A5 /* SceneManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,7 +396,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50BC8ECE23A6BBCF003544A5 /* SandboxScene.swift in Sources */,
 				50BC8EBA23A669A8003544A5 /* GameObject.swift in Sources */,
+				50BC8ED123A6BD65003544A5 /* SceneManager.swift in Sources */,
 				505D1A6223A3024000813A05 /* MyShaders.metal in Sources */,
 				505D1A6023A2FCCF00813A05 /* GameView.swift in Sources */,
 				50BC8EB323A53FA6003544A5 /* VertexDescriptorLibrary.swift in Sources */,
@@ -379,6 +406,7 @@
 				50BC8EBC23A66B60003544A5 /* Renderer.swift in Sources */,
 				50BC8EC223A67591003544A5 /* Node.swift in Sources */,
 				505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */,
+				50BC8ECC23A6B5D6003544A5 /* Scene.swift in Sources */,
 				50BC8EB723A545BF003544A5 /* RenderPipelineStateLibrary.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
 				50BC8EB123A38609003544A5 /* ShaderLibrary.swift in Sources */,
