@@ -23,6 +23,8 @@
 		50A4646523A704D7000D562D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646423A704D7000D562D /* Camera.swift */; };
 		50A4646723A705B9000D562D /* DebugCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646623A705B9000D562D /* DebugCamera.swift */; };
 		50A4646923A707F5000D562D /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646823A707F5000D562D /* CameraManager.swift */; };
+		50A4646B23A710F7000D562D /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646A23A710F7000D562D /* Cube.swift */; };
+		50A4646D23A712D4000D562D /* DepthStencilStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646C23A712D4000D562D /* DepthStencilStateLibrary.swift */; };
 		50BC8EB123A38609003544A5 /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EB023A38609003544A5 /* ShaderLibrary.swift */; };
 		50BC8EB323A53FA6003544A5 /* VertexDescriptorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EB223A53FA6003544A5 /* VertexDescriptorLibrary.swift */; };
 		50BC8EB523A54248003544A5 /* RenderPipelineDescriptorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8EB423A54248003544A5 /* RenderPipelineDescriptorLibrary.swift */; };
@@ -80,6 +82,8 @@
 		50A4646423A704D7000D562D /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		50A4646623A705B9000D562D /* DebugCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugCamera.swift; sourceTree = "<group>"; };
 		50A4646823A707F5000D562D /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		50A4646A23A710F7000D562D /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		50A4646C23A712D4000D562D /* DepthStencilStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthStencilStateLibrary.swift; sourceTree = "<group>"; };
 		50BC8EB023A38609003544A5 /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		50BC8EB223A53FA6003544A5 /* VertexDescriptorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptorLibrary.swift; sourceTree = "<group>"; };
 		50BC8EB423A54248003544A5 /* RenderPipelineDescriptorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelineDescriptorLibrary.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				50BC8EB423A54248003544A5 /* RenderPipelineDescriptorLibrary.swift */,
 				50BC8EB623A545BF003544A5 /* RenderPipelineStateLibrary.swift */,
 				50BC8EBD23A670ED003544A5 /* MeshLibrary.swift */,
+				50A4646C23A712D4000D562D /* DepthStencilStateLibrary.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 			children = (
 				50BC8EB923A669A8003544A5 /* GameObject.swift */,
 				50BC8EBF23A67479003544A5 /* Pointer.swift */,
+				50A4646A23A710F7000D562D /* Cube.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -444,6 +450,8 @@
 				505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */,
 				50BC8ECC23A6B5D6003544A5 /* Scene.swift in Sources */,
 				50BC8EB723A545BF003544A5 /* RenderPipelineStateLibrary.swift in Sources */,
+				50A4646D23A712D4000D562D /* DepthStencilStateLibrary.swift in Sources */,
+				50A4646B23A710F7000D562D /* Cube.swift in Sources */,
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
 				50BC8EB123A38609003544A5 /* ShaderLibrary.swift in Sources */,
