@@ -4,18 +4,21 @@ enum CameraTypes {
     case Debug
 }
 
-protocol Camera {
-    var cameraType: CameraTypes { get set }
-    var position: SIMD3<Float> { get set }
-    var projectionMatrix: matrix_float4x4 { get }
+class Camera: Node {
+    var cameraType: CameraTypes!
     
-    func update(deltaTime: Float)
-}
-
-extension Camera {
     var viewMatrix: matrix_float4x4 {
         var viewMatrix = matrix_identity_float4x4
-        viewMatrix.translate(direction: -position)
+        viewMatrix.translate(direction: -getPosition())
         return viewMatrix
+    }
+    
+    var projectionMatrix: matrix_float4x4 {
+        return matrix_identity_float4x4
+    }
+    
+    init(cameraType: CameraTypes) {
+        super.init(name: "Camera")
+        self.cameraType = cameraType
     }
 }

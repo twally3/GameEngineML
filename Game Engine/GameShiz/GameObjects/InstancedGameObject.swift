@@ -1,18 +1,17 @@
 import MetalKit
 
 class InstancedGameObject: Node {
+    private var _mesh: Mesh!
+    
     var material = Material()
     
-    private var _mesh: Mesh!
-    internal var _nodes: [Node] = []
-    private var _modelConstants: [ModelConstants] = []
-    
+    internal var _nodes: [Node] = []    
     private var _modelConstantsBuffer: MTLBuffer!
     
     init(meshType: MeshTypes, instanceCount: Int) {
-        super.init()
+        super.init(name: "Instantiated Game Object")
         
-        self._mesh = MeshLibrary.mesh(meshType)
+        self._mesh = Entities.meshes[meshType]
         self._mesh.setInstanceCount(instanceCount)
         self.generateInstances(instanceCount: instanceCount)
         self.createBuffers(instancCount: instanceCount)
@@ -21,7 +20,6 @@ class InstancedGameObject: Node {
     func generateInstances(instanceCount: Int) {
         for _ in 0..<instanceCount {
             _nodes.append(Node())
-            _modelConstants.append(ModelConstants())
         }
     }
     
@@ -29,22 +27,25 @@ class InstancedGameObject: Node {
         _modelConstantsBuffer = Engine.device.makeBuffer(length: ModelConstants.stride(instancCount), options: [])
     }
     
-    override func update(deltaTime: Float) {
-        var pointer = _modelConstantsBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _modelConstants.count)
+    private func updateModelConstantsBuffer() {
+        var pointer = _modelConstantsBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _nodes.count)
         
         for node in _nodes {
             pointer.pointee.modelMatrix = matrix_multiply(self.modelMatrix, node.modelMatrix)
             pointer = pointer.advanced(by: 1)
         }
-        
-        super.update(deltaTime: deltaTime)
+    }
+    
+    override func update() {
+        updateModelConstantsBuffer()
+        super.update()
     }
 }
 
 extension InstancedGameObject: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.state(.Instanced))
-        renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.depthStencilState(.Less))
+        renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[.Instanced])
+        renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Less])
     
         renderCommandEncoder.setVertexBuffer(_modelConstantsBuffer, offset: 0, index: 2)
         

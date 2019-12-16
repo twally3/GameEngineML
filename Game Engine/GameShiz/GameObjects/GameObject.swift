@@ -8,12 +8,12 @@ class GameObject: Node {
     var mesh: Mesh!
     
     init(meshType: MeshTypes) {
-        mesh = MeshLibrary.mesh(meshType)
-        mesh.setInstanceCount(1)
+        mesh = Entities.meshes[meshType]
     }
     
-    override func update(deltaTime: Float) {
+    override func update() {
         updateModelConstants()
+        super.update()
     }
     
     private func updateModelConstants() {
@@ -23,8 +23,8 @@ class GameObject: Node {
 
 extension GameObject: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.state(.Basic))
-        renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.depthStencilState(.Less))
+        renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[.Basic])
+        renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Less])
         
         renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
         
