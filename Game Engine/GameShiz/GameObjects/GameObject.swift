@@ -9,6 +9,7 @@ class GameObject: Node {
     
     init(meshType: MeshTypes) {
         mesh = MeshLibrary.mesh(meshType)
+        mesh.setInstanceCount(1)
     }
     
     override func update(deltaTime: Float) {
@@ -25,12 +26,11 @@ extension GameObject: Renderable {
         renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.state(.Basic))
         renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.depthStencilState(.Less))
         
-        renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
         renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
         
         renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
         
-        renderCommandEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: mesh.vertexCount)
+        mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }
 }
 
