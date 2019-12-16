@@ -46,8 +46,8 @@ class CustomMesh: Mesh {
         _vertexBuffer = Engine.device.makeBuffer(bytes: _vertices, length: Vertex.stride * _vertices.count, options: [])
     }
     
-    func addVertex(position: SIMD3<Float>, colour: SIMD4<Float>) {
-        _vertices.append(Vertex(position: position, colour: colour))
+    func addVertex(position: SIMD3<Float>, colour: SIMD4<Float>, textureCoordinate: SIMD2<Float> = SIMD2<Float>(repeating: 0)) {
+        _vertices.append(Vertex(position: position, colour: colour, textureCoordinate: textureCoordinate))
     }
     
     func setInstanceCount(_ count: Int) {
@@ -70,13 +70,13 @@ class Triangle_CustomMesh: CustomMesh {
 
 class Quad_CustomMesh: CustomMesh {
     override func createVertices() {
-        addVertex(position: SIMD3<Float>(1, 1, 0), colour: SIMD4<Float>(1, 0, 0, 1))
-        addVertex(position: SIMD3<Float>(-1, 1, 0), colour: SIMD4<Float>(0, 1, 0, 1))
-        addVertex(position: SIMD3<Float>(-1, -1, 0), colour: SIMD4<Float>(0, 0, 1, 1))
+        addVertex(position: SIMD3<Float>(1, 1, 0), colour: SIMD4<Float>(1, 0, 0, 1), textureCoordinate: SIMD2<Float>(1, 0))
+        addVertex(position: SIMD3<Float>(-1, 1, 0), colour: SIMD4<Float>(0, 1, 0, 1), textureCoordinate: SIMD2<Float>(0, 0))
+        addVertex(position: SIMD3<Float>(-1, -1, 0), colour: SIMD4<Float>(0, 0, 1, 1), textureCoordinate: SIMD2<Float>(0, 1))
         
-        addVertex(position: SIMD3<Float>(1, 1, 0), colour: SIMD4<Float>(1, 0, 0, 1))
-        addVertex(position: SIMD3<Float>(-1, -1, 0), colour: SIMD4<Float>(0, 0, 1, 1))
-        addVertex(position: SIMD3<Float>(1, -1, 0), colour: SIMD4<Float>(1, 0, 1, 1))
+        addVertex(position: SIMD3<Float>(1, 1, 0), colour: SIMD4<Float>(1, 0, 0, 1), textureCoordinate: SIMD2<Float>(1, 0))
+        addVertex(position: SIMD3<Float>(-1, -1, 0), colour: SIMD4<Float>(0, 0, 1, 1), textureCoordinate: SIMD2<Float>(0, 1))
+        addVertex(position: SIMD3<Float>(1, -1, 0), colour: SIMD4<Float>(1, 0, 1, 1), textureCoordinate: SIMD2<Float>(1, 1))
     }
 }
 
