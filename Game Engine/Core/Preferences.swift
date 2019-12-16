@@ -11,7 +11,7 @@ class Preferences {
     
     public static var clearColour: MTLClearColor = ClearColours.White
     
-    public static var mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm
+    public static var mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
     
     public static var mainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
     
