@@ -6,6 +6,12 @@ class Node {
     var scale: SIMD3<Float> = SIMD3<Float>(repeating: 1)
     var rotation: SIMD3<Float> = SIMD3<Float>(repeating: 0)
     
+    var name: String!
+    
+    init(name: String = "Node") {
+        self.name = name
+    }
+    
     var modelMatrix: matrix_float4x4 {
         var modelMatrix = matrix_identity_float4x4
         modelMatrix.translate(direction: position)
@@ -29,6 +35,7 @@ class Node {
     }
     
     func render(renderCommandEncoder: MTLRenderCommandEncoder) {
+        renderCommandEncoder.pushDebugGroup("Rendering \(name!)")
         for child in children {
             child.render(renderCommandEncoder: renderCommandEncoder)
         }
