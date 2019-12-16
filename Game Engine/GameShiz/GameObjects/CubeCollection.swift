@@ -11,6 +11,7 @@ class CubeCollection: InstancedGameObject {
         self.cubesWide = cubesWide
         self.cubesHigh = cubesHigh
         self.cubesBack = cubesBack
+        self.name = "Cube Collection"
         
         setColour(ColourUtil.randomColour)
     }
