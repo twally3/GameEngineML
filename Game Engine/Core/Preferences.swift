@@ -9,7 +9,7 @@ enum ClearColours {
 
 class Preferences {
     
-    public static var clearColour: MTLClearColor = ClearColours.White
+    public static var clearColour: MTLClearColor = ClearColours.Black
     
     public static var mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
     
