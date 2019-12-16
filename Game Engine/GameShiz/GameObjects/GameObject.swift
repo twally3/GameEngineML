@@ -4,6 +4,7 @@ class GameObject: Node {
     
     var modelConstants = ModelConstants()
     private var material = Material()
+    private var _textureType: TextureTypes = .None
     
     var mesh: Mesh!
     
@@ -29,6 +30,10 @@ extension GameObject: Renderable {
         renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
         
         renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
+        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
+        if (material.useTexture) {
+            renderCommandEncoder.setFragmentTexture(Entities.textures[_textureType], index: 0)
+        }
         
         mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }
@@ -39,5 +44,12 @@ extension GameObject {
     public func setColour(_ colour: SIMD4<Float>) {
         self.material.colour = colour
         self.material.useMaterialColour = true
+        self.material.useTexture = false
+    }
+    
+    public func setTexture(_ textureType: TextureTypes) {
+        self._textureType = textureType
+        self.material.useTexture = true
+        self.material.useMaterialColour = false
     }
 }

@@ -18,6 +18,9 @@
 		50215E2F23A7F20700B0C166 /* InstancedShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 50215E2E23A7F20700B0C166 /* InstancedShaders.metal */; };
 		50215E3123A7F27500B0C166 /* GameTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E3023A7F27500B0C166 /* GameTime.swift */; };
 		50215E3323A7FB2900B0C166 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E3223A7FB2900B0C166 /* Quad.swift */; };
+		50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */ = {isa = PBXBuildFile; fileRef = 50215E3523A80B6800B0C166 /* PartyPirateParot.png */; };
+		50215E3823A80D0E00B0C166 /* TextureLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E3723A80D0E00B0C166 /* TextureLibrary.swift */; };
+		50215E3A23A8111800B0C166 /* SamplerStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E3923A8111800B0C166 /* SamplerStateLibrary.swift */; };
 		505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A3223A2F4E800813A05 /* AppDelegate.swift */; };
 		505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505D1A3623A2F4EA00813A05 /* Assets.xcassets */; };
 		505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505D1A3823A2F4EA00813A05 /* Main.storyboard */; };
@@ -82,6 +85,9 @@
 		50215E2E23A7F20700B0C166 /* InstancedShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = InstancedShaders.metal; sourceTree = "<group>"; };
 		50215E3023A7F27500B0C166 /* GameTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTime.swift; sourceTree = "<group>"; };
 		50215E3223A7FB2900B0C166 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
+		50215E3523A80B6800B0C166 /* PartyPirateParot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PartyPirateParot.png; sourceTree = "<group>"; };
+		50215E3723A80D0E00B0C166 /* TextureLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLibrary.swift; sourceTree = "<group>"; };
+		50215E3923A8111800B0C166 /* SamplerStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplerStateLibrary.swift; sourceTree = "<group>"; };
 		505D1A2F23A2F4E800813A05 /* Game Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		505D1A3223A2F4E800813A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		505D1A3623A2F4EA00813A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				50BC8EBD23A670ED003544A5 /* MeshLibrary.swift */,
+				50215E3723A80D0E00B0C166 /* TextureLibrary.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 				50BC8EB423A54248003544A5 /* RenderPipelineDescriptorLibrary.swift */,
 				50BC8EB623A545BF003544A5 /* RenderPipelineStateLibrary.swift */,
 				50A4646C23A712D4000D562D /* DepthStencilStateLibrary.swift */,
+				50215E3923A8111800B0C166 /* SamplerStateLibrary.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -207,6 +215,14 @@
 				50215E2E23A7F20700B0C166 /* InstancedShaders.metal */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		50215E3423A80B2100B0C166 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				50215E3523A80B6800B0C166 /* PartyPirateParot.png */,
+			);
+			path = Res;
 			sourceTree = "<group>";
 		};
 		505D1A2623A2F4E800813A05 = {
@@ -282,6 +298,7 @@
 				5067174823A6C89500C31239 /* Input */,
 				50BC8EC723A6AAE7003544A5 /* Maths */,
 				50A4646E23A7B860000D562D /* Utils */,
+				50215E3423A80B2100B0C166 /* Res */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -488,6 +505,7 @@
 			files = (
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
+				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +536,7 @@
 				50A4647023A7B876000D562D /* ColourUtil.swift in Sources */,
 				50215E2D23A7F1C400B0C166 /* BasicShaders.metal in Sources */,
 				505D1A6023A2FCCF00813A05 /* GameView.swift in Sources */,
+				50215E3A23A8111800B0C166 /* SamplerStateLibrary.swift in Sources */,
 				50BC8EB323A53FA6003544A5 /* VertexDescriptorLibrary.swift in Sources */,
 				50BC8EC023A67479003544A5 /* Pointer.swift in Sources */,
 				50BC8EBC23A66B60003544A5 /* Renderer.swift in Sources */,
@@ -533,6 +552,7 @@
 				50A4646D23A712D4000D562D /* DepthStencilStateLibrary.swift in Sources */,
 				50A4647423A7C598000D562D /* CubeCollection.swift in Sources */,
 				50215E2223A7E5A300B0C166 /* Library.swift in Sources */,
+				50215E3823A80D0E00B0C166 /* TextureLibrary.swift in Sources */,
 				50A4647223A7BF00000D562D /* InstancedGameObject.swift in Sources */,
 				50A4646B23A710F7000D562D /* Cube.swift in Sources */,
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,

@@ -9,6 +9,12 @@ class SandboxScene: Scene {
         
         camera.setPositionZ(5)
         
+        quad.setTexture(.PartyPirateParot)
+        
         addChild(quad)
+    }
+    
+    override func doUpdate() {
+        quad.rotateY(GameTime.deltaTime)
     }
 }

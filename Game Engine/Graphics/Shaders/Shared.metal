@@ -11,7 +11,6 @@ struct RasterizerData {
     float4 position [[ position ]];
     float4 colour;
     float2 textureCoordinate;
-    float totalGameTime;
 };
 
 struct ModelConstants {
@@ -19,7 +18,6 @@ struct ModelConstants {
 };
 
 struct SceneConstants {
-    float totalGameTime;
     float4x4 viewMatrix;
     float4x4 projectionMatrix;
 };
@@ -27,4 +25,5 @@ struct SceneConstants {
 struct Material {
     float4 colour;
     bool useMaterialColour;
+    bool useTexture;
 };
