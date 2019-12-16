@@ -39,6 +39,11 @@ public struct Basic_VertexDescriptor: VertexDescriptor {
         vertexDescriptor.attributes[1].bufferIndex = 0
         vertexDescriptor.attributes[1].offset = SIMD3<Float>.size
         
+        // Texture Coordinate
+        vertexDescriptor.attributes[2].format = .float2
+        vertexDescriptor.attributes[2].bufferIndex = 0
+        vertexDescriptor.attributes[2].offset = SIMD3<Float>.size + SIMD4<Float>.size
+        
         vertexDescriptor.layouts[0].stride = Vertex.stride
     }
 }
