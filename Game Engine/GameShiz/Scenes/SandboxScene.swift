@@ -20,6 +20,7 @@ class SandboxScene: Scene {
         
         middleSun.setPosition(SIMD3<Float>(0, 1, 0))
         middleSun.setMaterialIsLit(false)
+        middleSun.setLightBrightness(0.3)
         middleSun.setMaterialColour(SIMD4<Float>(1, 1, 1, 1))
         middleSun.setLightColour(SIMD3<Float>(1, 1, 1))
         addLight(middleSun)
@@ -30,6 +31,7 @@ class SandboxScene: Scene {
         rightSun.setLightColour(SIMD3<Float>(0, 0, 1))
         addLight(rightSun)
         
+        cruiser.setMaterialAmbient(0.01)
         cruiser.setRotation(SIMD3<Float>(repeating: 0.3))
         addChild(cruiser)
     }
@@ -39,5 +41,9 @@ class SandboxScene: Scene {
             cruiser.rotateX(Mouse.getDY() * GameTime.deltaTime)
             cruiser.rotateY(Mouse.getDX() * GameTime.deltaTime)
         }
+        
+        leftSun.setPositionX(cos(GameTime.totalGameTime) - 1)
+        middleSun.setPositionX(cos(GameTime.totalGameTime))
+        rightSun.setPositionX(cos(GameTime.totalGameTime) + 1)
     }
 }

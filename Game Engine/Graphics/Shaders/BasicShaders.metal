@@ -7,9 +7,13 @@ vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant ModelConstants &modelConstants [[ buffer(2) ]]) {
     RasterizerData rd;
     
-    rd.position = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * modelConstants.modelMatrix * float4(vIn.position, 1);
+    float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1);
+    
+    rd.position = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * worldPosition;
     rd.colour = vIn.colour;
     rd.textureCoordinate = vIn.textureCoordinate;
+    rd.worldPosition = worldPosition.xyz;
+    rd.surfaceNormal = (modelConstants.modelMatrix * float4(vIn.normal, 1.0)).xyz;
     
     return rd;
 }
@@ -34,15 +38,26 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     if (material.isLit) {
         float3 totalAmbient = float3(0, 0, 0);
+        float3 totalDiffuse = float3(0, 0, 0);
+        
+        float3 unitNormal = normalize(rd.surfaceNormal);
+        
         for (int i = 0; i < lightCount; i++) {
             LightData lightData = lightDatas[i];
             
             float3 ambientness = material.ambient * lightData.ambientIntensity;
-            float3 ambientColour = ambientness * lightData.colour;
+            float3 ambientColour = clamp(ambientness * lightData.colour * lightData.brightness, 0.0, 1.0);
             totalAmbient += ambientColour;
+            
+            float3 unitToLightVector = normalize(lightData.position - rd.worldPosition);
+            
+            float3 diffuseness = material.diffuse * lightData.diffuseIntensity;
+            float nDotL = max(dot(unitNormal, unitToLightVector), 0.0);
+            float3 diffuseColour = clamp(diffuseness * nDotL * lightData.colour * lightData.brightness, 0.0, 1.0);
+            totalDiffuse += diffuseColour;
         }
         
-        float3 phongIntensity = totalAmbient; // + totalDiffuse + totalSpecular
+        float3 phongIntensity = totalAmbient + totalDiffuse; // + totalSpecular
         colour *= float4(phongIntensity, 1.0);
     }
     
