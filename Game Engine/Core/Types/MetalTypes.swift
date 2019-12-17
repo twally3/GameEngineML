@@ -39,6 +39,7 @@ struct ModelConstants: sizeable {
 struct SceneConstants: sizeable {
     var viewMatrix = matrix_identity_float4x4
     var projectionMatrix = matrix_identity_float4x4
+    var cameraPosition = SIMD3<Float>(repeating: 0)
 }
 
 struct Material: sizeable {
@@ -48,6 +49,8 @@ struct Material: sizeable {
     var isLit: Bool = true
     var ambient: SIMD3<Float> = SIMD3<Float>(repeating: 0.1)
     var diffuse: SIMD3<Float> = SIMD3<Float>(repeating: 1)
+    var specular: SIMD3<Float> = SIMD3<Float>(repeating: 1)
+    var shininess: Float = 2
 }
 
 struct LightData: sizeable {
@@ -56,4 +59,5 @@ struct LightData: sizeable {
     var brightness: Float = 1.0
     var ambientIntensity: Float = 1.0
     var diffuseIntensity: Float = 1.0
+    var specularIntensity: Float = 1.0
 }
