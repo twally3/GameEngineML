@@ -28,6 +28,6 @@ class DebugCamera: Camera {
             self.moveY(-GameTime.deltaTime)
         }
         
-        self._zoom += Mouse.getDWheel()
+//        self._zoom += Mouse.getDWheel()
     }
 }
