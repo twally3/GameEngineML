@@ -1,9 +1,8 @@
 import MetalKit
 
 class InstancedGameObject: Node {
+    private var _material = Material()
     private var _mesh: Mesh!
-    
-    var material = Material()
     
     internal var _nodes: [Node] = []    
     private var _modelConstantsBuffer: MTLBuffer!
@@ -19,7 +18,7 @@ class InstancedGameObject: Node {
     
     func generateInstances(instanceCount: Int) {
         for _ in 0..<instanceCount {
-            _nodes.append(Node())
+            _nodes.append(Node(name: "\(getName())_InstancedNode"))
         }
     }
     
@@ -27,17 +26,14 @@ class InstancedGameObject: Node {
         _modelConstantsBuffer = Engine.device.makeBuffer(length: ModelConstants.stride(instancCount), options: [])
     }
     
-    private func updateModelConstantsBuffer() {
+    override func update() {
         var pointer = _modelConstantsBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _nodes.count)
         
         for node in _nodes {
             pointer.pointee.modelMatrix = matrix_multiply(self.modelMatrix, node.modelMatrix)
             pointer = pointer.advanced(by: 1)
         }
-    }
-    
-    override func update() {
-        updateModelConstantsBuffer()
+        
         super.update()
     }
 }
@@ -49,7 +45,7 @@ extension InstancedGameObject: Renderable {
     
         renderCommandEncoder.setVertexBuffer(_modelConstantsBuffer, offset: 0, index: 2)
         
-        renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
+        renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
         
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }
@@ -57,7 +53,11 @@ extension InstancedGameObject: Renderable {
 
 extension InstancedGameObject {
     public func setColour(_ colour: SIMD4<Float>) {
-        self.material.colour = colour
-        self.material.useMaterialColour = true
+        self._material.colour = colour
+        self._material.useMaterialColour = true
+    }
+    
+    public func setColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
+        setColour(SIMD4<Float>(r, g, b, a))
     }
 }

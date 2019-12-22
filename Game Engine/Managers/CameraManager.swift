@@ -1,5 +1,4 @@
 class CameraManager {
-    
     private var _cameras: [CameraTypes: Camera] = [:]
     
     public var currentCamera: Camera!
@@ -17,5 +16,4 @@ class CameraManager {
             camera.update()
         }
     }
-    
 }

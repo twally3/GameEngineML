@@ -1,7 +1,6 @@
 import MetalKit
 
 class Engine {
-    
     public static var device: MTLDevice!
     public static var commandQueue: MTLCommandQueue!
     public static var defaultLibrary: MTLLibrary!

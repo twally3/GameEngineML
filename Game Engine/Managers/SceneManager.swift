@@ -5,7 +5,6 @@ enum SceneTypes {
 }
 
 class SceneManager {
-    
     private static var _currentScene: Scene!
     
     public static func initialize(_ sceneType: SceneTypes) {
@@ -15,7 +14,7 @@ class SceneManager {
     public static func setScene(sceneType: SceneTypes) {
         switch sceneType {
         case .Sandbox:
-            _currentScene = SandboxScene()
+            _currentScene = SandboxScene(name: "Sandbox")
         }
     }
     
