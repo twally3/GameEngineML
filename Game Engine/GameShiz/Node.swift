@@ -1,7 +1,6 @@
 import MetalKit
 
 class Node {
-    
     private var _name: String = "Node"
     private var _id: String!
     
@@ -23,7 +22,7 @@ class Node {
     
     var children: [Node] = []
     
-    init(name: String = "Node") {
+    init(name: String) {
         self._name = name
         self._id = UUID().uuidString
     }
@@ -64,6 +63,7 @@ extension Node {
     func getID() -> String { return self._id }
     
     func setPosition(_ position: SIMD3<Float>) { self._position = position }
+    func setPosition(_ x: Float, _ y: Float, _ z: Float) { self._position = SIMD3<Float>(x, y, z) }
     func setPositionX(_ xPosition: Float) { self._position.x = xPosition }
     func setPositionY(_ yPosition: Float) { self._position.y = yPosition }
     func setPositionZ(_ zPosition: Float) { self._position.z = zPosition }
@@ -77,6 +77,7 @@ extension Node {
     func moveZ(_ delta: Float) { self._position.z += delta }
     
     func setRotation(_ rotation: SIMD3<Float>) { self._rotation = rotation }
+    func setRotation(_ x: Float, _ y: Float, _ z: Float) { self._rotation = SIMD3<Float>(x, y, z) }
     func setRotationX(_ xRotation: Float) { self._rotation.x = xRotation }
     func setRotationY(_ yRotation: Float) { self._rotation.y = yRotation }
     func setRotationZ(_ zRotation: Float) { self._rotation.z = zRotation }
@@ -90,6 +91,7 @@ extension Node {
     func rotateZ(_ delta: Float) { self._rotation.z += delta }
     
     func setScale(_ scale: SIMD3<Float>) { self._scale = scale }
+    func setScale(_ x: Float, _ y: Float, _ z: Float) { self._scale = SIMD3<Float>(x, y, z) }
     func setScaleX(_ xScale: Float) { self._scale.x = xScale }
     func setScaleY(_ yScale: Float) { self._scale.y = yScale }
     func setScaleZ(_ zScale: Float) { self._scale.z = zScale }

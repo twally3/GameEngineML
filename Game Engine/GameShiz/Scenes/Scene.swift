@@ -1,13 +1,12 @@
 import MetalKit
 
 class Scene: Node {
-    
     private var _cameraManager = CameraManager()
     private var _lightManager = LightManager()
     private var _sceneConstants = SceneConstants()
     
-    init() {
-        super.init(name: "Scene")
+    override init(name: String) {
+        super.init(name: name)
         buildScene()
     }
     
@@ -26,25 +25,23 @@ class Scene: Node {
         self._lightManager.addLightObject(light)
     }
     
-    func updateSceneConstants() {
-        _sceneConstants.viewMatrix = _cameraManager.currentCamera.viewMatrix
-        _sceneConstants.projectionMatrix = _cameraManager.currentCamera.projectionMatrix
-        _sceneConstants.cameraPosition = _cameraManager.currentCamera.getPosition()
-    }
-    
     func updateCameras() {
         _cameraManager.update()
     }
     
     override func update() {
-        updateSceneConstants()
+        _sceneConstants.viewMatrix = _cameraManager.currentCamera.viewMatrix
+        _sceneConstants.projectionMatrix = _cameraManager.currentCamera.projectionMatrix
+        _sceneConstants.cameraPosition = _cameraManager.currentCamera.getPosition()
+        
         super.update()
     }
     
     override func render(renderCommandEncoder: MTLRenderCommandEncoder) {
+        renderCommandEncoder.pushDebugGroup("Rendering Scene \(getName())")
         renderCommandEncoder.setVertexBytes(&_sceneConstants, length: SceneConstants.stride, index: 1)
         _lightManager.setLightData(renderCommandEncoder)
         super.render(renderCommandEncoder: renderCommandEncoder)
+        renderCommandEncoder.popDebugGroup()
     }
-    
 }

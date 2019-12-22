@@ -5,7 +5,6 @@ enum MOUSE_BUTTON_CODES: Int {
 }
 
 class Mouse {
-    
     private static var MOUSE_BUTTON_COUNT = 12
     private static var mouseButtonList = [Bool].init(repeating: false, count: MOUSE_BUTTON_COUNT)
     

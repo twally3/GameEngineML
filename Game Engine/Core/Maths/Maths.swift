@@ -27,7 +27,6 @@ extension Float {
 }
 
 extension matrix_float4x4 {
-    
     mutating func translate(direction: SIMD3<Float>) {
         var result = matrix_identity_float4x4
         

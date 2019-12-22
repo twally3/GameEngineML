@@ -10,7 +10,6 @@ enum MeshTypes {
 }
 
 class MeshLibrary: Library<MeshTypes, Mesh> {
-    
     private var _library: [MeshTypes: Mesh] = [:]
     
     override func fillLibrary() {
@@ -194,5 +193,4 @@ class Cube_CustomMesh: CustomMesh {
         addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0))
         addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0))
     }
-
 }

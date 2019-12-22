@@ -1,5 +1,3 @@
-import MetalKit
-
 class SandboxScene: Scene {
     let camera = DebugCamera()
     let cruiser = Cruiser()
@@ -9,30 +7,32 @@ class SandboxScene: Scene {
     let rightSun = Sun()
     
     override func buildScene() {
-        camera.setPositionZ(6)
+        camera.setPosition(0, 0, 4)
         addCamera(camera)
         
-        leftSun.setPosition(SIMD3<Float>(-1, 1, 0))
+        leftSun.setPosition(-1, 1, 0)
         leftSun.setMaterialIsLit(false)
-        leftSun.setMaterialColour(SIMD4<Float>(1, 0, 0, 1))
-        leftSun.setLightColour(SIMD3<Float>(1, 0, 0))
+        leftSun.setMaterialColour(1, 0, 0, 1)
+        leftSun.setLightColour(1, 0, 0)
         addLight(leftSun)
         
-        middleSun.setPosition(SIMD3<Float>(0, 1, 0))
+        middleSun.setPosition(0, 1, 0)
         middleSun.setMaterialIsLit(false)
         middleSun.setLightBrightness(0.3)
-        middleSun.setMaterialColour(SIMD4<Float>(1, 1, 1, 1))
-        middleSun.setLightColour(SIMD3<Float>(1, 1, 1))
+        middleSun.setMaterialColour(1, 1, 1, 1)
+        middleSun.setLightColour(1, 1, 1)
         addLight(middleSun)
         
-        rightSun.setPosition(SIMD3<Float>(1, 1, 0))
+        rightSun.setPosition(1, 1, 0)
         rightSun.setMaterialIsLit(false)
-        rightSun.setMaterialColour(SIMD4<Float>(0, 0, 1, 1))
-        rightSun.setLightColour(SIMD3<Float>(0, 0, 1))
+        rightSun.setMaterialColour(0, 0, 1, 1)
+        rightSun.setLightColour(0, 0, 1)
         addLight(rightSun)
         
         cruiser.setMaterialAmbient(0.01)
-        cruiser.setRotation(SIMD3<Float>(repeating: 0.3))
+        cruiser.setRotationX(0.5)
+        cruiser.setMaterialShininess(10)
+        cruiser.setMaterialSpecular(5)
         addChild(cruiser)
     }
     
@@ -41,10 +41,6 @@ class SandboxScene: Scene {
             cruiser.rotateX(Mouse.getDY() * GameTime.deltaTime)
             cruiser.rotateY(Mouse.getDX() * GameTime.deltaTime)
         }
-        
-        leftSun.setPositionX(cos(GameTime.totalGameTime) - 1)
-        middleSun.setPositionX(cos(GameTime.totalGameTime))
-        rightSun.setPositionX(cos(GameTime.totalGameTime) + 1)
         
         cruiser.setMaterialShininess(cruiser.getMaterialShininess() - Mouse.getDWheel())
     }
