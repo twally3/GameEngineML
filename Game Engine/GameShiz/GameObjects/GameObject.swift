@@ -6,6 +6,8 @@ class GameObject: Node {
     private var _textureType: TextureTypes = .None
     private var _mesh: Mesh!
     
+    private var _texture: MTLTexture!
+    
     init(name: String, meshType: MeshTypes) {
         super.init(name: name)
         _mesh = Entities.meshes[meshType]
@@ -28,7 +30,11 @@ extension GameObject: Renderable {
         renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
         renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
         if (_material.useTexture) {
-            renderCommandEncoder.setFragmentTexture(Entities.textures[_textureType], index: 0)
+            if (_texture != nil) {
+                renderCommandEncoder.setFragmentTexture(_texture, index: 0)
+            } else {
+                renderCommandEncoder.setFragmentTexture(Entities.textures[_textureType], index: 0)
+            }
         }
         
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
@@ -49,6 +55,12 @@ extension GameObject {
     
     public func setTexture(_ textureType: TextureTypes) {
         self._textureType = textureType
+        self._material.useTexture = true
+        self._material.useMaterialColour = false
+    }
+    
+    public func setTexture(_ texture: MTLTexture) {
+        self._texture = texture
         self._material.useTexture = true
         self._material.useMaterialColour = false
     }

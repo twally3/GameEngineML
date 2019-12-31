@@ -49,3 +49,12 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     return half4(colour.r, colour.g, colour.b, colour.a);
 }
+
+kernel void create_height_map(texture2d<float, access::write> outputTexture [[texture(0)]],
+                              constant float *heights [[ buffer(0) ]],
+                              uint2 position [[thread_position_in_grid]]) {
+    float heightValue = heights[position.y * outputTexture.get_width() + position.x];
+    float4 height = heightValue;
+    
+    outputTexture.write(height, position);
+}

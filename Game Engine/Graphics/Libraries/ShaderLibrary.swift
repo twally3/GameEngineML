@@ -7,6 +7,9 @@ enum ShaderTypes {
 
     // Fragment
     case Basic_Fragment
+    
+    // Compute
+    case CreateHeightMap_Compute
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -26,6 +29,11 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "Basic Fragment Shader", functionName: "basic_fragment_shader"),
             forKey: .Basic_Fragment
+        )
+        
+        _library.updateValue(
+            Shader(name: "Create Height Map Compute Shader", functionName: "create_height_map"),
+            forKey: .CreateHeightMap_Compute
         )
     }
     
