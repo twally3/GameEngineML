@@ -1,63 +1,64 @@
 import GameplayKit
 
 class Noise {
-//    public static func generateNoiseMap(mapWidth: Int, mapHeight: Int, scale: Float) -> [[Float]] {
-//        let perlinNoiseSource = GKPerlinNoiseSource.init()
-//        perlinNoiseSource.seed = Int32(arc4random_uniform(1000000))
-//        let noise = GKNoise(perlinNoiseSource)
-//        let perlinNoise = GKNoiseMap(noise)
-//
-//        var noiseMap: [[Float]] = Array(repeating: Array(repeating: Float(0), count: mapHeight), count: mapWidth)
-//
-//        var minHeightValue: Float = Float.greatestFiniteMagnitude
-//        var maxHeightValue: Float = -Float.greatestFiniteMagnitude
-//
-//        for y in 0..<mapHeight {
-//            for x in 0..<mapWidth {
-//                let sampleX = Int32(Double(x) / Double(scale))
-//                let sampleY = Int32(Double(y) / Double(scale))
-//
-//                let perlinValue = perlinNoise.value(at: vector_int2(sampleX, sampleY))
-//                print(perlinValue)
-//                noiseMap[x][y] = map(x: perlinValue, in_min: -1.0, in_max: 1.0, out_min: 0.0, out_max: 1.0)
-//
-//                if (perlinValue > maxHeightValue) {
-//                    maxHeightValue = perlinValue
-//                }
-//                if (perlinValue < minHeightValue) {
-//                    minHeightValue = perlinValue
-//                }
-//            }
-//        }
-//
-//        print("---")
-//        print(minHeightValue)
-//        print(maxHeightValue)
-//        print("---")
-//        print(map(x: minHeightValue, in_min: -1.0, in_max: 1.0, out_min: 0.0, out_max: 1.0))
-//        print(map(x: maxHeightValue, in_min: -1.0, in_max: 1.0, out_min: 0.0, out_max: 1.0))
-//        print("---")
-//        print(perlinNoiseSource.seed)
-//        print("---")
-//
-//        return noiseMap
-//    }
-    
-    public static func generateNoiseMap(mapWidth: Int, mapHeight: Int, scale: Float) -> [[Float]] {
+    public static func generateNoiseMap(mapWidth: Int, mapHeight: Int, seed: UInt64, scale: Float, octaves: Int, persistance: Float, lacunarity: Float, offset: SIMD2<Int>) -> [[Float]] {
         var noiseMap: [[Float]] = Array(repeating: Array(repeating: Float(0), count: mapHeight), count: mapWidth)
         
-        let min = -sqrt(Double(3) / Double(4))
-        let max = sqrt(Double(3) / Double(4))
+        var prng = SeededRandom(seed: seed)
+        let octaveOffsets: [SIMD2<Int>] = {
+            var x: [SIMD2<Int>] = []
+
+            for _ in 0..<octaves {
+                x.append(SIMD2<Int>(x: Int.random(in: -100000...100000, using: &prng) + offset.x,
+                                    y: Int.random(in: -100000...100000, using: &prng) + offset.y))
+            }
+
+            return x
+        }()
+        
+        let _scale = scale <= 0 ? 0.0001 : scale
+        
+        var minNoiseHeight: Float = Float.greatestFiniteMagnitude
+        var maxNoiseHeight: Float = -minNoiseHeight
+        
+        let halfHeight: Float = Float(mapHeight) / 2.0
+        let halfWidth: Float = Float(mapWidth) / 2.0
         
         for y in 0..<mapHeight {
             for x in 0..<mapWidth {
-                let sampleX = Float(x) / scale
-                let sampleY = Float(y) / scale
-                let sampleZ = 0 / scale
-
                 
-                let perlinValue = ImprovedNoise.noise(x: Double(sampleX), y: Double(sampleY), z: Double(sampleZ))
-                noiseMap[x][y] = map(x: Float(perlinValue), in_min: Float(min), in_max: Float(max), out_min: 0.0, out_max: 1.0)
+                var amplitude: Float = 1
+                var frequency: Float = 1
+                var noiseHeight: Float = 0
+                
+                for i in 0..<octaves {
+                    let sampleX = (Float(x) - halfWidth) / _scale * frequency + Float(octaveOffsets[i].x)
+                    let sampleY = (Float(y) - halfHeight) / _scale * frequency + Float(octaveOffsets[i].y)
+                    let sampleZ = 0 / _scale * frequency
+                    
+                    let perlinValue = map(x: Float(ImprovedNoise.noise(x: Double(sampleX), y: Double(sampleY), z: Double(sampleZ))),
+                                          in_min: -sqrt(3/4), in_max: sqrt(3/4), out_min: -1, out_max: 1)
+                    
+                    noiseHeight += Float(perlinValue) * amplitude
+                    
+                    amplitude *= persistance
+                    frequency *= lacunarity
+                }
+                
+                if noiseHeight > maxNoiseHeight {
+                    maxNoiseHeight = noiseHeight
+                }
+                if noiseHeight < minNoiseHeight {
+                    minNoiseHeight = noiseHeight
+                }
+                
+                noiseMap[x][y] = noiseHeight
+            }
+        }
+        
+        for y in 0..<mapHeight {
+            for x in 0..<mapWidth {
+                noiseMap[x][y] = map(x: noiseMap[x][y], in_min: minNoiseHeight, in_max: maxNoiseHeight, out_min: 0, out_max: 1)
             }
         }
         

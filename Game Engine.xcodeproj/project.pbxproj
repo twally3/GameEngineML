@@ -28,6 +28,7 @@
 		50215E4D23A8365900B0C166 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50215E4C23A8365900B0C166 /* sphere.obj */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
+		5057803A23BC21BD0088F513 /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057803923BC21BD0088F513 /* SeededRandom.swift */; };
 		505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A3223A2F4E800813A05 /* AppDelegate.swift */; };
 		505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505D1A3623A2F4EA00813A05 /* Assets.xcassets */; };
 		505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505D1A3823A2F4EA00813A05 /* Main.storyboard */; };
@@ -107,6 +108,7 @@
 		50215E4C23A8365900B0C166 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
+		5057803923BC21BD0088F513 /* SeededRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandom.swift; sourceTree = "<group>"; };
 		505D1A2F23A2F4E800813A05 /* Game Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		505D1A3223A2F4E800813A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		505D1A3623A2F4EA00813A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				50DABBFB23BAA0D200E95FDE /* Noise.swift */,
 				50DABC0123BAAA3000E95FDE /* MapDisplay.swift */,
 				50DABC0323BBBE6400E95FDE /* ImprovedPerlin.swift */,
+				5057803923BC21BD0088F513 /* SeededRandom.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				50BC8EBE23A670ED003544A5 /* MeshLibrary.swift in Sources */,
 				5067174A23A6C8A500C31239 /* Keyboard.swift in Sources */,
 				50BC8EC923A6AAF9003544A5 /* Maths.swift in Sources */,
+				5057803A23BC21BD0088F513 /* SeededRandom.swift in Sources */,
 				50215E3323A7FB2900B0C166 /* Quad.swift in Sources */,
 				50215E1D23A7E42B00B0C166 /* Graphics.swift in Sources */,
 				505D1A6A23A382D200813A05 /* Engine.swift in Sources */,

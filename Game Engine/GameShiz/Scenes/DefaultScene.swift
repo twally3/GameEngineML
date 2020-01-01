@@ -7,7 +7,14 @@ class DefaultScene: Scene {
     
     let mapWidth: Int = 100
     let mapHeight: Int = 100
-    let noiseScale: Float = 9
+    var noiseScale: Float = 25
+    
+    let octaves: Int = 4
+    let persistance: Float = 0.5
+    let lacunarity: Float = 2
+    
+    let seed: UInt64 = 1
+    let offset = SIMD2<Int>(x: 0, y: 0)
     
     override func buildScene() {
         camera.setPosition(0, 0, 4)
@@ -36,7 +43,14 @@ class DefaultScene: Scene {
     }
     
     func generateRandomTexture() -> [Float] {
-        let noise = Noise.generateNoiseMap(mapWidth: mapWidth, mapHeight: mapHeight, scale: noiseScale)
+        let noise = Noise.generateNoiseMap(mapWidth: mapWidth,
+                                           mapHeight: mapHeight,
+                                           seed: seed,
+                                           scale: noiseScale,
+                                           octaves: octaves,
+                                           persistance: persistance,
+                                           lacunarity: lacunarity,
+                                           offset: offset)
         
         var mapValues: [Float] = []
         
