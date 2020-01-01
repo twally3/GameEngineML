@@ -16,6 +16,17 @@ class DefaultScene: Scene {
     let seed: UInt64 = 1
     let offset = SIMD2<Int>(x: 0, y: 0)
     
+    var regions: [TerrainType] = [
+        TerrainType(height: 0.3, colour: SIMD4<Float>(66 / 255, 110 / 255, 202 / 255, 1.0)),        // Water Deep
+        TerrainType(height: 0.4, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
+        TerrainType(height: 0.45, colour: SIMD4<Float>(216 / 255, 218 / 255, 154 / 255, 1.0)),      // Sand
+        TerrainType(height: 0.55, colour: SIMD4<Float>(100 / 255, 158 / 255, 32 / 255, 1.0)),       // Grass
+        TerrainType(height: 0.6, colour: SIMD4<Float>(76 / 255, 116 / 255, 28 / 255, 1.0)),         // Grass 2
+        TerrainType(height: 0.7, colour: SIMD4<Float>(100 / 255, 80 / 255, 75 / 255, 1.0)),         // Rock
+        TerrainType(height: 0.9, colour: SIMD4<Float>(85 / 255, 70 / 255, 70 / 255, 1.0)),          // Rock 2
+        TerrainType(height: 1, colour: SIMD4<Float>(255 / 255, 255 / 255, 255 / 255, 1.0))          // Snow
+    ];
+    
     override func buildScene() {
         camera.setPosition(0, 0, 4)
         addCamera(camera)
@@ -92,6 +103,10 @@ class DefaultScene: Scene {
         
         computeCommandEncoder?.setTexture(texture, index: 0)
         computeCommandEncoder?.setBuffer(mapValuesBuffer, offset: 0, index: 0)
+        
+        var regionCount = regions.count
+        computeCommandEncoder?.setBytes(&regions, length: TerrainType.stride(regions.count), index: 1)
+        computeCommandEncoder?.setBytes(&regionCount, length: Int32.size, index: 2)
         
         let w = computePipelineState.threadExecutionWidth
         let h = computePipelineState.maxTotalThreadsPerThreadgroup / w

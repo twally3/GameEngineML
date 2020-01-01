@@ -9,3 +9,9 @@ class MapGenerator {
         
     }
 }
+
+struct TerrainType: sizeable {
+//    var name: String
+    var height: Float
+    var colour: SIMD4<Float>
+}

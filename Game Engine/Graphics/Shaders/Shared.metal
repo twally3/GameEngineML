@@ -50,4 +50,9 @@ struct LightData {
     float specularIntensity;
 };
 
+struct TerrainType {
+    float height;
+    float4 colour;
+};
+
 #endif

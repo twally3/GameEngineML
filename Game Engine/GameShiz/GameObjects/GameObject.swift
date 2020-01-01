@@ -27,7 +27,7 @@ extension GameObject: Renderable {
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
+        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Nearest], index: 0)
         renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
         if (_material.useTexture) {
             if (_texture != nil) {
