@@ -65,6 +65,10 @@ extension GameObject {
         self._material.useMaterialColour = false
     }
     
+    public func setMesh(_ mesh: Mesh) {
+        self._mesh = mesh
+    }
+    
     
     public func setMaterialIsLit(_ isLit: Bool) { self._material.isLit = isLit }
     public func getMaterialIsLit() -> Bool { return self._material.isLit }

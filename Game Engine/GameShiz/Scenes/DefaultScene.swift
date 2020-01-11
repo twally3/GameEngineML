@@ -5,6 +5,8 @@ class DefaultScene: Scene {
     let sun = Sun()
     let plane = Plane()
     
+    var terrain: Terrain!
+    
     let mapWidth: Int = 100
     let mapHeight: Int = 100
     var noiseScale: Float = 25
@@ -28,17 +30,27 @@ class DefaultScene: Scene {
     ];
     
     override func buildScene() {
-        camera.setPosition(0, 0, 4)
+        camera.setPosition(0, 0, 10)
         addCamera(camera)
         
-        sun.setPosition(0, 3, 0)
+        sun.setPosition(0, 5, 0)
+        sun.setMaterialIsLit(false)
         addLight(sun)
         
         addPlane()
     }
     
     func addPlane() {
-        let noiseMap = generateRandomTexture()
+        let noise = Noise.generateNoiseMap(mapWidth: mapWidth,
+                                            mapHeight: mapHeight,
+                                            seed: seed,
+                                            scale: noiseScale,
+                                            octaves: octaves,
+                                            persistance: persistance,
+                                            lacunarity: lacunarity,
+                                            offset: offset)
+        
+        let noiseMap = generateRandomTexture(noise)
         
         let mapValuesBuffer = Engine.device!.makeBuffer(bytes: noiseMap, length: MemoryLayout<Float>.size * noiseMap.count, options: [])
         
@@ -48,21 +60,16 @@ class DefaultScene: Scene {
         
         loadTextureWithHeights(computePipelineState: computePipelineState, mapValuesBuffer: mapValuesBuffer!, texture: texture)
         
-        plane.setMaterialIsLit(false)
-        plane.setTexture(texture)
-        addChild(plane)
+//        plane.setMaterialIsLit(true)
+//        plane.setTexture(texture)
+//        addChild(plane)
+        
+        terrain = Terrain(heightMap: noise)
+        terrain.setTexture(texture)
+        addChild(terrain)
     }
     
-    func generateRandomTexture() -> [Float] {
-        let noise = Noise.generateNoiseMap(mapWidth: mapWidth,
-                                           mapHeight: mapHeight,
-                                           seed: seed,
-                                           scale: noiseScale,
-                                           octaves: octaves,
-                                           persistance: persistance,
-                                           lacunarity: lacunarity,
-                                           offset: offset)
-        
+    func generateRandomTexture(_ noise: [[Float]]) -> [Float] {
         var mapValues: [Float] = []
         
         for y in 0..<mapHeight {
@@ -122,9 +129,89 @@ class DefaultScene: Scene {
     }
     
     override func doUpdate() {
+//        if (Mouse.isMouseButtonPressed(button: .LEFT)) {
+//            plane.rotateX(Mouse.getDY() * GameTime.deltaTime)
+//            plane.rotateY(Mouse.getDX() * GameTime.deltaTime)
+//        }
+        
         if (Mouse.isMouseButtonPressed(button: .LEFT)) {
-            plane.rotateX(Mouse.getDY() * GameTime.deltaTime)
-            plane.rotateY(Mouse.getDX() * GameTime.deltaTime)
+            terrain!.rotateX(Mouse.getDY() * GameTime.deltaTime)
+            terrain!.rotateY(Mouse.getDX() * GameTime.deltaTime)
         }
+    }
+}
+
+class Terrain_CustomMesh: CustomMesh {
+    var heightMap: [[Float]]!
+    
+    init(heightMap: [[Float]]) {
+        self.heightMap = heightMap
+        super.init()
+    }
+    
+    override func createVertices() {
+        let height = heightMap.count
+        let width = heightMap[0].count
+        
+        // TODO: Delete me
+        for y in 0..<height {
+            for x in 0..<width {
+                heightMap[x][y] *= 20
+            }
+        }
+        
+        for y in 0..<height {
+            for x in 0..<width {
+                let xf = Float(x)
+                let yf = Float(y)
+                
+                let _x = xf - (Float(width) / 2)
+                let _y = yf - (Float(height) / 2)
+                
+                let _w = Float(width)
+                let _h = Float(height)
+                
+                if (x < width - 1 && y < height - 1) {
+                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y],    _y),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, yf / _h))
+                    
+                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y],        _y),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>(xf / _w, yf / _h))
+                    
+                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y + 1],    _y + 1),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>(xf / _w, (yf + 1) / _h))
+                    
+                    
+                    
+                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y],    _y),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, yf / _h))
+                    
+                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y + 1],    _y + 1),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>(xf / _w, (yf + 1) / _h))
+                    
+                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y + 1],_y + 1),
+                              colour: SIMD4<Float>(1, 0, 0, 1),
+                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, (yf + 1) / _h))
+                }
+            }
+        }
+    }
+}
+
+class Terrain: GameObject {
+    init(heightMap: [[Float]]) {
+        super.init(name: "Terrain", meshType: .None)
+        
+        let mesh = Terrain_CustomMesh(heightMap: heightMap)
+        setMesh(mesh)
+        
+        setMaterialIsLit(false)
+        setRotationX(0.5)
+        setScale(SIMD3<Float>(repeating: 0.1))
     }
 }
