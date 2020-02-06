@@ -1,47 +1,32 @@
 class SandboxScene: Scene {
     let camera = DebugCamera()
-    let cruiser = Cruiser()
-    
-    let leftSun = Sun()
-    let middleSun = Sun()
-    let rightSun = Sun()
+    let quad = Quad()
+    let sun = Sun()
     
     override func buildScene() {
         camera.setPosition(0, 0, 4)
         addCamera(camera)
         
-        leftSun.setPosition(-1, 1, 0)
-        leftSun.setMaterialIsLit(false)
-        leftSun.setMaterialColour(1, 0, 0, 1)
-        leftSun.setLightColour(1, 0, 0)
-        addLight(leftSun)
+        sun.setPosition(SIMD3<Float>(0, 2, 0))
+        sun.setMaterialIsLit(false)
+        sun.setLightBrightness(0.3)
+        sun.setMaterialColour(1,1,1,1)
+        sun.setLightColour(1,1,1)
+        addLight(sun)
         
-        middleSun.setPosition(0, 1, 0)
-        middleSun.setMaterialIsLit(false)
-        middleSun.setLightBrightness(0.3)
-        middleSun.setMaterialColour(1, 1, 1, 1)
-        middleSun.setLightColour(1, 1, 1)
-        addLight(middleSun)
+        quad.setMaterialAmbient(0.01)
+        quad.setMaterialShininess(10)
+        quad.setMaterialSpecular(5)
+        quad.setMaterialIsLit(false)
+        quad.setTexture(.PartyPirateParot)
         
-        rightSun.setPosition(1, 1, 0)
-        rightSun.setMaterialIsLit(false)
-        rightSun.setMaterialColour(0, 0, 1, 1)
-        rightSun.setLightColour(0, 0, 1)
-        addLight(rightSun)
-        
-        cruiser.setMaterialAmbient(0.01)
-        cruiser.setRotationX(0.5)
-        cruiser.setMaterialShininess(10)
-        cruiser.setMaterialSpecular(5)
-        addChild(cruiser)
+        addChild(quad)
     }
     
     override func doUpdate() {
         if (Mouse.isMouseButtonPressed(button: .LEFT)) {
-            cruiser.rotateX(Mouse.getDY() * GameTime.deltaTime)
-            cruiser.rotateY(Mouse.getDX() * GameTime.deltaTime)
+            quad.rotateX(Mouse.getDY() * GameTime.deltaTime)
+            quad.rotateY(Mouse.getDX() * GameTime.deltaTime)
         }
-        
-        cruiser.setMaterialShininess(cruiser.getMaterialShininess() - Mouse.getDWheel())
     }
 }
