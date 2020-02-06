@@ -28,6 +28,7 @@ struct Vertex: sizeable {
 }
 
 extension Int32: sizeable {}
+extension UInt32: sizeable {}
 extension SIMD2: sizeable where Scalar == Float {}
 extension SIMD3: sizeable where Scalar == Float {}
 extension SIMD4: sizeable where Scalar == Float {}
