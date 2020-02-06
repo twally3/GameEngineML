@@ -17,7 +17,7 @@ class SandboxScene: Scene {
         quad.setMaterialAmbient(0.01)
         quad.setMaterialShininess(10)
         quad.setMaterialSpecular(5)
-        quad.setMaterialIsLit(false)
+//        quad.setMaterialIsLit(false)
         quad.setTexture(.PartyPirateParot)
         
         addChild(quad)
