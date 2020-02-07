@@ -60,10 +60,6 @@ class DefaultScene: Scene {
         
         loadTextureWithHeights(computePipelineState: computePipelineState, mapValuesBuffer: mapValuesBuffer!, texture: texture)
         
-//        plane.setMaterialIsLit(true)
-//        plane.setTexture(texture)
-//        addChild(plane)
-        
         terrain = Terrain(heightMap: noise)
         terrain.setTexture(texture)
         addChild(terrain)
@@ -129,11 +125,6 @@ class DefaultScene: Scene {
     }
     
     override func doUpdate() {
-//        if (Mouse.isMouseButtonPressed(button: .LEFT)) {
-//            plane.rotateX(Mouse.getDY() * GameTime.deltaTime)
-//            plane.rotateY(Mouse.getDX() * GameTime.deltaTime)
-//        }
-        
         if (Mouse.isMouseButtonPressed(button: .LEFT)) {
             terrain!.rotateX(Mouse.getDY() * GameTime.deltaTime)
             terrain!.rotateY(Mouse.getDX() * GameTime.deltaTime)
@@ -149,14 +140,14 @@ class Terrain_CustomMesh: CustomMesh {
         super.init()
     }
     
-    override func createVertices() {
-        let height = heightMap.count
-        let width = heightMap[0].count
+    override func createMesh() {
+        let height = heightMap[0].count
+        let width = heightMap.count
         
         // TODO: Delete me
         for y in 0..<height {
             for x in 0..<width {
-                heightMap[x][y] *= 20
+                heightMap[x][y] *= 15
             }
         }
         
@@ -175,28 +166,27 @@ class Terrain_CustomMesh: CustomMesh {
                     addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y],    _y),
                               colour: SIMD4<Float>(1, 0, 0, 1),
                               textureCoordinate: SIMD2<Float>((xf + 1) / _w, yf / _h))
-                    
+
                     addVertex(position: SIMD3<Float>(_x,        heightMap[x][y],        _y),
                               colour: SIMD4<Float>(1, 0, 0, 1),
                               textureCoordinate: SIMD2<Float>(xf / _w, yf / _h))
-                    
+
                     addVertex(position: SIMD3<Float>(_x,        heightMap[x][y + 1],    _y + 1),
                               colour: SIMD4<Float>(1, 0, 0, 1),
                               textureCoordinate: SIMD2<Float>(xf / _w, (yf + 1) / _h))
-                    
-                    
-                    
-                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y],    _y),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, yf / _h))
-                    
-                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y + 1],    _y + 1),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>(xf / _w, (yf + 1) / _h))
-                    
+
                     addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y + 1],_y + 1),
                               colour: SIMD4<Float>(1, 0, 0, 1),
                               textureCoordinate: SIMD2<Float>((xf + 1) / _w, (yf + 1) / _h))
+
+                    
+                    let startIndex = (y * (width - 1) + x) * 4
+                    let idxs = [startIndex, startIndex + 1, startIndex + 2, startIndex, startIndex + 2, startIndex + 3]
+                    let idxs2: [UInt32] = idxs.map { (x) -> UInt32 in
+                        UInt32(x)
+                    }
+
+                    addIndices(idxs2)
                 }
             }
         }
@@ -210,7 +200,7 @@ class Terrain: GameObject {
         let mesh = Terrain_CustomMesh(heightMap: heightMap)
         setMesh(mesh)
         
-        setMaterialIsLit(false)
+        setMaterialIsLit(true)
         setRotationX(0.5)
         setScale(SIMD3<Float>(repeating: 0.1))
     }
