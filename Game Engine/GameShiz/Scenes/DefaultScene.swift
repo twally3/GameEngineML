@@ -144,6 +144,9 @@ class Terrain_CustomMesh: CustomMesh {
         let height = heightMap[0].count
         let width = heightMap.count
         
+        let _w = Float(width)
+        let _h = Float(height)
+        
         // TODO: Delete me
         for y in 0..<height {
             for x in 0..<width {
@@ -156,36 +159,20 @@ class Terrain_CustomMesh: CustomMesh {
                 let xf = Float(x)
                 let yf = Float(y)
                 
-                let _x = xf - (Float(width) / 2)
-                let _y = yf - (Float(height) / 2)
+                let _x = xf - (_w / 2)
+                let _y = yf - (_h / 2)
                 
-                let _w = Float(width)
-                let _h = Float(height)
+                addVertex(position: SIMD3<Float>(_x, heightMap[x][y], _y),
+                          colour: SIMD4<Float>(1,0,0,1),
+                          textureCoordinate: SIMD2<Float>(xf / (_w - 1), yf / (_h - 1)))
                 
                 if (x < width - 1 && y < height - 1) {
-                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y],    _y),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, yf / _h))
-
-                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y],        _y),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>(xf / _w, yf / _h))
-
-                    addVertex(position: SIMD3<Float>(_x,        heightMap[x][y + 1],    _y + 1),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>(xf / _w, (yf + 1) / _h))
-
-                    addVertex(position: SIMD3<Float>(_x + 1,    heightMap[x + 1][y + 1],_y + 1),
-                              colour: SIMD4<Float>(1, 0, 0, 1),
-                              textureCoordinate: SIMD2<Float>((xf + 1) / _w, (yf + 1) / _h))
-
-                    
-                    let startIndex = (y * (width - 1) + x) * 4
-                    let idxs = [startIndex, startIndex + 1, startIndex + 2, startIndex, startIndex + 2, startIndex + 3]
+                    let startIndex = (y * width + x)
+                    let idxs = [startIndex + 1, startIndex, startIndex + width, startIndex + 1, startIndex + width, startIndex + width + 1]
                     let idxs2: [UInt32] = idxs.map { (x) -> UInt32 in
                         UInt32(x)
                     }
-
+                    
                     addIndices(idxs2)
                 }
             }
