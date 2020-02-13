@@ -7,8 +7,10 @@ class DefaultScene: Scene {
     
     var terrain: Terrain!
     
-    let mapWidth: Int = 100
-    let mapHeight: Int = 100
+    // Divisble by all even numbers up to 12 (for LOD)
+    let mapChunkSize = 241
+    // TODO: Clamp between (0,6)
+    let levelOfDetail: Int = 0
     var noiseScale: Float = 25
     
     let octaves: Int = 4
@@ -41,8 +43,8 @@ class DefaultScene: Scene {
     }
     
     func addPlane() {
-        let noise = Noise.generateNoiseMap(mapWidth: mapWidth,
-                                            mapHeight: mapHeight,
+        let noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
+                                            mapHeight: mapChunkSize,
                                             seed: seed,
                                             scale: noiseScale,
                                             octaves: octaves,
@@ -60,7 +62,7 @@ class DefaultScene: Scene {
         
         loadTextureWithHeights(computePipelineState: computePipelineState, mapValuesBuffer: mapValuesBuffer!, texture: texture)
         
-        terrain = Terrain(heightMap: noise)
+        terrain = Terrain(heightMap: noise, levelOfDetail: levelOfDetail)
         terrain.setTexture(texture)
         addChild(terrain)
     }
@@ -68,8 +70,8 @@ class DefaultScene: Scene {
     func generateRandomTexture(_ noise: [[Float]]) -> [Float] {
         var mapValues: [Float] = []
         
-        for y in 0..<mapHeight {
-            for x in 0..<mapWidth {
+        for y in 0..<mapChunkSize {
+            for x in 0..<mapChunkSize {
                 mapValues.append(noise[x][y])
             }
         }
@@ -79,8 +81,8 @@ class DefaultScene: Scene {
     
     public func loadEmptyTexture()->MTLTexture {
         let textureDescriptor = MTLTextureDescriptor()
-        textureDescriptor.width = mapWidth
-        textureDescriptor.height = mapHeight
+        textureDescriptor.width = mapChunkSize
+        textureDescriptor.height = mapChunkSize
         textureDescriptor.pixelFormat = .bgra8Unorm
         textureDescriptor.sampleCount = 1
         textureDescriptor.storageMode = .managed
@@ -134,57 +136,62 @@ class DefaultScene: Scene {
 
 class Terrain_CustomMesh: CustomMesh {
     var heightMap: [[Float]]!
+    var levelOfDetail: Int!
     
-    init(heightMap: [[Float]]) {
+    init(heightMap: [[Float]], levelOfDetail: Int) {
         self.heightMap = heightMap
+        self.levelOfDetail = levelOfDetail
         super.init()
     }
     
+    // TODO: Clean this up as args and add curve support
     override func createMesh() {
         let height = heightMap[0].count
         let width = heightMap.count
+        let heightMultiplier: Float = 15
         
         let _w = Float(width)
         let _h = Float(height)
         
-        // TODO: Delete me
-        for y in 0..<height {
-            for x in 0..<width {
-                heightMap[x][y] *= 15
-            }
-        }
+        let meshSimplificationIncrement = levelOfDetail == 0 ? 1 : (levelOfDetail * 2)
+        let verticesPerLine = (width - 1) / meshSimplificationIncrement + 1
         
-        for y in 0..<height {
-            for x in 0..<width {
+        var vertexIndex = 0
+        
+        for y in stride(from: 0, to: height, by: meshSimplificationIncrement) {
+            for x in stride(from: 0, to: width, by: meshSimplificationIncrement) {
                 let xf = Float(x)
                 let yf = Float(y)
                 
                 let _x = xf - (_w / 2)
                 let _y = yf - (_h / 2)
                 
-                addVertex(position: SIMD3<Float>(_x, heightMap[x][y], _y),
+                addVertex(position: SIMD3<Float>(_x, heightMap[x][y] * heightMultiplier, _y),
                           colour: SIMD4<Float>(1,0,0,1),
                           textureCoordinate: SIMD2<Float>(xf / (_w - 1), yf / (_h - 1)))
                 
                 if (x < width - 1 && y < height - 1) {
-                    let startIndex = (y * width + x)
-                    let idxs = [startIndex + 1, startIndex, startIndex + width, startIndex + 1, startIndex + width, startIndex + width + 1]
+                    let startIndex = vertexIndex
+                    let idxs = [startIndex + 1, startIndex, startIndex + verticesPerLine,
+                                startIndex + 1, startIndex + verticesPerLine, startIndex + verticesPerLine + 1]
                     let idxs2: [UInt32] = idxs.map { (x) -> UInt32 in
                         UInt32(x)
                     }
                     
                     addIndices(idxs2)
                 }
+                
+                vertexIndex += 1
             }
         }
     }
 }
 
 class Terrain: GameObject {
-    init(heightMap: [[Float]]) {
+    init(heightMap: [[Float]], levelOfDetail: Int) {
         super.init(name: "Terrain", meshType: .None)
         
-        let mesh = Terrain_CustomMesh(heightMap: heightMap)
+        let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
         setMesh(mesh)
         
         setMaterialIsLit(true)
