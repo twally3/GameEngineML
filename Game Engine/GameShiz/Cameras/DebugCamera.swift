@@ -1,6 +1,8 @@
 import simd
 
 class DebugCamera: Camera {
+    let speed: Float = 100
+    
     override var projectionMatrix: matrix_float4x4 {
         return matrix_float4x4.perspective(degreesFov: 45.0, aspectRatio: Renderer.aspectRatio, near: 0.1, far: 1000)
     }
@@ -23,7 +25,23 @@ class DebugCamera: Camera {
         }
         
         if Keyboard.isKeyPressed(.downArrow) {
-            self.moveY(-GameTime.deltaTime)
+            self.moveZ(-GameTime.deltaTime)
+        }
+        
+        if Keyboard.isKeyPressed(.a) {
+            self.moveX(-GameTime.deltaTime * speed)
+        }
+        
+        if Keyboard.isKeyPressed(.d) {
+            self.moveX(GameTime.deltaTime * speed)
+        }
+        
+        if Keyboard.isKeyPressed(.w) {
+            self.moveZ(-GameTime.deltaTime * speed)
+        }
+        
+        if Keyboard.isKeyPressed(.s) {
+            self.moveZ(GameTime.deltaTime * speed)
         }
         
         if Mouse.isMouseButtonPressed(button: .RIGHT) {

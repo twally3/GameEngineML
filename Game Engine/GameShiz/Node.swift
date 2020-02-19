@@ -31,6 +31,12 @@ class Node {
         children.append(child)
     }
     
+    func removeChild(_ child: Node) {
+        children.removeAll { (x) -> Bool in
+            x.getID() == child.getID()
+        }
+    }
+    
     func doUpdate() {}
     
     func update() {
