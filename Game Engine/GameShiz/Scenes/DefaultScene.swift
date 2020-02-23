@@ -119,115 +119,19 @@ class Terrain_CustomMesh: CustomMesh {
 
 class Terrain: GameObject {
     var endlessTerrain: EndlessTerrain!
-    let queue = DispatchQueue(label: "Terrain Mesh")
+//    let queue = DispatchQueue(label: "Terrain Mesh")
     
     init(heightMap: [[Float]], levelOfDetail: Int) {
         super.init(name: "Terrain", meshType: .None)
-        
-        queue.async {
-            let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
-            
-            DispatchQueue.main.async {
-                self.setMesh(mesh)
-            }
-        }
+
+//        queue.async {
+//            let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
+//
+//            DispatchQueue.main.async {
+//                self.setMesh(mesh)
+//            }
+//        }
         
         setMaterialIsLit(false)
-    }
-}
-
-class EndlessTerrain {
-    let maxViewDistance: Float = 550;
-    var viewer: Node!
-    
-    var viewerPosition: SIMD2<Float>!
-    var chunkSize: Int!
-    var chunksVisibleInViewDst: Int!
-    
-    var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
-    var terrainChunksVisibleLastUpdate: [TerrainChunk] = []
-    
-    let mapGenerator = MapGenerator()
-    
-    init(chunkSize: Int) {
-        self.chunkSize = chunkSize
-        self.chunksVisibleInViewDst = Int((maxViewDistance / Float(chunkSize)).rounded(.toNearestOrEven))
-    }
-    
-    func update() {
-        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ())
-        updateVisibleChunks()
-    }
-    
-    func updateVisibleChunks() {
-        guard let viewerPosition = self.viewerPosition else { return }
-        
-        for terrainChunk in terrainChunksVisibleLastUpdate {
-            terrainChunk.setVisibility(visible: false)
-        }
-        
-        terrainChunksVisibleLastUpdate.removeAll(keepingCapacity: false)
-        
-        let currentChunkX: Int = Int((viewerPosition.x / Float(chunkSize)).rounded(.toNearestOrEven))
-        let currentChunkY: Int = Int((viewerPosition.y / Float(chunkSize)).rounded(.toNearestOrEven))
-        
-        for yOffset in stride(from: -chunksVisibleInViewDst, to: chunksVisibleInViewDst, by: 1) {
-            for xOffset in stride(from: -chunksVisibleInViewDst, to: chunksVisibleInViewDst, by: 1) {
-                let viewedChunkCoord = SIMD2<Int>(x: currentChunkX + xOffset, y: currentChunkY + yOffset)
-                
-                if let terrainChunk = terrainChunkDict[viewedChunkCoord] {
-                    terrainChunk.updateTerrainChunk()
-                    if terrainChunk.getVisibility() == true {
-                        terrainChunksVisibleLastUpdate.append(terrainChunk)
-                    }
-                } else {
-                    // Create chunk
-                    terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, size: self.chunkSize)
-                }
-            }
-        }
-    }
-    
-    class TerrainChunk {
-        var parent: EndlessTerrain!
-        var position: SIMD2<Int>!
-        var node: GameObject!
-        var visibility: Bool = false;
-        var size: Int!
-        
-        init(parent: EndlessTerrain, coord: SIMD2<Int>, size: Int) {
-            self.position = coord &* size
-            self.parent = parent
-            self.size = size
-            
-            parent.mapGenerator.requestMapData(callback: onMapDataRecieved(mapData:))
-
-            setVisibility(visible: false)
-        }
-        
-        func onMapDataRecieved(mapData: MapData) {
-            let noise = mapData.noiseMap
-            let texture = mapData.texture
-            let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
-
-            node = Terrain(heightMap: noise, levelOfDetail: 0)
-            node.setPosition(SIMD3<Float>(positionV3))
-            node.setTexture(texture)
-        }
-        
-        func updateTerrainChunk() {
-            // Get distance to nearest bound
-            let viewDstFromNearestEdge = distance(SIMD2<Float>(position) - (240.0 / 2.0), parent.viewerPosition!)
-            let visible = viewDstFromNearestEdge <= parent.maxViewDistance
-            setVisibility(visible: visible)
-        }
-        
-        public func setVisibility(visible: Bool) {
-            self.visibility = visible
-        }
-        
-        public func getVisibility() -> Bool {
-            return self.visibility
-        }
     }
 }

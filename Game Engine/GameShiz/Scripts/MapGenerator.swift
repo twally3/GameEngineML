@@ -26,9 +26,9 @@ class MapGenerator {
     let queue = DispatchQueue(label: "Map Generator")
     let dsem = DispatchSemaphore(value: 1)
     
-    func requestMapData(callback: @escaping (MapData) -> ()) {
+    func requestMapData(centre: SIMD2<Int>, callback: @escaping (MapData) -> ()) {
         queue.async {
-            let mapData = self.generateMapData()
+            let mapData = self.generateMapData(centre: centre)
             
             DispatchQueue.main.async {
                 callback(mapData)
@@ -36,7 +36,7 @@ class MapGenerator {
         }
     }
     
-    func generateMapData() -> MapData {
+    func generateMapData(centre: SIMD2<Int>) -> MapData {
         let noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
                                             mapHeight: mapChunkSize,
                                             seed: seed,
@@ -44,7 +44,7 @@ class MapGenerator {
                                             octaves: octaves,
                                             persistance: persistance,
                                             lacunarity: lacunarity,
-                                            offset: offset)
+                                            offset: centre &+ offset)
         
         let noiseMap = generateRandomTexture(noise)
         

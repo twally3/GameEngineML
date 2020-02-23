@@ -29,6 +29,7 @@ extension GameObject: Renderable {
         
         renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Nearest], index: 0)
         renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
+//        renderCommandEncoder.setTriangleFillMode(.lines)
         if (_material.useTexture) {
             if (_texture != nil) {
                 renderCommandEncoder.setFragmentTexture(_texture, index: 0)

@@ -41,6 +41,7 @@
 		5067174A23A6C8A500C31239 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174923A6C8A500C31239 /* Keyboard.swift */; };
 		5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174B23A6C9BE00C31239 /* Keycodes.swift */; };
 		5067174E23A6CC5700C31239 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174D23A6CC5700C31239 /* Mouse.swift */; };
+		508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */; };
 		50A4646523A704D7000D562D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646423A704D7000D562D /* Camera.swift */; };
 		50A4646723A705B9000D562D /* DebugCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646623A705B9000D562D /* DebugCamera.swift */; };
 		50A4646923A707F5000D562D /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646823A707F5000D562D /* CameraManager.swift */; };
@@ -128,6 +129,7 @@
 		5067174923A6C8A500C31239 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		5067174B23A6C9BE00C31239 /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		5067174D23A6CC5700C31239 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessTerrain.swift; sourceTree = "<group>"; };
 		50A4646423A704D7000D562D /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		50A4646623A705B9000D562D /* DebugCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugCamera.swift; sourceTree = "<group>"; };
 		50A4646823A707F5000D562D /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				50DABC0123BAAA3000E95FDE /* MapDisplay.swift */,
 				50DABC0323BBBE6400E95FDE /* ImprovedPerlin.swift */,
 				5057803923BC21BD0088F513 /* SeededRandom.swift */,
+				508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */,
 				50BC8EBC23A66B60003544A5 /* Renderer.swift in Sources */,
 				50DABC0423BBBE6400E95FDE /* ImprovedPerlin.swift in Sources */,
+				508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */,
 				50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */,
 				50A4646523A704D7000D562D /* Camera.swift in Sources */,
 				50215E2F23A7F20700B0C166 /* InstancedShaders.metal in Sources */,
