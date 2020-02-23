@@ -8,36 +8,18 @@ class DefaultScene: Scene {
     
     var terrain: Terrain!
     
-    // Divisble by all even numbers up to 12 (for LOD)
-    let mapChunkSize = 241
     // TODO: Clamp between (0,6)
     let levelOfDetail: Int = 0
-    var noiseScale: Float = 25
-    
-    let octaves: Int = 4
-    let persistance: Float = 0.5
-    let lacunarity: Float = 2
-    
-    let seed: UInt64 = 1
-    let offset = SIMD2<Int>(x: 0, y: 0)
-    
     var endlessTerrain: EndlessTerrain!
     
     var i: Int = 0
     
-    var regions: [TerrainType] = [
-        TerrainType(height: 0.3, colour: SIMD4<Float>(66 / 255, 110 / 255, 202 / 255, 1.0)),        // Water Deep
-        TerrainType(height: 0.4, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
-        TerrainType(height: 0.45, colour: SIMD4<Float>(216 / 255, 218 / 255, 154 / 255, 1.0)),      // Sand
-        TerrainType(height: 0.55, colour: SIMD4<Float>(100 / 255, 158 / 255, 32 / 255, 1.0)),       // Grass
-        TerrainType(height: 0.6, colour: SIMD4<Float>(76 / 255, 116 / 255, 28 / 255, 1.0)),         // Grass 2
-        TerrainType(height: 0.7, colour: SIMD4<Float>(100 / 255, 80 / 255, 75 / 255, 1.0)),         // Rock
-        TerrainType(height: 0.9, colour: SIMD4<Float>(85 / 255, 70 / 255, 70 / 255, 1.0)),          // Rock 2
-        TerrainType(height: 1, colour: SIMD4<Float>(255 / 255, 255 / 255, 255 / 255, 1.0))          // Snow
-    ];
+    let mapGenerator = MapGenerator()
     
     override func buildScene() {
-        camera.setPosition(0, 100, 10)
+        camera.setPosition(0, 50, 10)
+//        camera.setPosition(0, 10, 10)
+        camera.setRotationX(Float.pi / 2)
         addCamera(camera)
         
         sun.setPosition(0, 5, 0)
@@ -48,91 +30,9 @@ class DefaultScene: Scene {
     }
     
     func addPlane() {
-        let noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
-                                            mapHeight: mapChunkSize,
-                                            seed: seed,
-                                            scale: noiseScale,
-                                            octaves: octaves,
-                                            persistance: persistance,
-                                            lacunarity: lacunarity,
-                                            offset: offset)
-        
-        let noiseMap = generateRandomTexture(noise)
-        
-        let mapValuesBuffer = Engine.device!.makeBuffer(bytes: noiseMap, length: MemoryLayout<Float>.size * noiseMap.count, options: [])
-        
-        let texture = loadEmptyTexture()
-        
-        let computePipelineState = createComputePipelineState()
-        
-        loadTextureWithHeights(computePipelineState: computePipelineState, mapValuesBuffer: mapValuesBuffer!, texture: texture)
-        
-//        terrain = Terrain(heightMap: noise, levelOfDetail: levelOfDetail)
-//        terrain.setTexture(texture)
-//        addChild(terrain)
-        
         endlessTerrain = EndlessTerrain(chunkSize: 240)
         endlessTerrain.viewer = camera
         endlessTerrain.updateVisibleChunks()
-    }
-    
-    func generateRandomTexture(_ noise: [[Float]]) -> [Float] {
-        var mapValues: [Float] = []
-        
-        for y in 0..<mapChunkSize {
-            for x in 0..<mapChunkSize {
-                mapValues.append(noise[x][y])
-            }
-        }
-        
-        return mapValues
-    }
-    
-    public func loadEmptyTexture()->MTLTexture {
-        let textureDescriptor = MTLTextureDescriptor()
-        textureDescriptor.width = mapChunkSize
-        textureDescriptor.height = mapChunkSize
-        textureDescriptor.pixelFormat = .bgra8Unorm
-        textureDescriptor.sampleCount = 1
-        textureDescriptor.storageMode = .managed
-        textureDescriptor.usage = [.shaderWrite, .shaderRead]
-        
-        let texture = Engine.device!.makeTexture(descriptor: textureDescriptor)
-        return texture!
-    }
-    
-    func createComputePipelineState() -> MTLComputePipelineState {
-        do {
-            return try Engine.device!.makeComputePipelineState(function: Graphics.shaders[.CreateHeightMap_Compute])
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
-    }
-    
-    func loadTextureWithHeights(computePipelineState: MTLComputePipelineState, mapValuesBuffer: MTLBuffer, texture: MTLTexture) {
-        let commandQueue = Engine.commandQueue
-        let commandBuffer = commandQueue!.makeCommandBuffer()
-        let computeCommandEncoder = commandBuffer?.makeComputeCommandEncoder()
-        computeCommandEncoder?.setComputePipelineState(computePipelineState)
-        
-        computeCommandEncoder?.setTexture(texture, index: 0)
-        computeCommandEncoder?.setBuffer(mapValuesBuffer, offset: 0, index: 0)
-        
-        var regionCount = regions.count
-        computeCommandEncoder?.setBytes(&regions, length: TerrainType.stride(regions.count), index: 1)
-        computeCommandEncoder?.setBytes(&regionCount, length: Int32.size, index: 2)
-        
-        let w = computePipelineState.threadExecutionWidth
-        let h = computePipelineState.maxTotalThreadsPerThreadgroup / w
-        let threadsPerThreadgroup = MTLSizeMake(w, h, 1)
-        let threadgroupsPerGrid = MTLSize(width: (texture.width + w - 1) / w,
-                                          height: (texture.height + h - 1) / h,
-                                          depth: 1)
-        
-        computeCommandEncoder!.dispatchThreadgroups(threadgroupsPerGrid,
-                                                   threadsPerThreadgroup: threadsPerThreadgroup)
-        computeCommandEncoder?.endEncoding()
-        commandBuffer?.commit()
     }
     
     override func doUpdate() {
@@ -141,18 +41,23 @@ class DefaultScene: Scene {
 //            terrain!.rotateY(Mouse.getDX() * GameTime.deltaTime)
 //        }
         
+        // TODO: Move this into the endless terrain game object
         if let endlessTerrain = self.endlessTerrain {
             for terrainChunk in endlessTerrain.terrainChunksVisibleLastUpdate {
-                removeChild(terrainChunk.node)
+                guard let go = terrainChunk.node else { continue }
+                
+                removeChild(go)
             }
             
             endlessTerrain.update()
             
             for (_, terrainChunk) in endlessTerrain.terrainChunkDict {
+                guard let go = terrainChunk.node else { continue }
+                
                 if terrainChunk.getVisibility() == true {
-                    addChild(terrainChunk.node)
+                    addChild(go)
                 } else {
-                    removeChild(terrainChunk.node)
+                    removeChild(go)
                 }
             }
         }
@@ -214,16 +119,20 @@ class Terrain_CustomMesh: CustomMesh {
 
 class Terrain: GameObject {
     var endlessTerrain: EndlessTerrain!
+    let queue = DispatchQueue(label: "Terrain Mesh")
     
     init(heightMap: [[Float]], levelOfDetail: Int) {
         super.init(name: "Terrain", meshType: .None)
         
-        let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
-        setMesh(mesh)
+        queue.async {
+            let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
+            
+            DispatchQueue.main.async {
+                self.setMesh(mesh)
+            }
+        }
         
-        setMaterialIsLit(true)
-        setRotationX(0.5)
-        setScale(SIMD3<Float>(repeating: 0.1))
+        setMaterialIsLit(false)
     }
 }
 
@@ -237,6 +146,8 @@ class EndlessTerrain {
     
     var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
     var terrainChunksVisibleLastUpdate: [TerrainChunk] = []
+    
+    let mapGenerator = MapGenerator()
     
     init(chunkSize: Int) {
         self.chunkSize = chunkSize
@@ -282,33 +193,36 @@ class EndlessTerrain {
         var position: SIMD2<Int>!
         var node: GameObject!
         var visibility: Bool = false;
+        var size: Int!
         
         init(parent: EndlessTerrain, coord: SIMD2<Int>, size: Int) {
             self.position = coord &* size
             self.parent = parent
-            let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
+            self.size = size
             
-            // Create mesh at given position
-            node = Quad()
-            node.setPosition(SIMD3<Float>(positionV3))
-            node.setRotationX(1.5708)
-            node.setScale(Float(size) / 2, Float(size) / 2, Float(1))
-            node.setMaterialIsLit(false)
-            // Set Visibility(false)
+            parent.mapGenerator.requestMapData(callback: onMapDataRecieved(mapData:))
+
             setVisibility(visible: false)
+        }
+        
+        func onMapDataRecieved(mapData: MapData) {
+            let noise = mapData.noiseMap
+            let texture = mapData.texture
+            let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
+
+            node = Terrain(heightMap: noise, levelOfDetail: 0)
+            node.setPosition(SIMD3<Float>(positionV3))
+            node.setTexture(texture)
         }
         
         func updateTerrainChunk() {
             // Get distance to nearest bound
             let viewDstFromNearestEdge = distance(SIMD2<Float>(position) - (240.0 / 2.0), parent.viewerPosition!)
-            // visible = viewDistFromNearestEdge <= maxViewDist
             let visible = viewDstFromNearestEdge <= parent.maxViewDistance
-            // Set Visibility(visible)
             setVisibility(visible: visible)
         }
         
         public func setVisibility(visible: Bool) {
-            // Set Visibility
             self.visibility = visible
         }
         
