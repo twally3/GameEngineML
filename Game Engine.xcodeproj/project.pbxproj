@@ -66,7 +66,6 @@
 		50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBF823BA7D2C00E95FDE /* Plane.swift */; };
 		50DABBFC23BAA0D200E95FDE /* Noise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBFB23BAA0D200E95FDE /* Noise.swift */; };
 		50DABC0023BAAA1000E95FDE /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBFF23BAAA1000E95FDE /* MapGenerator.swift */; };
-		50DABC0223BAAA3000E95FDE /* MapDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABC0123BAAA3000E95FDE /* MapDisplay.swift */; };
 		50DABC0423BBBE6400E95FDE /* ImprovedPerlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABC0323BBBE6400E95FDE /* ImprovedPerlin.swift */; };
 /* End PBXBuildFile section */
 
@@ -154,7 +153,6 @@
 		50DABBF823BA7D2C00E95FDE /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		50DABBFB23BAA0D200E95FDE /* Noise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noise.swift; sourceTree = "<group>"; };
 		50DABBFF23BAAA1000E95FDE /* MapGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
-		50DABC0123BAAA3000E95FDE /* MapDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDisplay.swift; sourceTree = "<group>"; };
 		50DABC0323BBBE6400E95FDE /* ImprovedPerlin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprovedPerlin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,7 +447,6 @@
 			children = (
 				50DABBFF23BAAA1000E95FDE /* MapGenerator.swift */,
 				50DABBFB23BAA0D200E95FDE /* Noise.swift */,
-				50DABC0123BAAA3000E95FDE /* MapDisplay.swift */,
 				50DABC0323BBBE6400E95FDE /* ImprovedPerlin.swift */,
 				5057803923BC21BD0088F513 /* SeededRandom.swift */,
 				508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */,
@@ -622,7 +619,6 @@
 				50A4647423A7C598000D562D /* CubeCollection.swift in Sources */,
 				50215E4B23A8355B00B0C166 /* Sun.swift in Sources */,
 				50215E2223A7E5A300B0C166 /* Library.swift in Sources */,
-				50DABC0223BAAA3000E95FDE /* MapDisplay.swift in Sources */,
 				50215E4723A8325C00B0C166 /* LightObject.swift in Sources */,
 				50215E3823A80D0E00B0C166 /* TextureLibrary.swift in Sources */,
 				50A4647223A7BF00000D562D /* InstancedGameObject.swift in Sources */,

@@ -4,21 +4,11 @@ import simd
 class DefaultScene: Scene {
     let camera = DebugCamera()
     let sun = Sun()
-    let plane = Plane()
-    
-    var terrain: Terrain!
-    
-    // TODO: Clamp between (0,6)
-    let levelOfDetail: Int = 0
+
     var endlessTerrain: EndlessTerrain!
-    
-    var i: Int = 0
-    
-    let mapGenerator = MapGenerator()
     
     override func buildScene() {
         camera.setPosition(0, 50, 10)
-//        camera.setPosition(0, 10, 10)
         camera.setRotationX(Float.pi / 2)
         addCamera(camera)
         
@@ -36,11 +26,6 @@ class DefaultScene: Scene {
     }
     
     override func doUpdate() {
-//        if (Mouse.isMouseButtonPressed(button: .LEFT)) {
-//            terrain!.rotateX(Mouse.getDY() * GameTime.deltaTime)
-//            terrain!.rotateY(Mouse.getDX() * GameTime.deltaTime)
-//        }
-        
         // TODO: Move this into the endless terrain game object
         if let endlessTerrain = self.endlessTerrain {
             for terrainChunk in endlessTerrain.terrainChunksVisibleLastUpdate {
@@ -78,7 +63,7 @@ class Terrain_CustomMesh: CustomMesh {
     override func createMesh() {
         let height = heightMap[0].count
         let width = heightMap.count
-        let heightMultiplier: Float = 15
+        let heightMultiplier: Float = 20
         
         let _w = Float(width)
         let _h = Float(height)
@@ -118,19 +103,8 @@ class Terrain_CustomMesh: CustomMesh {
 }
 
 class Terrain: GameObject {
-    var endlessTerrain: EndlessTerrain!
-//    let queue = DispatchQueue(label: "Terrain Mesh")
-    
-    init(heightMap: [[Float]], levelOfDetail: Int) {
+    init() {
         super.init(name: "Terrain", meshType: .None)
-
-//        queue.async {
-//            let mesh = Terrain_CustomMesh(heightMap: heightMap, levelOfDetail: levelOfDetail)
-//
-//            DispatchQueue.main.async {
-//                self.setMesh(mesh)
-//            }
-//        }
         
         setMaterialIsLit(false)
     }

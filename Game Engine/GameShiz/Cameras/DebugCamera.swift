@@ -25,7 +25,7 @@ class DebugCamera: Camera {
         }
         
         if Keyboard.isKeyPressed(.downArrow) {
-            self.moveZ(-GameTime.deltaTime)
+            self.moveY(-GameTime.deltaTime)
         }
         
         if Keyboard.isKeyPressed(.a) {

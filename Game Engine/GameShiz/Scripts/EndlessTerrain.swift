@@ -4,6 +4,8 @@ import Dispatch
 class EndlessTerrain {
     var viewer: Node!
     
+    let scale: Float = 1
+    
     var viewerPosition: SIMD2<Float>!
     var viewerPositionOld: SIMD2<Float>!
     var chunkSize: Int!
@@ -32,10 +34,9 @@ class EndlessTerrain {
     }
     
     func update() {
-        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ())
+        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ()) / scale
         
         if viewerPositionOld == nil || simd_distance(viewerPositionOld, viewerPosition) > viewerMoveThresholdForChunkUpdate {
-            print("YES")
             viewerPositionOld = viewerPosition;
             updateVisibleChunks();
         }
@@ -59,9 +60,6 @@ class EndlessTerrain {
                 
                 if let terrainChunk = terrainChunkDict[viewedChunkCoord] {
                     terrainChunk.updateTerrainChunk()
-//                    if terrainChunk.getVisibility() == true {
-//                        terrainChunksVisibleLastUpdate.append(terrainChunk)
-//                    }
                 } else {
                     // Create chunk
                     terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, size: self.chunkSize, detailLevels: detailLevels)
@@ -79,8 +77,6 @@ class EndlessTerrain {
         
         var detailLevels: [LODInfo]
         var lodMeshes: [LODMesh] = []
-        var meshes: [Int : Terrain_CustomMesh] = [:]
-        var tmp: [Int : Bool] = [:]
         var previousLodIdx: Int = -1
         var mapData: MapData!
         
@@ -102,13 +98,12 @@ class EndlessTerrain {
         
         func onMapDataRecieved(mapData: MapData) {
             self.mapData = mapData
-            let noise = mapData.noiseMap
-            let texture = mapData.texture
             let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
 
-            node = Terrain(heightMap: noise, levelOfDetail: 0)
-            node.setPosition(SIMD3<Float>(positionV3))
-            node.setTexture(texture)
+            node = Terrain()
+            node.setPosition(SIMD3<Float>(positionV3) * self.parent.scale)
+            node.setScale(SIMD3<Float>(repeating: self.parent.scale))
+            node.setTexture(mapData.texture)
             
             updateTerrainChunk()
         }

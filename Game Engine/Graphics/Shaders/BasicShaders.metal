@@ -61,8 +61,9 @@ kernel void create_height_map(texture2d<float, access::write> outputTexture [[te
     
     float4 heightColour = float4(0.0, 0.0, 0.0, 1.0);
     for (int i = 0; i < regionCount; i++) {
-        if (heightValue <= regions[i].height) {
+        if (heightValue >= regions[i].height) {
             heightColour = regions[i].colour;
+        } else {
             break;
         }
     }
