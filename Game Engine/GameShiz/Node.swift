@@ -77,6 +77,7 @@ extension Node {
     func getPositionX() -> Float { return self._position.x }
     func getPositionY() -> Float { return self._position.y }
     func getPositionZ() -> Float { return self._position.z }
+    func move(delta: SIMD3<Float>) { self._position += delta }
     func move(x: Float, y: Float, z: Float) { self._position += SIMD3<Float>(x, y, z) }
     func moveX(_ delta: Float) { self._position.x += delta }
     func moveY(_ delta: Float) { self._position.y += delta }

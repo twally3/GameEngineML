@@ -21,27 +21,46 @@ class DebugCamera: Camera {
         }
         
         if Keyboard.isKeyPressed(.upArrow) {
-            self.moveY(GameTime.deltaTime)
+            self.moveY(GameTime.deltaTime * speed)
         }
         
         if Keyboard.isKeyPressed(.downArrow) {
-            self.moveY(-GameTime.deltaTime)
+            self.moveY(-GameTime.deltaTime * speed)
         }
         
+        var rot: SIMD3<Float> = SIMD3<Float>(repeating: 0)
+        var rotIsDirty = false
+        
         if Keyboard.isKeyPressed(.a) {
-            self.moveX(-GameTime.deltaTime * speed)
+            var copy = viewMatrix
+            copy.rotate(angle: Float.pi / 2, axis: Y_AXIS)
+            let _rotation = -normalize(SIMD3<Float>(x: -copy[0,2], y: 0, z: -copy[0,0]))
+            rot += _rotation
+            rotIsDirty = true
         }
         
         if Keyboard.isKeyPressed(.d) {
-            self.moveX(GameTime.deltaTime * speed)
+            var copy = viewMatrix
+            copy.rotate(angle: Float.pi / 2, axis: Y_AXIS)
+            let _rotation = normalize(SIMD3<Float>(x: -copy[0,2], y: 0, z: -copy[0,0]))
+            rot += _rotation
+            rotIsDirty = true
         }
         
         if Keyboard.isKeyPressed(.w) {
-            self.moveZ(-GameTime.deltaTime * speed)
+            let _rotation = normalize(SIMD3<Float>(x: -viewMatrix[0,2], y: 0, z: -viewMatrix[0,0]))
+            rot += _rotation
+            rotIsDirty = true
         }
         
         if Keyboard.isKeyPressed(.s) {
-            self.moveZ(GameTime.deltaTime * speed)
+            let _rotation = -normalize(SIMD3<Float>(x: -viewMatrix[0,2], y: 0, z: -viewMatrix[0,0]))
+            rot += _rotation
+            rotIsDirty = true
+        }
+        
+        if rotIsDirty {
+            self.move(delta: normalize(rot) * GameTime.deltaTime * speed)
         }
         
         if Mouse.isMouseButtonPressed(button: .RIGHT) {
