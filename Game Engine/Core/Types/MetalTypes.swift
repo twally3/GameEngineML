@@ -28,6 +28,7 @@ struct Vertex: sizeable {
 }
 
 extension Int32: sizeable {}
+extension Float32: sizeable {}
 extension UInt32: sizeable {}
 extension SIMD2: sizeable where Scalar == Float {}
 extension SIMD3: sizeable where Scalar == Float {}
@@ -41,6 +42,7 @@ struct SceneConstants: sizeable {
     var viewMatrix = matrix_identity_float4x4
     var projectionMatrix = matrix_identity_float4x4
     var cameraPosition = SIMD3<Float>(repeating: 0)
+    var clippingPlane = SIMD4<Float>(repeating: 0)
 }
 
 struct Material: sizeable {

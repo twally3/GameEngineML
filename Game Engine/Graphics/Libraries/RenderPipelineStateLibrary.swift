@@ -3,6 +3,7 @@ import MetalKit
 enum RenderPipelineStateTypes {
     case Basic
     case Instanced
+    case Water
 }
 
 class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPipelineState> {
@@ -10,6 +11,7 @@ class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPip
     
     override func fillLibrary() {
         _library.updateValue(Basic_RenderPipelineState(), forKey: .Basic)
+        _library.updateValue(Water_RenderPipelineState(), forKey: .Water)
         _library.updateValue(Instanced_RenderPipelineState() , forKey: .Instanced)
     }
     
@@ -41,6 +43,22 @@ class Basic_RenderPipelineState: RenderPipelineState {
         
         renderPipelineDescriptor.vertexFunction = Graphics.shaders[.Basic_Vertex]
         renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.Basic_Fragment]
+        
+        super.init(renderPipelineDescriptor: renderPipelineDescriptor)
+    }
+}
+
+class Water_RenderPipelineState: RenderPipelineState {
+    init() {
+        let renderPipelineDescriptor = MTLRenderPipelineDescriptor()
+        renderPipelineDescriptor.label = "Basic Render Pipeline Descriptor"
+
+        renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
+        renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
+        
+        renderPipelineDescriptor.vertexFunction = Graphics.shaders[.Water_Vertex]
+        renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.Water_Fragment]
         
         super.init(renderPipelineDescriptor: renderPipelineDescriptor)
     }

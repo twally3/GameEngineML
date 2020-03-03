@@ -6,6 +6,10 @@ using namespace metal;
 vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant SceneConstants &sceneConstants [[ buffer(1) ]],
                                           constant ModelConstants &modelConstants [[ buffer(2) ]]) {
+    
+//    float4 plane = float4(0, -1, 0, 50);
+    float4 plane = sceneConstants.clippingPlane;
+    
     RasterizerData rd;
     
     float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1);
@@ -16,6 +20,7 @@ vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
     rd.worldPosition = worldPosition.xyz;
     rd.surfaceNormal = (modelConstants.modelMatrix * float4(vIn.normal, 0.0)).xyz;
     rd.toCameraVector = sceneConstants.cameraPosition - worldPosition.xyz;
+    rd.clipDistance = dot(worldPosition, plane);
     
     return rd;
 }

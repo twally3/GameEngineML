@@ -3,6 +3,7 @@ import MetalKit
 enum SceneTypes {
     case Sandbox
     case Default
+    case Terrain
 }
 
 class SceneManager {
@@ -18,6 +19,8 @@ class SceneManager {
             _currentScene = SandboxScene(name: "Sandbox")
         case .Default:
             _currentScene = DefaultScene(name: "Default")
+        case .Terrain:
+            _currentScene = TerrainScene(name: "Terrain")
         }
     }
     
@@ -27,4 +30,23 @@ class SceneManager {
         _currentScene.update()
         _currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
+    
+    public static func updateScene(deltaTime: Float) {
+        GameTime.updateTime(deltaTime)
+        _currentScene.updateCameras()
+        _currentScene.update()
+    }
+    
+    public static func renderScene(renderCommandEncoder: MTLRenderCommandEncoder) {
+        _currentScene.render(renderCommandEncoder: renderCommandEncoder)
+    }
+    
+    public static func renderWater(renderCommandEncoder: MTLRenderCommandEncoder, reflection: MTLTexture?, refraction: MTLTexture?, refractionDepth: MTLTexture?) {
+        _currentScene.renderWater(renderCommandEncoder: renderCommandEncoder, reflectionTexture: reflection, refractionTexture: refraction, refractionDepthTexture: refractionDepth)
+    }
+    
+    public static func getCurrentScene() -> Scene {
+        return self._currentScene
+    }
 }
+

@@ -42,6 +42,8 @@
 		5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174B23A6C9BE00C31239 /* Keycodes.swift */; };
 		5067174E23A6CC5700C31239 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174D23A6CC5700C31239 /* Mouse.swift */; };
 		508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */; };
+		509C9366240DD25200500CA7 /* waterDUDV.png in Resources */ = {isa = PBXBuildFile; fileRef = 509C9365240DD25200500CA7 /* waterDUDV.png */; };
+		509C9368240DD25B00500CA7 /* waterNormalMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 509C9367240DD25B00500CA7 /* waterNormalMap.png */; };
 		50A4646523A704D7000D562D /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646423A704D7000D562D /* Camera.swift */; };
 		50A4646723A705B9000D562D /* DebugCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646623A705B9000D562D /* DebugCamera.swift */; };
 		50A4646923A707F5000D562D /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A4646823A707F5000D562D /* CameraManager.swift */; };
@@ -62,6 +64,9 @@
 		50BC8ECC23A6B5D6003544A5 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ECB23A6B5D6003544A5 /* Scene.swift */; };
 		50BC8ECE23A6BBCF003544A5 /* SandboxScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */; };
 		50BC8ED123A6BD65003544A5 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC8ED023A6BD65003544A5 /* SceneManager.swift */; };
+		50BEE124240C2BB700DCCCD3 /* WaterShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 50BEE123240C2BB700DCCCD3 /* WaterShaders.metal */; };
+		50BEE126240C2EE100DCCCD3 /* WaterQuad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BEE125240C2EE100DCCCD3 /* WaterQuad.swift */; };
+		50C94CFE240BF2FD00A56AD8 /* TerrainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C94CFD240BF2FD00A56AD8 /* TerrainScene.swift */; };
 		50DABBF723BA77D400E95FDE /* DefaultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBF623BA77D400E95FDE /* DefaultScene.swift */; };
 		50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBF823BA7D2C00E95FDE /* Plane.swift */; };
 		50DABBFC23BAA0D200E95FDE /* Noise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DABBFB23BAA0D200E95FDE /* Noise.swift */; };
@@ -129,6 +134,8 @@
 		5067174B23A6C9BE00C31239 /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		5067174D23A6CC5700C31239 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessTerrain.swift; sourceTree = "<group>"; };
+		509C9365240DD25200500CA7 /* waterDUDV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterDUDV.png; sourceTree = "<group>"; };
+		509C9367240DD25B00500CA7 /* waterNormalMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterNormalMap.png; sourceTree = "<group>"; };
 		50A4646423A704D7000D562D /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		50A4646623A705B9000D562D /* DebugCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugCamera.swift; sourceTree = "<group>"; };
 		50A4646823A707F5000D562D /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
@@ -149,6 +156,9 @@
 		50BC8ECB23A6B5D6003544A5 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxScene.swift; sourceTree = "<group>"; };
 		50BC8ED023A6BD65003544A5 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
+		50BEE123240C2BB700DCCCD3 /* WaterShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = WaterShaders.metal; sourceTree = "<group>"; };
+		50BEE125240C2EE100DCCCD3 /* WaterQuad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterQuad.swift; sourceTree = "<group>"; };
+		50C94CFD240BF2FD00A56AD8 /* TerrainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainScene.swift; sourceTree = "<group>"; };
 		50DABBF623BA77D400E95FDE /* DefaultScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultScene.swift; sourceTree = "<group>"; };
 		50DABBF823BA7D2C00E95FDE /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		50DABBFB23BAA0D200E95FDE /* Noise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noise.swift; sourceTree = "<group>"; };
@@ -237,6 +247,7 @@
 				50215E2C23A7F1C400B0C166 /* BasicShaders.metal */,
 				50215E2E23A7F20700B0C166 /* InstancedShaders.metal */,
 				503B90DD23AFCA7600F30DBE /* Lighting.metal */,
+				50BEE123240C2BB700DCCCD3 /* WaterShaders.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -244,6 +255,8 @@
 		50215E3423A80B2100B0C166 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				509C9367240DD25B00500CA7 /* waterNormalMap.png */,
+				509C9365240DD25200500CA7 /* waterDUDV.png */,
 				50215E4C23A8365900B0C166 /* sphere.obj */,
 				50215E3D23A824F200B0C166 /* cruiser */,
 				50215E3523A80B6800B0C166 /* PartyPirateParot.png */,
@@ -410,6 +423,7 @@
 				50215E4623A8325C00B0C166 /* LightObject.swift */,
 				50215E4A23A8355B00B0C166 /* Sun.swift */,
 				50DABBF823BA7D2C00E95FDE /* Plane.swift */,
+				50BEE125240C2EE100DCCCD3 /* WaterQuad.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -428,6 +442,7 @@
 				50BC8ECB23A6B5D6003544A5 /* Scene.swift */,
 				50BC8ECD23A6BBCF003544A5 /* SandboxScene.swift */,
 				50DABBF623BA77D400E95FDE /* DefaultScene.swift */,
+				50C94CFD240BF2FD00A56AD8 /* TerrainScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -565,6 +580,8 @@
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
 				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
+				509C9368240DD25B00500CA7 /* waterNormalMap.png in Resources */,
+				509C9366240DD25200500CA7 /* waterDUDV.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +621,7 @@
 				50BC8EBC23A66B60003544A5 /* Renderer.swift in Sources */,
 				50DABC0423BBBE6400E95FDE /* ImprovedPerlin.swift in Sources */,
 				508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */,
+				50BEE126240C2EE100DCCCD3 /* WaterQuad.swift in Sources */,
 				50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */,
 				50A4646523A704D7000D562D /* Camera.swift in Sources */,
 				50215E2F23A7F20700B0C166 /* InstancedShaders.metal in Sources */,
@@ -626,6 +644,7 @@
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
 				50215E1F23A7E43B00B0C166 /* Entities.swift in Sources */,
+				50C94CFE240BF2FD00A56AD8 /* TerrainScene.swift in Sources */,
 				50215E4923A8337200B0C166 /* LightManager.swift in Sources */,
 				505D1A6423A313B100813A05 /* MetalTypes.swift in Sources */,
 				50BC8EBE23A670ED003544A5 /* MeshLibrary.swift in Sources */,
@@ -636,6 +655,7 @@
 				50215E1D23A7E42B00B0C166 /* Graphics.swift in Sources */,
 				505D1A6A23A382D200813A05 /* Engine.swift in Sources */,
 				50DABBFC23BAA0D200E95FDE /* Noise.swift in Sources */,
+				50BEE124240C2BB700DCCCD3 /* WaterShaders.metal in Sources */,
 				50BC8EC523A6771B003544A5 /* Renderable.swift in Sources */,
 				50215E3123A7F27500B0C166 /* GameTime.swift in Sources */,
 				5067174E23A6CC5700C31239 /* Mouse.swift in Sources */,

@@ -2,6 +2,7 @@ import simd
 
 enum CameraTypes {
     case Debug
+    case Test
 }
 
 class Camera: Node {

@@ -5,6 +5,10 @@ class Scene: Node {
     private var _lightManager = LightManager()
     private var _sceneConstants = SceneConstants()
     
+    private var _waters: [GameObject] = []
+    
+    public var clippingPlane = SIMD4<Float>(repeating: 0) 
+    
     override init(name: String) {
         super.init(name: name)
         buildScene()
@@ -25,14 +29,27 @@ class Scene: Node {
         self._lightManager.addLightObject(light)
     }
     
+    func addWater(_ water: GameObject) {
+        _waters.append(water)
+    }
+    
     func updateCameras() {
         _cameraManager.update()
     }
     
-    override func update() {
+    func updateSceneConstants() {
         _sceneConstants.viewMatrix = _cameraManager.currentCamera.viewMatrix
         _sceneConstants.projectionMatrix = _cameraManager.currentCamera.projectionMatrix
         _sceneConstants.cameraPosition = _cameraManager.currentCamera.getPosition()
+        _sceneConstants.clippingPlane = self.clippingPlane
+    }
+    
+    override func update() {
+        updateSceneConstants()
+        
+        for water in _waters {
+            water.update()
+        }
         
         super.update()
     }
@@ -43,5 +60,20 @@ class Scene: Node {
         _lightManager.setLightData(renderCommandEncoder)
         super.render(renderCommandEncoder: renderCommandEncoder)
         renderCommandEncoder.popDebugGroup()
+    }
+    
+    func renderWater(renderCommandEncoder: MTLRenderCommandEncoder, reflectionTexture: MTLTexture?, refractionTexture: MTLTexture?, refractionDepthTexture: MTLTexture?) {
+        renderCommandEncoder.pushDebugGroup("Rendering Scene \(getName()) water")
+        renderCommandEncoder.setVertexBytes(&_sceneConstants, length: SceneConstants.stride, index: 1)
+        _lightManager.setLightData(renderCommandEncoder)
+        
+        for water in _waters {
+            water.render(renderCommandEncoder: renderCommandEncoder, reflectionTexture: reflectionTexture, refractionTexture: refractionTexture, refractionDepthTexture: refractionDepthTexture)
+        }
+        renderCommandEncoder.popDebugGroup()
+    }
+    
+    func getCameraManager() -> CameraManager {
+        return self._cameraManager
     }
 }

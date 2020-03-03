@@ -14,8 +14,8 @@ class Preferences {
     public static var clearColour: MTLClearColor = ClearColours.SkyBlue
     
     public static var mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm
-    
+
     public static var mainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
     
-    public static var startingSceneType: SceneTypes = .Default
+    public static var startingSceneType: SceneTypes = .Terrain
 }

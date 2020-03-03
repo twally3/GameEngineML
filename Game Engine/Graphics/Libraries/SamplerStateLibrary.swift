@@ -48,6 +48,11 @@ class Nearest_SamplerState: SamplerState {
         samplerDescriptor.minFilter = .nearest
         samplerDescriptor.magFilter = .nearest
         samplerDescriptor.label = name
+        
+        samplerDescriptor.rAddressMode = .repeat
+        samplerDescriptor.sAddressMode = .repeat
+        samplerDescriptor.tAddressMode = .repeat
+        
         samplerState = Engine.device.makeSamplerState(descriptor: samplerDescriptor)
     }
 }

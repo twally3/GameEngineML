@@ -4,6 +4,8 @@ enum TextureTypes{
     case None
     case PartyPirateParot
     case Cruiser
+    case WaterDUDV
+    case WaterNormalMap
 }
 
 class TextureLibrary: Library<TextureTypes, MTLTexture> {
@@ -12,6 +14,8 @@ class TextureLibrary: Library<TextureTypes, MTLTexture> {
     override func fillLibrary() {
         _library.updateValue(Texture("PartyPirateParot"), forKey: .PartyPirateParot)
         _library.updateValue(Texture("cruiser", ext: "bmp", origin: .bottomLeft), forKey: .Cruiser)
+        _library.updateValue(Texture("waterDUDV"), forKey: .WaterDUDV)
+        _library.updateValue(Texture("waterNormalMap"), forKey: .WaterNormalMap)
     }
     
     override subscript(_ type: TextureTypes) -> MTLTexture? {

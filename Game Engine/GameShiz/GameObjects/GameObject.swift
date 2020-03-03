@@ -8,6 +8,8 @@ class GameObject: Node {
     
     private var _texture: MTLTexture!
     
+    var moveFactor: Float = 0;
+
     init(name: String, meshType: MeshTypes) {
         super.init(name: name)
         _mesh = Entities.meshes[meshType]
@@ -38,6 +40,27 @@ extension GameObject: Renderable {
             }
         }
         
+        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
+    }
+    
+    func render(renderCommandEncoder: MTLRenderCommandEncoder, reflectionTexture: MTLTexture?, refractionTexture: MTLTexture?, refractionDepthTexture: MTLTexture?) {
+        moveFactor += 0.03 * GameTime.deltaTime
+        moveFactor = moveFactor.truncatingRemainder(dividingBy: 1)
+        renderCommandEncoder.setFragmentBytes(&moveFactor, length: Float.size, index: 4)
+        renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[.Water])
+        renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Less])
+
+        renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
+
+        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Nearest], index: 0)
+        renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
+
+        renderCommandEncoder.setFragmentTextures([reflectionTexture,
+                                                  refractionTexture,
+                                                  Entities.textures[.WaterDUDV],
+                                                  Entities.textures[.WaterNormalMap],
+                                                  refractionDepthTexture], range: 0..<5)
+
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }
 }

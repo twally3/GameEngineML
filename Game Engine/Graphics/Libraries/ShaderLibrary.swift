@@ -10,6 +10,9 @@ enum ShaderTypes {
     
     // Compute
     case CreateHeightMap_Compute
+    
+    case Water_Vertex
+    case Water_Fragment
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -34,6 +37,15 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "Create Height Map Compute Shader", functionName: "create_height_map"),
             forKey: .CreateHeightMap_Compute
+        )
+        
+        _library.updateValue(
+            Shader(name: "Water Vertex Shader", functionName: "water_vertex_shader"),
+            forKey: .Water_Vertex
+        )
+        _library.updateValue(
+            Shader(name: "Water Fragment Shader", functionName: "water_fragment_shader"),
+            forKey: .Water_Fragment
         )
     }
     

@@ -13,11 +13,13 @@ struct VertexIn {
 
 struct RasterizerData {
     float4 position [[ position ]];
+    float clipDistance [[ clip_distance ]];
     float4 colour;
     float2 textureCoordinate;
     float3 worldPosition;
     float3 surfaceNormal;
     float3 toCameraVector;
+    float4 clipSpace;
 };
 
 struct ModelConstants {
@@ -28,6 +30,7 @@ struct SceneConstants {
     float4x4 viewMatrix;
     float4x4 projectionMatrix;
     float3 cameraPosition;
+    float4 clippingPlane;
 };
 
 struct Material {
