@@ -18,23 +18,20 @@ class TerrainScene: Scene {
     
     override func buildScene() {
         camera.setPosition(0, 50, 10)
-//        camera.setRotationX(Float.pi / 2)
         addCamera(camera)
         
         sun.setPosition(0, 100, 0)
         sun.setMaterialIsLit(false)
         addLight(sun)
         
-//        waterQuad.setMaterialColour(SIMD4<Float>(x: 1, y: 0, z: 0, w: 0))
-//        waterQuad.setMaterialIsLit(false)
         waterQuad.setMaterialIsLit(true)
         waterQuad.setMaterialDiffuse(0)
         waterQuad.setMaterialSpecular(0.3)
-        waterQuad.setMaterialShininess(2)
+        waterQuad.setMaterialShininess(40)
         waterQuad.setMaterialAmbient(1)
         waterQuad.rotateX(-Float.pi / 2)
-        waterQuad.setScale(SIMD3<Float>(repeating: 119))
-        waterQuad.setPositionY(0.35*80)
+        waterQuad.setScale(SIMD3<Float>(repeating: 120))
+        waterQuad.setPositionY(0.38*80)
         
         addWater(waterQuad)
         addChild(terrain)

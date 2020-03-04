@@ -19,7 +19,7 @@ class Renderer: NSObject {
         
         (self.reflectionRenderTexture, self.reflectionDepthTexture) = secondRenderStuff()
         (self.refractionRenderTexture, self.refractionDepthTexture) = secondRenderStuff()
-        
+
         self.reflectionRenderPassDescriptor = self.renderPassDescriptor(renderTexture: reflectionRenderTexture, depthTexture: reflectionDepthTexture)
         self.refractionRenderPassDescriptor = self.renderPassDescriptor(renderTexture: refractionRenderTexture, depthTexture: refractionDepthTexture)
     }
@@ -52,11 +52,11 @@ extension Renderer: MTKViewDelegate {
         let currentScene = SceneManager.getCurrentScene()
         let currentCamera = currentScene.getCameraManager().currentCamera
         
-        let distanceToWater = 2 * (currentCamera!.getPositionY() - 0.35 * 80)
+        let distanceToWater = 2 * (currentCamera!.getPositionY() - (0.38 * 80))
         
         currentCamera?.moveY(-distanceToWater)
         currentCamera?.setRotationX(-currentCamera!.getRotationX())
-        currentScene.clippingPlane = SIMD4(x: 0, y: 1, z: 0, w: -0.35 * 80)
+        currentScene.clippingPlane = SIMD4(x: 0, y: 1, z: 0, w: (-0.38 * 80) + 1.0)
         currentScene.updateSceneConstants()
         
         reflectionRenderCommandEncoder?.pushDebugGroup("Starting Reflection Render")
@@ -77,7 +77,7 @@ extension Renderer: MTKViewDelegate {
         refractionRenderCommandEncoder?.setCullMode(.back)
         refractionRenderCommandEncoder?.label = "Refraction Render Command Encoder"
 
-        currentScene.clippingPlane = SIMD4(x: 0, y: -1, z: 0, w: 0.35 * 80)
+        currentScene.clippingPlane = SIMD4(x: 0, y: -1, z: 0, w: 0.38 * 80)
         currentScene.updateSceneConstants()
         
         refractionRenderCommandEncoder?.pushDebugGroup("Starting Refraction Render")

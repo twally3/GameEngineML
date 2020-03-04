@@ -54,6 +54,15 @@ class Water_RenderPipelineState: RenderPipelineState {
         renderPipelineDescriptor.label = "Basic Render Pipeline Descriptor"
 
         renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        
+        renderPipelineDescriptor.colorAttachments[0].isBlendingEnabled = true
+        renderPipelineDescriptor.colorAttachments[0].alphaBlendOperation = .add
+        renderPipelineDescriptor.colorAttachments[0].rgbBlendOperation = .add
+        renderPipelineDescriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+        renderPipelineDescriptor.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
+        renderPipelineDescriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+        renderPipelineDescriptor.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+        
         renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
         renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
         
