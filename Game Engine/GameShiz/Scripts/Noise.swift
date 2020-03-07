@@ -85,6 +85,8 @@ class Noise {
             }
         }
         
+        print(maxPossibleHeight);
+        
         return noiseMap
     }
     

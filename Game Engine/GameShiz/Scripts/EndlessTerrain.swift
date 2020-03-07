@@ -71,7 +71,7 @@ class EndlessTerrain {
     class TerrainChunk {
         var parent: EndlessTerrain!
         var position: SIMD2<Int>!
-        var node: GameObject!
+        var node: Terrain!
         var visibility: Bool = false;
         var size: Int!
         

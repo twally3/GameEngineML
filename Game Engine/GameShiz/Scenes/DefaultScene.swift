@@ -73,6 +73,8 @@ class Terrain_CustomMesh: CustomMesh {
         
         var vertexIndex = 0
         
+        var max: Float = 0
+        
         for y in stride(from: 0, to: height, by: meshSimplificationIncrement) {
             for x in stride(from: 0, to: width, by: meshSimplificationIncrement) {
                 let xf = Float(x)
@@ -80,6 +82,11 @@ class Terrain_CustomMesh: CustomMesh {
                 
                 let _x = xf - (_w / 2)
                 let _y = yf - (_h / 2)
+                
+                if (max < heightMap[x][y] * heightMultiplier) {
+                    max = heightMap[x][y] * heightMultiplier
+                }
+                
                 
                 addVertex(position: SIMD3<Float>(_x, heightMap[x][y] * heightMultiplier, _y),
                           colour: SIMD4<Float>(1,0,0,1),
@@ -99,13 +106,15 @@ class Terrain_CustomMesh: CustomMesh {
                 vertexIndex += 1
             }
         }
+        
+        print(max)
     }
 }
 
-class Terrain: GameObject {
-    init() {
-        super.init(name: "Terrain", meshType: .None)
-        
-        setMaterialIsLit(false)
-    }
-}
+//class Terrain: GameObject {
+//    init() {
+//        super.init(name: "Terrain", meshType: .None)
+//        
+//        setMaterialIsLit(false)
+//    }
+//}

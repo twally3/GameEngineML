@@ -16,6 +16,9 @@ enum ShaderTypes {
     
     case SkyBox_Vertex
     case SkyBox_Fragment
+    
+    case Terrain_Vertex
+    case Terrain_Fragment
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -58,6 +61,15 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "SkyBox Fragment Shader", functionName: "skybox_fragment_shader"),
             forKey: .SkyBox_Fragment
+        )
+        
+        _library.updateValue(
+            Shader(name: "Terrain Vertex Shader", functionName: "terrain_vertex_shader"),
+            forKey: .Terrain_Vertex
+        )
+        _library.updateValue(
+            Shader(name: "Terrain Fragment Shader", functionName: "terrain_fragment_shader"),
+            forKey: .Terrain_Fragment
         )
     }
     

@@ -5,6 +5,7 @@ enum RenderPipelineStateTypes {
     case Instanced
     case Water
     case SkyBox
+    case Terrain
 }
 
 class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPipelineState> {
@@ -15,6 +16,7 @@ class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPip
         _library.updateValue(Water_RenderPipelineState(), forKey: .Water)
         _library.updateValue(Instanced_RenderPipelineState(), forKey: .Instanced)
         _library.updateValue(SkyBox_RenderPipelineState(), forKey: .SkyBox)
+        _library.updateValue(Terrain_RenderPipelineState(), forKey: .Terrain)
     }
     
     override subscript(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState {
@@ -103,6 +105,23 @@ class SkyBox_RenderPipelineState: RenderPipelineState {
         
         renderPipelineDescriptor.vertexFunction = Graphics.shaders[.SkyBox_Vertex]
         renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.SkyBox_Fragment]
+        
+        super.init(renderPipelineDescriptor: renderPipelineDescriptor)
+    }
+}
+
+
+class Terrain_RenderPipelineState: RenderPipelineState {
+    init() {
+        let renderPipelineDescriptor = MTLRenderPipelineDescriptor()
+        renderPipelineDescriptor.label = "Terrain Render Pipeline Descriptor"
+
+        renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
+        renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
+        
+        renderPipelineDescriptor.vertexFunction = Graphics.shaders[.Terrain_Vertex]
+        renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.Terrain_Fragment]
         
         super.init(renderPipelineDescriptor: renderPipelineDescriptor)
     }
