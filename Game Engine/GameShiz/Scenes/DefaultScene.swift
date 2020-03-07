@@ -63,7 +63,7 @@ class Terrain_CustomMesh: CustomMesh {
     override func createMesh() {
         let height = heightMap[0].count
         let width = heightMap.count
-        let heightMultiplier: Float = 70
+        let heightMultiplier: Float = 110
         
         let _w = Float(width)
         let _h = Float(height)

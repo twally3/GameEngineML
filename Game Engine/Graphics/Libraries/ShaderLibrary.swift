@@ -13,6 +13,9 @@ enum ShaderTypes {
     
     case Water_Vertex
     case Water_Fragment
+    
+    case SkyBox_Vertex
+    case SkyBox_Fragment
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -46,6 +49,15 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "Water Fragment Shader", functionName: "water_fragment_shader"),
             forKey: .Water_Fragment
+        )
+        
+        _library.updateValue(
+            Shader(name: "SkyBox Vertex Shader", functionName: "skybox_vertex_shader"),
+            forKey: .SkyBox_Vertex
+        )
+        _library.updateValue(
+            Shader(name: "SkyBox Fragment Shader", functionName: "skybox_fragment_shader"),
+            forKey: .SkyBox_Fragment
         )
     }
     

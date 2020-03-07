@@ -41,8 +41,8 @@ class SceneManager {
         _currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
     
-    public static func renderWater(renderCommandEncoder: MTLRenderCommandEncoder, reflection: MTLTexture?, refraction: MTLTexture?, refractionDepth: MTLTexture?) {
-        _currentScene.renderWater(renderCommandEncoder: renderCommandEncoder, reflectionTexture: reflection, refractionTexture: refraction, refractionDepthTexture: refractionDepth)
+    public static func renderWater(renderCommandEncoder: MTLRenderCommandEncoder) {
+        _currentScene.renderWater(renderCommandEncoder: renderCommandEncoder)
     }
     
     public static func getCurrentScene() -> Scene {

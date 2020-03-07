@@ -3,25 +3,32 @@
 #include "Shared.metal"
 using namespace metal;
 
-vertex RasterizerData water_vertex_shader(const VertexIn vIn [[ stage_in ]],
+struct WaterRasterizerData {
+    float4 position [[ position ]];
+    float2 textureCoordinate;
+    float4 clipSpace;
+    float3 toCameraVector;
+    float3 worldPosition;
+};
+
+vertex WaterRasterizerData water_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant SceneConstants &sceneConstants [[ buffer(1) ]],
                                           constant ModelConstants &modelConstants [[ buffer(2) ]]) {
-    RasterizerData rd;
+    WaterRasterizerData rd;
     
     float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1);
+    float4 clipSpace = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * worldPosition;
     
-    rd.position = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * worldPosition;
-    rd.colour = vIn.colour;
+    rd.position = clipSpace;
     rd.textureCoordinate = vIn.textureCoordinate;
     rd.worldPosition = worldPosition.xyz;
-    rd.surfaceNormal = (modelConstants.modelMatrix * float4(vIn.normal, 0.0)).xyz;
     rd.toCameraVector = sceneConstants.cameraPosition - worldPosition.xyz;
-    rd.clipSpace = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * worldPosition;
+    rd.clipSpace = clipSpace;
     
     return rd;
 }
 
-fragment half4 water_fragment_shader(RasterizerData rd [[ stage_in ]],
+fragment half4 water_fragment_shader(WaterRasterizerData rd [[ stage_in ]],
                                      constant Material &material [[ buffer(1) ]],
                                      constant int &lightCount [[ buffer(2) ]],
                                      constant LightData *lightDatas [[ buffer(3)]],
@@ -72,6 +79,7 @@ fragment half4 water_fragment_shader(RasterizerData rd [[ stage_in ]],
     refractiveFactor = pow(refractiveFactor, 0.5);
 
     float4 color = mix(reflectColour, refractColour, refractiveFactor);
+    color = mix(color, float4(0.0, 0.3, 0.5, 0.1), 0.2);
 
     if (material.isLit) {
         float3 unitToCameraVector = normalize(rd.toCameraVector);

@@ -13,9 +13,7 @@ class MapGenerator {
     let offset = SIMD2<Int>(x: 0, y: 0)
     
     var regions: [TerrainType] = [
-//        TerrainType(height: 0, colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0)),        // Water Deep
-//        TerrainType(height: 0, colour: SIMD4<Float>(66 / 255, 110 / 255, 202 / 255, 1.0)),        // Water Deep
-        TerrainType(height: 0.0, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
+        TerrainType(height: 0, colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0)),        // Water Deep
         TerrainType(height: 0.3, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
         TerrainType(height: 0.4, colour: SIMD4<Float>(216 / 255, 218 / 255, 154 / 255, 1.0)),      // Sand
         TerrainType(height: 0.45, colour: SIMD4<Float>(100 / 255, 158 / 255, 32 / 255, 1.0)),       // Grass

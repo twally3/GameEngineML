@@ -5,7 +5,7 @@ class Scene: Node {
     private var _lightManager = LightManager()
     private var _sceneConstants = SceneConstants()
     
-    private var _waters: [GameObject] = []
+    private var _waters: [Water] = []
     
     public var clippingPlane = SIMD4<Float>(repeating: 0) 
     
@@ -29,7 +29,7 @@ class Scene: Node {
         self._lightManager.addLightObject(light)
     }
     
-    func addWater(_ water: GameObject) {
+    func addWater(_ water: Water) {
         _waters.append(water)
     }
     
@@ -62,13 +62,13 @@ class Scene: Node {
         renderCommandEncoder.popDebugGroup()
     }
     
-    func renderWater(renderCommandEncoder: MTLRenderCommandEncoder, reflectionTexture: MTLTexture?, refractionTexture: MTLTexture?, refractionDepthTexture: MTLTexture?) {
+    func renderWater(renderCommandEncoder: MTLRenderCommandEncoder) {
         renderCommandEncoder.pushDebugGroup("Rendering Scene \(getName()) water")
         renderCommandEncoder.setVertexBytes(&_sceneConstants, length: SceneConstants.stride, index: 1)
         _lightManager.setLightData(renderCommandEncoder)
         
         for water in _waters {
-            water.render(renderCommandEncoder: renderCommandEncoder, reflectionTexture: reflectionTexture, refractionTexture: refractionTexture, refractionDepthTexture: refractionDepthTexture)
+            water.render(renderCommandEncoder: renderCommandEncoder)
         }
         renderCommandEncoder.popDebugGroup()
     }

@@ -7,6 +7,7 @@ enum MeshTypes {
     case Cube_Custom
     case Cruiser
     case Sphere
+    case SkyBox_Custom
 }
 
 class MeshLibrary: Library<MeshTypes, Mesh> {
@@ -19,6 +20,7 @@ class MeshLibrary: Library<MeshTypes, Mesh> {
         _library.updateValue(Cube_CustomMesh(), forKey: .Cube_Custom)
         _library.updateValue(ModelMesh(modelName: "cruiser"), forKey: .Cruiser)
         _library.updateValue(ModelMesh(modelName: "sphere"), forKey: .Sphere)
+        _library.updateValue(Skybox_CustomMesh(), forKey: .SkyBox_Custom)
     }
     
     override subscript(_ type: MeshTypes) -> Mesh {
@@ -120,7 +122,7 @@ class CustomMesh: Mesh {
         }
     }
     
-    func addVertex(position: SIMD3<Float>, colour: SIMD4<Float>, textureCoordinate: SIMD2<Float> = SIMD2<Float>(repeating: 0), normal: SIMD3<Float> = SIMD3<Float>(0, 1, 0)) {
+    func addVertex(position: SIMD3<Float>, colour: SIMD4<Float> = SIMD4<Float>(1, 0, 0, 1), textureCoordinate: SIMD2<Float> = SIMD2<Float>(repeating: 0), normal: SIMD3<Float> = SIMD3<Float>(0, 1, 0)) {
         _vertices.append(Vertex(position: position, colour: colour, textureCoordinate: textureCoordinate, normal: normal))
     }
     
@@ -214,5 +216,54 @@ class Cube_CustomMesh: CustomMesh {
         addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 1.0, 0.5, 1.0))
         addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0))
         addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0))
+    }
+}
+
+class Skybox_CustomMesh: CustomMesh {
+    override func createMesh() {
+        // + Y
+        addVertex(position: SIMD3<Float>(-0.5,  0.5,  0.5), normal: SIMD3<Float>(0.0, -1.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5,  0.5), normal: SIMD3<Float>(0.0, -1.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5, -0.5), normal: SIMD3<Float>(0.0, -1.0,  0.0))
+        addVertex(position: SIMD3<Float>(-0.5,  0.5, -0.5), normal: SIMD3<Float>(0.0, -1.0,  0.0))
+
+        // -Y
+        addVertex(position: SIMD3<Float>(-0.5, -0.5, -0.5), normal: SIMD3<Float>(0.0,  1.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5, -0.5, -0.5), normal: SIMD3<Float>(0.0,  1.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5, -0.5,  0.5), normal: SIMD3<Float>(0.0,  1.0,  0.0))
+        addVertex(position: SIMD3<Float>(-0.5, -0.5,  0.5), normal: SIMD3<Float>(0.0,  1.0,  0.0))
+
+        // +Z
+        addVertex(position: SIMD3<Float>(-0.5, -0.5,  0.5), normal: SIMD3<Float>(0.0,  0.0, -1.0))
+        addVertex(position: SIMD3<Float>( 0.5, -0.5,  0.5), normal: SIMD3<Float>(0.0,  0.0, -1.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5,  0.5), normal: SIMD3<Float>(0.0,  0.0, -1.0))
+        addVertex(position: SIMD3<Float>(-0.5,  0.5,  0.5), normal: SIMD3<Float>(0.0,  0.0, -1.0))
+
+        // -Z
+        addVertex(position: SIMD3<Float>( 0.5, -0.5, -0.5), normal: SIMD3<Float>(0.0,  0.0,  1.0))
+        addVertex(position: SIMD3<Float>(-0.5, -0.5, -0.5), normal: SIMD3<Float>(0.0,  0.0,  1.0))
+        addVertex(position: SIMD3<Float>(-0.5,  0.5, -0.5), normal: SIMD3<Float>(0.0,  0.0,  1.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5, -0.5), normal: SIMD3<Float>(0.0,  0.0,  1.0))
+
+        // -X
+        addVertex(position: SIMD3<Float>(-0.5, -0.5, -0.5), normal: SIMD3<Float>(1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>(-0.5, -0.5,  0.5), normal: SIMD3<Float>(1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>(-0.5,  0.5,  0.5), normal: SIMD3<Float>(1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>(-0.5,  0.5, -0.5), normal: SIMD3<Float>(1.0,  0.0,  0.0))
+
+        // +X
+        addVertex(position: SIMD3<Float>( 0.5, -0.5,  0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5, -0.5, -0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5, -0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
+        addVertex(position: SIMD3<Float>( 0.5,  0.5,  0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
+
+        addIndices([
+            0,  3,  2,  2,  1,  0,
+            4,  7,  6,  6,  5,  4,
+            8, 11, 10, 10,  9,  8,
+            12, 15, 14, 14, 13, 12,
+            16, 19, 18, 18, 17, 16,
+            20, 23, 22, 22, 21, 20
+        ])
     }
 }
