@@ -64,3 +64,12 @@ struct LightData: sizeable {
     var diffuseIntensity: Float = 1.0
     var specularIntensity: Float = 1.0
 }
+
+struct TerrainLayer: sizeable {
+    var height: Float
+    var colour: SIMD4<Float>
+    var colourStrength: Float = 0
+    var scale: Float
+    var blend: Float = 0
+    var textureId: Int32 = 0
+}

@@ -28,7 +28,7 @@ extension SkyBox: Renderable{
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
         renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
-        renderCommandEncoder.setFragmentTexture(_texture, index: 10)
+        renderCommandEncoder.setFragmentTexture(_texture, index: 0)
 
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }

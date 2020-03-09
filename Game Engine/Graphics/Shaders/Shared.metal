@@ -58,4 +58,13 @@ struct TerrainType {
     float4 colour;
 };
 
+struct TerrainLayer {
+    float height;
+    float4 colour;
+    float colourStrength;
+    float scale;
+    float blend;
+    int textureId;
+};
+
 #endif

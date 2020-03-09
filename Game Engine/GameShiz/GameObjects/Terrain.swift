@@ -7,16 +7,44 @@ class Terrain: Node {
     private var _mesh: Mesh!
     
     private var _texture: MTLTexture!
-    
-    var _baseColours: [TerrainType] = [
-        TerrainType(height: 0, colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0)),        // Water Deep
-        TerrainType(height: 0.3, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
-        TerrainType(height: 0.4, colour: SIMD4<Float>(216 / 255, 218 / 255, 154 / 255, 1.0)),      // Sand
-        TerrainType(height: 0.45, colour: SIMD4<Float>(100 / 255, 158 / 255, 32 / 255, 1.0)),       // Grass
-        TerrainType(height: 0.55, colour: SIMD4<Float>(76 / 255, 116 / 255, 28 / 255, 1.0)),         // Grass 2
-        TerrainType(height: 0.6, colour: SIMD4<Float>(100 / 255, 80 / 255, 75 / 255, 1.0)),         // Rock
-        TerrainType(height: 0.7, colour: SIMD4<Float>(85 / 255, 70 / 255, 70 / 255, 1.0)),          // Rock 2
-        TerrainType(height: 0.9, colour: SIMD4<Float>(255 / 255, 255 / 255, 255 / 255, 1.0))          // Snow
+        
+    var _baseColours: [TerrainLayer] = [
+        // Water Deep
+        TerrainLayer(height: 0,
+                     colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.05,
+                     textureId: 1),
+        // Sand
+        TerrainLayer(height: 0.3,
+                     colour: SIMD4<Float>(216 / 255, 218 / 255, 154 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.05,
+                     textureId: 1),
+        // Grass
+        TerrainLayer(height: 0.4,
+                     colour: SIMD4<Float>(100 / 255, 158 / 255, 32 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.1,
+                     textureId: 2),
+        // Rock
+        TerrainLayer(height: 0.55,
+                     colour: SIMD4<Float>(100 / 255, 80 / 255, 75 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.05,
+                     textureId: 3),
+        // Rock 2
+        TerrainLayer(height: 0.7,
+                     colour: SIMD4<Float>(85 / 255, 70 / 255, 70 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.05,
+                     textureId: 4),
+        // Snow
+        TerrainLayer(height: 0.85,
+                     colour: SIMD4<Float>(255 / 255, 255 / 255, 255 / 255, 1.0),
+                     scale: 30,
+                     blend: 0.1,
+                     textureId: 5)
     ];
 
     init() {
@@ -40,26 +68,26 @@ extension Terrain: Renderable {
 
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
 
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Nearest], index: 0)
+        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Terrain], index: 0)
         renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
-//        renderCommandEncoder.setTriangleFillMode(.lines)
-        if (_material.useTexture) {
-            if (_texture != nil) {
-                renderCommandEncoder.setFragmentTexture(_texture, index: 0)
-            } else {
-                renderCommandEncoder.setFragmentTexture(Entities.textures[_textureType], index: 0)
-            }
-        }
-        
+
         var terrainDatas = _baseColours
         var terrainCount = terrainDatas.count
         var maxTerrainHeight: Float = 117
         
         renderCommandEncoder.setFragmentBytes(&terrainCount, length: Int32.size, index: 4)
-        renderCommandEncoder.setFragmentBytes(&terrainDatas, length: TerrainType.stride(terrainCount), index: 5)
+        renderCommandEncoder.setFragmentBytes(&terrainDatas, length: TerrainLayer.stride(terrainCount), index: 5)
 
         //TODO: 117 is a hack, this needs to be passed in!
         renderCommandEncoder.setFragmentBytes(&maxTerrainHeight, length: Float.size, index: 6)
+        
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.Terrain], index: 0)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.Water], index: 1)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.SandyGrass], index: 2)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.Grass], index: 3)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.StonyGround], index: 4)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.Rocks1], index: 5)
+        renderCommandEncoder.setFragmentTexture(Entities.textures[.Snow], index: 6)
         
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }

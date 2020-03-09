@@ -106,8 +106,6 @@ class Terrain_CustomMesh: CustomMesh {
                 vertexIndex += 1
             }
         }
-        
-        print(max)
     }
 }
 

@@ -78,14 +78,9 @@ class Noise {
                 } else if self.normaliseMode == .global {
                     let normalisedHeight: Float = (noiseMap[x][y] + 1) / (2 * maxPossibleHeight / 2)
                     noiseMap[x][y] =  max(0, normalisedHeight)
-                    if (noiseMap[x][y] < 0) {
-                        print(normalisedHeight)
-                    }
                 }
             }
         }
-        
-        print(maxPossibleHeight);
         
         return noiseMap
     }

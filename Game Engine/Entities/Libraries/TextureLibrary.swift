@@ -10,6 +10,15 @@ enum TextureTypes{
     case WaterRefractionTexture
     case WaterRefractionDepthTexture
     case SkyBox
+    
+    // --- TERRAIN ---
+    case Water
+    case SandyGrass
+    case Grass
+    case StonyGround
+    case Rocks1
+    case Snow
+    case Terrain
 }
 
 class TextureLibrary: Library<TextureTypes, MTLTexture> {
@@ -20,7 +29,16 @@ class TextureLibrary: Library<TextureTypes, MTLTexture> {
         _library.updateValue(Texture("cruiser", ext: "bmp", origin: .bottomLeft), forKey: .Cruiser)
         _library.updateValue(Texture("waterDUDV"), forKey: .WaterDUDV)
         _library.updateValue(Texture("waterNormalMap"), forKey: .WaterNormalMap)
-        _library.updateValue(Texture(["left", "right", "up", "down", "back", "front"]), forKey: .SkyBox)
+        _library.updateValue(Texture(["left", "right", "up", "down", "back", "front"], cubeMap: true), forKey: .SkyBox)
+
+        _library.updateValue(Texture(["Water", "Sandy grass", "Grass", "Stony ground", "Rocks 1", "Snow"], cubeMap: false), forKey: .Terrain)
+        
+        _library.updateValue(Texture("Water"), forKey: .Water)
+        _library.updateValue(Texture("Sandy grass"), forKey: .SandyGrass)
+        _library.updateValue(Texture("Grass"), forKey: .Grass)
+        _library.updateValue(Texture("Stony ground"), forKey: .StonyGround)
+        _library.updateValue(Texture("Rocks 1"), forKey: .Rocks1)
+        _library.updateValue(Texture("Snow"), forKey: .Snow)
     }
     
     override subscript(_ type: TextureTypes) -> MTLTexture? {
@@ -47,7 +65,82 @@ class Texture {
         setTexture(texture)
     }
     
-    init(_ textureNames: [String], ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft) {
+    init(_ textureNames: [String], ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, cubeMap: Bool = false) {
+        var texture: MTLTexture!
+        
+        if cubeMap {
+            texture = loadCubeMap(textureNames: textureNames, ext: ext, origin: origin)
+        } else {
+            texture = loadTexture2DArray(textureNames: textureNames, ext: ext, origin: origin)
+        }
+        
+        setTexture(texture)
+    }
+    
+    func loadTexture2DArray(textureNames: [String], ext: String, origin: MTKTextureLoader.Origin) -> MTLTexture {
+        var texture: MTLTexture!
+        let scale: Int = 1
+        let firstImage = NSImage(named: textureNames.first!)
+        let cubeSize = Int(firstImage!.size.width) * scale
+        
+        let textureDescriptor = MTLTextureDescriptor()
+        textureDescriptor.pixelFormat = Preferences.mainPixelFormat
+        textureDescriptor.height = cubeSize
+        textureDescriptor.width = cubeSize
+        textureDescriptor.textureType = .type2DArray
+        textureDescriptor.arrayLength = textureNames.count
+        textureDescriptor.mipmapLevelCount = Int(log2(Float(cubeSize)) + 1)
+        
+        texture = Engine.device.makeTexture(descriptor: textureDescriptor)
+        
+        for (i, textureName) in textureNames.enumerated() {
+            let textureLoader = TextureLoader(textureName: textureName, textureExtension: ext, origin: origin)
+            let tex: MTLTexture = textureLoader.loadTextureFromBundle()
+
+            for j in 0..<tex.mipmapLevelCount {
+                let texSize = cubeSize / Int(pow(Double(2), Double(j)))
+
+                let rowBytes = texSize * 4
+                let length = rowBytes * texSize
+                let bgraBytes = [UInt8](repeating: 0, count: length)
+                tex.getBytes(UnsafeMutableRawPointer(mutating: bgraBytes),
+                             bytesPerRow: rowBytes,
+                             from: MTLRegionMake2D(0, 0, texSize, texSize),
+                             mipmapLevel: j)
+
+                texture.replace(region: MTLRegionMake2D(0, 0, texSize, texSize),
+                                 mipmapLevel: j,
+                                 slice: i,
+                                 withBytes: bgraBytes,
+                                 bytesPerRow: rowBytes,
+                                 bytesPerImage: bgraBytes.count)
+            }
+        }
+
+//        for (i, textureName) in textureNames.enumerated() {
+//            let textureLoader = TextureLoader(textureName: textureName, textureExtension: ext, origin: origin)
+//            let tex: MTLTexture = textureLoader.loadTextureFromBundle()
+//
+//            let rowBytes = cubeSize * 4
+//            let length = rowBytes * cubeSize
+//            let bgraBytes = [UInt8](repeating: 0, count: length)
+//            tex.getBytes(UnsafeMutableRawPointer(mutating: bgraBytes),
+//                         bytesPerRow: rowBytes,
+//                         from: MTLRegionMake2D(0, 0, cubeSize, cubeSize),
+//                         mipmapLevel: 0)
+//
+//            texture.replace(region: MTLRegionMake2D(0, 0, cubeSize, cubeSize),
+//                             mipmapLevel: 0,
+//                             slice: i,
+//                             withBytes: bgraBytes,
+//                             bytesPerRow: rowBytes,
+//                             bytesPerImage: bgraBytes.count)
+//        }
+        
+        return texture
+    }
+    
+    func loadCubeMap(textureNames: [String], ext: String, origin: MTKTextureLoader.Origin) -> MTLTexture {
         var texture: MTLTexture!
         let scale: Int = 1
         let firstImage = NSImage(named: textureNames.first!)
@@ -81,7 +174,7 @@ class Texture {
                              bytesPerImage: bgraBytes.count)
         }
         
-        setTexture(texture)
+        return texture
     }
     
     func setTexture(_ texture: MTLTexture){

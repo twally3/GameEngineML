@@ -45,6 +45,13 @@
 		5067174E23A6CC5700C31239 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174D23A6CC5700C31239 /* Mouse.swift */; };
 		5069B017241417AB00B062EB /* Terrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069B016241417AB00B062EB /* Terrain.swift */; };
 		5069B0192414190E00B062EB /* TerrainShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5069B0182414190E00B062EB /* TerrainShaders.metal */; };
+		5069B02224142EFD00B062EB /* Sandy grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01B24142EFD00B062EB /* Sandy grass.png */; };
+		5069B02324142EFD00B062EB /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01C24142EFD00B062EB /* Water.png */; };
+		5069B02424142EFD00B062EB /* Rocks 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01D24142EFD00B062EB /* Rocks 1.png */; };
+		5069B02524142EFD00B062EB /* Snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01E24142EFD00B062EB /* Snow.png */; };
+		5069B02624142EFD00B062EB /* Stony ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01F24142EFD00B062EB /* Stony ground.png */; };
+		5069B02724142EFD00B062EB /* Grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02024142EFD00B062EB /* Grass.png */; };
+		5069B02824142EFD00B062EB /* Rocks 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02124142EFD00B062EB /* Rocks 2.png */; };
 		508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */; };
 		509522812413E46700124D30 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227B2413E46600124D30 /* back.png */; };
 		509522822413E46700124D30 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227C2413E46600124D30 /* left.png */; };
@@ -148,6 +155,13 @@
 		5067174D23A6CC5700C31239 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		5069B016241417AB00B062EB /* Terrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terrain.swift; sourceTree = "<group>"; };
 		5069B0182414190E00B062EB /* TerrainShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = TerrainShaders.metal; sourceTree = "<group>"; };
+		5069B01B24142EFD00B062EB /* Sandy grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandy grass.png"; sourceTree = "<group>"; };
+		5069B01C24142EFD00B062EB /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
+		5069B01D24142EFD00B062EB /* Rocks 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocks 1.png"; sourceTree = "<group>"; };
+		5069B01E24142EFD00B062EB /* Snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Snow.png; sourceTree = "<group>"; };
+		5069B01F24142EFD00B062EB /* Stony ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stony ground.png"; sourceTree = "<group>"; };
+		5069B02024142EFD00B062EB /* Grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grass.png; sourceTree = "<group>"; };
+		5069B02124142EFD00B062EB /* Rocks 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocks 2.png"; sourceTree = "<group>"; };
 		508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessTerrain.swift; sourceTree = "<group>"; };
 		5095227B2413E46600124D30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		5095227C2413E46600124D30 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
@@ -401,6 +415,13 @@
 		5069B01A24142BDD00B062EB /* terrain */ = {
 			isa = PBXGroup;
 			children = (
+				5069B02024142EFD00B062EB /* Grass.png */,
+				5069B01D24142EFD00B062EB /* Rocks 1.png */,
+				5069B02124142EFD00B062EB /* Rocks 2.png */,
+				5069B01B24142EFD00B062EB /* Sandy grass.png */,
+				5069B01E24142EFD00B062EB /* Snow.png */,
+				5069B01F24142EFD00B062EB /* Stony ground.png */,
+				5069B01C24142EFD00B062EB /* Water.png */,
 			);
 			path = terrain;
 			sourceTree = "<group>";
@@ -622,7 +643,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5069B02824142EFD00B062EB /* Rocks 2.png in Resources */,
 				509522882413E6D000124D30 /* up.png in Resources */,
+				5069B02324142EFD00B062EB /* Water.png in Resources */,
+				5069B02224142EFD00B062EB /* Sandy grass.png in Resources */,
 				509522822413E46700124D30 /* left.png in Resources */,
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
@@ -630,13 +654,17 @@
 				50215E4323A8250700B0C166 /* cruiser.mtl in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
 				509522852413E46700124D30 /* right.png in Resources */,
+				5069B02724142EFD00B062EB /* Grass.png in Resources */,
+				5069B02524142EFD00B062EB /* Snow.png in Resources */,
 				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
 				509522812413E46700124D30 /* back.png in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
 				509522842413E46700124D30 /* front.png in Resources */,
+				5069B02624142EFD00B062EB /* Stony ground.png in Resources */,
 				509C9368240DD25B00500CA7 /* waterNormalMap.png in Resources */,
 				509C9366240DD25200500CA7 /* waterDUDV.png in Resources */,
 				509522832413E46700124D30 /* down.png in Resources */,
+				5069B02424142EFD00B062EB /* Rocks 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@ vertex SkyboxRasterizerData skybox_vertex_shader(const VertexIn vIn [[ stage_in 
 }
 
 fragment half4 skybox_fragment_shader(SkyboxRasterizerData rd [[ stage_in ]],
-                                      texturecube<half> cubeTexture [[ texture(10) ]],
+                                      texturecube<half> cubeTexture [[ texture(0) ]],
                                       sampler cubeSampler [[ sampler(0) ]]) {
     
     float3 texCoords = float3(rd.texCoords.x, rd.texCoords.y, -rd.texCoords.z);
