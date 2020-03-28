@@ -92,12 +92,7 @@ fragment half4 terrain_fragment_shader(RasterizerData rd [[ stage_in ]],
                                      constant float &maxTerrainHeight [[ buffer(6) ]],
                                      sampler sampler2d [[ sampler(0) ]],
                                      texture2d_array<float> textures [[ texture(0) ]],
-                                     texture2d<float> water [[ texture(1) ]],
-                                     texture2d<float> sand [[ texture(2) ]],
-                                     texture2d<float> grass [[ texture(3) ]],
-                                     texture2d<float> stone [[ texture(4) ]],
-                                     texture2d<float> rock [[ texture(5) ]],
-                                     texture2d<float> snow [[ texture(6) ]]) {
+                                     const array<texture2d<float>, 6> _textures [[ texture(1) ]]) {
 
     float heightPercent = inverseLerp(0.0, maxTerrainHeight, rd.worldPosition.y);
     float4 colour = float4(0.0, 0.0, 0.0, 1.0);
@@ -106,17 +101,15 @@ fragment half4 terrain_fragment_shader(RasterizerData rd [[ stage_in ]],
 
     float3 blendedAxes = normalize(rd.surfaceNormal);
     
-    texture2d<float> _textures[] = { water, sand, grass, stone, rock, snow };
-
     for (int i = 0; i < regionCount; i++) {
         float blend = regions[i].blend;
         int textureId = regions[i].textureId;
         float drawStrength = inverseLerp(-blend / 2 - epsilon, blend / 2, heightPercent - regions[i].height);
 
         float4 baseColour = regions[i].colour * regions[i].colourStrength;
-        float4 textureColour = triplanar(rd.worldPosition, regions[i].scale, blendedAxes, textures, sampler2d, textureId) * (1 - regions[i].colourStrength);
-//        texture2d<float> texture = _textures[textureId];
-//        float4 textureColour = triplanar2(rd.worldPosition, regions[i].scale, blendedAxes, texture, sampler2d) * (1 - regions[i].colourStrength);
+//        float4 textureColour = triplanar(rd.worldPosition, regions[i].scale, blendedAxes, textures, sampler2d, textureId) * (1 - regions[i].colourStrength);
+        texture2d<float> texture = _textures[textureId];
+        float4 textureColour = triplanar2(rd.worldPosition, regions[i].scale, blendedAxes, texture, sampler2d) * (1 - regions[i].colourStrength);
 
         colour = colour * (1 - drawStrength) + (baseColour + textureColour) * drawStrength;
     }

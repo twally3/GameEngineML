@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "505D1A2E23A2F4E800813A05"
-               BuildableName = "Game Engine.app"
-               BlueprintName = "Game Engine"
+               BuildableName = "Game Engine-macOS.app"
+               BlueprintName = "Game Engine-macOS"
                ReferencedContainer = "container:Game Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "505D1A2E23A2F4E800813A05"
-            BuildableName = "Game Engine.app"
-            BlueprintName = "Game Engine"
+            BuildableName = "Game Engine-macOS.app"
+            BlueprintName = "Game Engine-macOS"
             ReferencedContainer = "container:Game Engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,8 +82,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "505D1A2E23A2F4E800813A05"
-            BuildableName = "Game Engine.app"
-            BlueprintName = "Game Engine"
+            BuildableName = "Game Engine-macOS.app"
+            BlueprintName = "Game Engine-macOS"
             ReferencedContainer = "container:Game Engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

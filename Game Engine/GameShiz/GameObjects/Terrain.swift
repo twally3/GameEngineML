@@ -82,12 +82,14 @@ extension Terrain: Renderable {
         renderCommandEncoder.setFragmentBytes(&maxTerrainHeight, length: Float.size, index: 6)
         
         renderCommandEncoder.setFragmentTexture(Entities.textures[.Terrain], index: 0)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.Water], index: 1)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.SandyGrass], index: 2)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.Grass], index: 3)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.StonyGround], index: 4)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.Rocks1], index: 5)
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.Snow], index: 6)
+        
+        renderCommandEncoder.setFragmentTextures([Entities.textures[.Water],
+                                                  Entities.textures[.SandyGrass],
+                                                  Entities.textures[.Grass],
+                                                  Entities.textures[.StonyGround],
+                                                  Entities.textures[.Rocks1],
+                                                  Entities.textures[.Snow]
+                                                ], range: 1..<7)
         
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
     }

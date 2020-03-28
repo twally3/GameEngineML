@@ -80,7 +80,12 @@ class Texture {
     func loadTexture2DArray(textureNames: [String], ext: String, origin: MTKTextureLoader.Origin) -> MTLTexture {
         var texture: MTLTexture!
         let scale: Int = 1
-        let firstImage = NSImage(named: textureNames.first!)
+//        let firstImage = NSImage(named: textureNames.first!)
+        #if os(iOS)
+            let firstImage = UIImage(named: textureNames.first!)
+        #elseif os(macOS)
+            let firstImage = NSImage(named: textureNames.first!)
+        #endif
         let cubeSize = Int(firstImage!.size.width) * scale
         
         let textureDescriptor = MTLTextureDescriptor()
@@ -116,26 +121,6 @@ class Texture {
                                  bytesPerImage: bgraBytes.count)
             }
         }
-
-//        for (i, textureName) in textureNames.enumerated() {
-//            let textureLoader = TextureLoader(textureName: textureName, textureExtension: ext, origin: origin)
-//            let tex: MTLTexture = textureLoader.loadTextureFromBundle()
-//
-//            let rowBytes = cubeSize * 4
-//            let length = rowBytes * cubeSize
-//            let bgraBytes = [UInt8](repeating: 0, count: length)
-//            tex.getBytes(UnsafeMutableRawPointer(mutating: bgraBytes),
-//                         bytesPerRow: rowBytes,
-//                         from: MTLRegionMake2D(0, 0, cubeSize, cubeSize),
-//                         mipmapLevel: 0)
-//
-//            texture.replace(region: MTLRegionMake2D(0, 0, cubeSize, cubeSize),
-//                             mipmapLevel: 0,
-//                             slice: i,
-//                             withBytes: bgraBytes,
-//                             bytesPerRow: rowBytes,
-//                             bytesPerImage: bgraBytes.count)
-//        }
         
         return texture
     }
@@ -143,7 +128,12 @@ class Texture {
     func loadCubeMap(textureNames: [String], ext: String, origin: MTKTextureLoader.Origin) -> MTLTexture {
         var texture: MTLTexture!
         let scale: Int = 1
-        let firstImage = NSImage(named: textureNames.first!)
+//        let firstImage = NSImage(named: textureNames.first!)
+        #if os(iOS)
+            let firstImage = UIImage(named: textureNames.first!)
+        #elseif os(macOS)
+            let firstImage = NSImage(named: textureNames.first!)
+        #endif
         let cubeSize = Int(firstImage!.size.width) * scale
 
         let textureDescriptor = MTLTextureDescriptor()

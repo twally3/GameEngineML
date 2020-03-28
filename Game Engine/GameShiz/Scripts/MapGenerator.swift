@@ -77,7 +77,7 @@ class MapGenerator {
         textureDescriptor.height = mapChunkSize
         textureDescriptor.pixelFormat = .bgra8Unorm
         textureDescriptor.sampleCount = 1
-        textureDescriptor.storageMode = .managed
+//        textureDescriptor.storageMode = .managed
         textureDescriptor.usage = [.shaderWrite, .shaderRead]
         
         let texture = Engine.device!.makeTexture(descriptor: textureDescriptor)
