@@ -21,5 +21,9 @@ class GameView: MTKView {
         
         self.renderer = Renderer(self)
         self.delegate = renderer
+        
+        Controller.ignite()
+        
+        self.preferredFramesPerSecond = 120
     }
 }

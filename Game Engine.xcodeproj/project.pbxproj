@@ -134,6 +134,8 @@
 		5069B02724142EFD00B062EB /* Grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02024142EFD00B062EB /* Grass.png */; };
 		5069B02824142EFD00B062EB /* Rocks 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02124142EFD00B062EB /* Rocks 2.png */; };
 		508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */; };
+		5092159B2430DAC100725048 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092159A2430DAC100725048 /* Controller.swift */; };
+		5092159C2430E49500725048 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092159A2430DAC100725048 /* Controller.swift */; };
 		509522812413E46700124D30 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227B2413E46600124D30 /* back.png */; };
 		509522822413E46700124D30 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227C2413E46600124D30 /* left.png */; };
 		509522832413E46700124D30 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227D2413E46600124D30 /* down.png */; };
@@ -229,6 +231,7 @@
 		5069B02024142EFD00B062EB /* Grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grass.png; sourceTree = "<group>"; };
 		5069B02124142EFD00B062EB /* Rocks 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocks 2.png"; sourceTree = "<group>"; };
 		508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessTerrain.swift; sourceTree = "<group>"; };
+		5092159A2430DAC100725048 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		5095227B2413E46600124D30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		5095227C2413E46600124D30 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
 		5095227D2413E46600124D30 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
@@ -461,6 +464,7 @@
 				5067174923A6C8A500C31239 /* Keyboard.swift */,
 				5067174B23A6C9BE00C31239 /* Keycodes.swift */,
 				5067174D23A6CC5700C31239 /* Mouse.swift */,
+				5092159A2430DAC100725048 /* Controller.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -783,6 +787,7 @@
 				50347A43242FAF17006A695D /* Lighting.metal in Sources */,
 				503479FE242FA942006A695D /* Library.swift in Sources */,
 				50347A45242FAF17006A695D /* SkyBoxShaders.metal in Sources */,
+				5092159C2430E49500725048 /* Controller.swift in Sources */,
 				50347A30242FAA01006A695D /* Pointer.swift in Sources */,
 				50347A37242FAA01006A695D /* Plane.swift in Sources */,
 				503479E9242FA6DA006A695D /* AppDelegate.swift in Sources */,
@@ -815,6 +820,7 @@
 				503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */,
 				50BC8EBC23A66B60003544A5 /* Renderer.swift in Sources */,
 				50DABC0423BBBE6400E95FDE /* ImprovedPerlin.swift in Sources */,
+				5092159B2430DAC100725048 /* Controller.swift in Sources */,
 				508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */,
 				50BEE126240C2EE100DCCCD3 /* WaterQuad.swift in Sources */,
 				50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */,

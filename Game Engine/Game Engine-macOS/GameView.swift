@@ -1,4 +1,5 @@
 import MetalKit
+import GameController
 
 class GameView: MTKView {
     
@@ -18,6 +19,8 @@ class GameView: MTKView {
         
         self.renderer = Renderer(self)
         self.delegate = renderer
+        
+        Controller.ignite()
     }
     
     override var acceptsFirstResponder: Bool { return true }
