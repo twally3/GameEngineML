@@ -12,6 +12,9 @@ class MapGenerator {
     let seed: UInt64 = 1
     let offset = SIMD2<Int>(x: 0, y: 0)
     
+    let useFalloffMap: Bool = true
+    var falloffMap: [[Float]]
+    
     var regions: [TerrainType] = [
         TerrainType(height: 0, colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0)),        // Water Deep
         TerrainType(height: 0.3, colour: SIMD4<Float>(74 / 255, 113 / 255, 206 / 255, 1.0)),        // Water Shallow
@@ -26,6 +29,10 @@ class MapGenerator {
     let queue = DispatchQueue(label: "Map Generator")
     let dsem = DispatchSemaphore(value: 1)
     
+    init() {
+        self.falloffMap = FalloffGenerator.generateFalloffMap(size: mapChunkSize)
+    }
+    
     func requestMapData(centre: SIMD2<Int>, callback: @escaping (MapData) -> ()) {
         queue.async {
             let mapData = self.generateMapData(centre: centre)
@@ -37,7 +44,7 @@ class MapGenerator {
     }
     
     func generateMapData(centre: SIMD2<Int>) -> MapData {
-        let noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
+        var noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
                                             mapHeight: mapChunkSize,
                                             seed: seed,
                                             scale: noiseScale,
@@ -45,6 +52,14 @@ class MapGenerator {
                                             persistance: persistance,
                                             lacunarity: lacunarity,
                                             offset: centre &+ offset)
+        
+        if self.useFalloffMap == true {
+            for i in 0..<noise.count {
+                for j in 0..<noise[0].count {
+                    noise[i][j] = min(max(noise[i][j] - self.falloffMap[i][j], 0), 1)
+                }
+            }
+        }
         
         let noiseMap = generateRandomTexture(noise)
         

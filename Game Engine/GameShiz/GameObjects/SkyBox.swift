@@ -10,6 +10,7 @@ class SkyBox: Node {
         
         self._mesh = Entities.meshes[.SkyBox_Custom]
         self._texture = Entities.textures[.SkyBox]
+//        self._texture = Entities.textures[.PartyPirateParot]
     }
     
     override func update(){
@@ -23,7 +24,7 @@ class SkyBox: Node {
 extension SkyBox: Renderable{
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[.SkyBox])
-        renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Less])
+        renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Skybox])
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
