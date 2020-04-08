@@ -39,17 +39,21 @@ class TerrainScene: Scene {
         camera.setPosition(0, 50, 10)
         addCamera(camera)
         
-        sun.setPosition(0, 100, 0)
+        sun.setPosition(0, 150, 0)
         sun.setMaterialIsLit(false)
         addLight(sun)
         
         addChild(skybox)
+
         addChild(terrain)
-        
+
         addWater(waterQuad)
     }
     
     override func doUpdate() {
         skybox.setPosition(camera.getPosition())
+        
+        sun.setPositionX(cos(GameTime.totalGameTime) * 500)
+        sun.setPositionZ(sin(GameTime.totalGameTime) * 500)
     }
 }

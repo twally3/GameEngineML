@@ -90,7 +90,8 @@ class Terrain_CustomMesh: CustomMesh {
                 
                 addVertex(position: SIMD3<Float>(_x, heightMap[x][y] * heightMultiplier, _y),
                           colour: SIMD4<Float>(1,0,0,1),
-                          textureCoordinate: SIMD2<Float>(xf / (_w - 1), yf / (_h - 1)))
+                          textureCoordinate: SIMD2<Float>(xf / (_w - 1), yf / (_h - 1)),
+                          normal: calculateNormal(x: x, z: y))
                 
                 if (x < width - 1 && y < height - 1) {
                     let startIndex = vertexIndex
@@ -107,12 +108,20 @@ class Terrain_CustomMesh: CustomMesh {
             }
         }
     }
+    
+    private func calculateNormal(x: Int, z: Int) -> SIMD3<Float> {
+        let heightL: Float = getHeight(x: x - 1, z: z)
+        let heightR: Float = getHeight(x: x + 1, z: z)
+        let heightD: Float = getHeight(x: x, z: z - 1)
+        let heightU: Float = getHeight(x: x, z: z + 1)
+        
+        return normalize(SIMD3<Float>(x: heightL - heightR, y: 2.0, z: heightD - heightU))
+    }
+    
+    private func getHeight(x: Int, z: Int) -> Float {
+        if (x < 0 || x >= self.heightMap.count || z < 0 || z >= self.heightMap[0].count) {
+            return 0
+        }
+        return self.heightMap[x][z] * 110
+    }
 }
-
-//class Terrain: GameObject {
-//    init() {
-//        super.init(name: "Terrain", meshType: .None)
-//        
-//        setMaterialIsLit(false)
-//    }
-//}

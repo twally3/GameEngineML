@@ -51,7 +51,11 @@ class Terrain: Node {
         super.init(name: "Terrain")
         _mesh = Entities.meshes[.None]
         
-        setMaterialIsLit(false)
+        setMaterialIsLit(true)
+        setMaterialAmbient(0.3)
+        setMaterialDiffuse(1)
+        setMaterialSpecular(0)
+        setMaterialShininess(0)
     }
     
     override func update() {
