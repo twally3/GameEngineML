@@ -2,7 +2,7 @@ import GameplayKit
 import simd
 
 class TerrainScene: Scene {
-    let camera = DebugCamera()
+    let camera = FPSCamera()
     let sun = Sun()
     let waterQuad: WaterQuad = {
         let waterQuad = WaterQuad()

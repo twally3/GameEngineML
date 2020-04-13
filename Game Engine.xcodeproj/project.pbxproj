@@ -133,6 +133,7 @@
 		5069B02624142EFD00B062EB /* Stony ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B01F24142EFD00B062EB /* Stony ground.png */; };
 		5069B02724142EFD00B062EB /* Grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02024142EFD00B062EB /* Grass.png */; };
 		5069B02824142EFD00B062EB /* Rocks 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5069B02124142EFD00B062EB /* Rocks 2.png */; };
+		507F226824447CF1007DD3AC /* FPSCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F226724447CF1007DD3AC /* FPSCamera.swift */; };
 		508502EB2402EF03002ADFB1 /* EndlessTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */; };
 		5092159B2430DAC100725048 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092159A2430DAC100725048 /* Controller.swift */; };
 		5092159C2430E49500725048 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092159A2430DAC100725048 /* Controller.swift */; };
@@ -231,6 +232,7 @@
 		5069B01F24142EFD00B062EB /* Stony ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stony ground.png"; sourceTree = "<group>"; };
 		5069B02024142EFD00B062EB /* Grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grass.png; sourceTree = "<group>"; };
 		5069B02124142EFD00B062EB /* Rocks 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocks 2.png"; sourceTree = "<group>"; };
+		507F226724447CF1007DD3AC /* FPSCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSCamera.swift; sourceTree = "<group>"; };
 		508502EA2402EF03002ADFB1 /* EndlessTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessTerrain.swift; sourceTree = "<group>"; };
 		5092159A2430DAC100725048 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		5095227B2413E46600124D30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			children = (
 				50A4646423A704D7000D562D /* Camera.swift */,
 				50A4646623A705B9000D562D /* DebugCamera.swift */,
+				507F226724447CF1007DD3AC /* FPSCamera.swift */,
 			);
 			path = Cameras;
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 				50BEE126240C2EE100DCCCD3 /* WaterQuad.swift in Sources */,
 				50DABBF923BA7D2C00E95FDE /* Plane.swift in Sources */,
 				50A4646523A704D7000D562D /* Camera.swift in Sources */,
+				507F226824447CF1007DD3AC /* FPSCamera.swift in Sources */,
 				50215E2F23A7F20700B0C166 /* InstancedShaders.metal in Sources */,
 				5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */,
 				50BC8EC223A67591003544A5 /* Node.swift in Sources */,
