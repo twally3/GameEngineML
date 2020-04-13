@@ -4,6 +4,8 @@ enum CameraTypes {
     case Debug
     case Test
     case FPS
+    case FPSQuaternion
+    case Free
 }
 
 class Camera: Node {

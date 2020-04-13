@@ -143,6 +143,8 @@
 		509522842413E46700124D30 /* front.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227E2413E46600124D30 /* front.png */; };
 		509522852413E46700124D30 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 5095227F2413E46600124D30 /* right.png */; };
 		509522882413E6D000124D30 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 509522872413E6D000124D30 /* up.png */; };
+		50973AEF2445102600B01109 /* FPSCameraQuaternion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50973AEE2445102600B01109 /* FPSCameraQuaternion.swift */; };
+		50973AF12445190600B01109 /* FreeCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50973AF02445190600B01109 /* FreeCamera.swift */; };
 		509A6BD2243D00CB002B556E /* FalloffGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6BD1243D00CB002B556E /* FalloffGenerator.swift */; };
 		509C9366240DD25200500CA7 /* waterDUDV.png in Resources */ = {isa = PBXBuildFile; fileRef = 509C9365240DD25200500CA7 /* waterDUDV.png */; };
 		509C9368240DD25B00500CA7 /* waterNormalMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 509C9367240DD25B00500CA7 /* waterNormalMap.png */; };
@@ -241,6 +243,8 @@
 		5095227E2413E46600124D30 /* front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = front.png; sourceTree = "<group>"; };
 		5095227F2413E46600124D30 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 		509522872413E6D000124D30 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		50973AEE2445102600B01109 /* FPSCameraQuaternion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSCameraQuaternion.swift; sourceTree = "<group>"; };
+		50973AF02445190600B01109 /* FreeCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCamera.swift; sourceTree = "<group>"; };
 		509A6BD1243D00CB002B556E /* FalloffGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FalloffGenerator.swift; sourceTree = "<group>"; };
 		509C9365240DD25200500CA7 /* waterDUDV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterDUDV.png; sourceTree = "<group>"; };
 		509C9367240DD25B00500CA7 /* waterNormalMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterNormalMap.png; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				50A4646423A704D7000D562D /* Camera.swift */,
 				50A4646623A705B9000D562D /* DebugCamera.swift */,
 				507F226724447CF1007DD3AC /* FPSCamera.swift */,
+				50973AEE2445102600B01109 /* FPSCameraQuaternion.swift */,
+				50973AF02445190600B01109 /* FreeCamera.swift */,
 			);
 			path = Cameras;
 			sourceTree = "<group>";
@@ -813,6 +819,7 @@
 			files = (
 				50BC8ECE23A6BBCF003544A5 /* SandboxScene.swift in Sources */,
 				50BC8EBA23A669A8003544A5 /* GameObject.swift in Sources */,
+				50973AEF2445102600B01109 /* FPSCameraQuaternion.swift in Sources */,
 				50DABC0023BAAA1000E95FDE /* MapGenerator.swift in Sources */,
 				505092B0241065C5005EE0F5 /* SkyBox.swift in Sources */,
 				50BC8ED123A6BD65003544A5 /* SceneManager.swift in Sources */,
@@ -864,6 +871,7 @@
 				50BC8EC923A6AAF9003544A5 /* Maths.swift in Sources */,
 				5057803A23BC21BD0088F513 /* SeededRandom.swift in Sources */,
 				50215E3323A7FB2900B0C166 /* Quad.swift in Sources */,
+				50973AF12445190600B01109 /* FreeCamera.swift in Sources */,
 				50215E1D23A7E42B00B0C166 /* Graphics.swift in Sources */,
 				50A0465D241077CE00B6E474 /* Water.swift in Sources */,
 				505D1A6A23A382D200813A05 /* Engine.swift in Sources */,
