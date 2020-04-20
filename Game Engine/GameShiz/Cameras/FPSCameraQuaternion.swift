@@ -57,19 +57,20 @@ class FPSCameraQuaternion: Camera {
         let strafe = SIMD3<Float>(x: mat[0][0], y: mat[1][0], z: mat[2][0])
         
         
-        let speed: Float = 0.32
+        let speed: Float = 20
 
-        self.move(delta: (-dz * forward + dx * strafe) * speed)
+        self.move(delta: (-dz * forward + dx * strafe) * speed * GameTime.deltaTime)
     }
     
     func mouseMove() {
+        if !Mouse.isMouseButtonPressed(button: .RIGHT) { return }
         let mousePos = SIMD2<Float>(x: Mouse.getDX(), y: Mouse.getDY())
         let mouseDelta = mousePos
         
-        let mouseXSensitivity: Float = 0.025
-        let mouseYSensitivity: Float = 0.025
+        let mouseXSensitivity: Float = 1
+        let mouseYSensitivity: Float = 1
         
-        yaw += mouseXSensitivity * mouseDelta.x
-        pitch += mouseYSensitivity * mouseDelta.y
+        yaw += mouseXSensitivity * mouseDelta.x * GameTime.deltaTime
+        pitch += mouseYSensitivity * mouseDelta.y * GameTime.deltaTime
     }
 }

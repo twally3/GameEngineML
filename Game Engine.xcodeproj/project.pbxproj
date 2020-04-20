@@ -27,6 +27,8 @@
 		50215E4923A8337200B0C166 /* LightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4823A8337200B0C166 /* LightManager.swift */; };
 		50215E4B23A8355B00B0C166 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4A23A8355B00B0C166 /* Sun.swift */; };
 		50215E4D23A8365900B0C166 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50215E4C23A8365900B0C166 /* sphere.obj */; };
+		503401642449A74C00BFA35E /* FPSCameraQuaternion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50973AEE2445102600B01109 /* FPSCameraQuaternion.swift */; };
+		503401652449A76500BFA35E /* FalloffGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6BD1243D00CB002B556E /* FalloffGenerator.swift */; };
 		503479E9242FA6DA006A695D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503479E8242FA6DA006A695D /* AppDelegate.swift */; };
 		503479EB242FA6DA006A695D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503479EA242FA6DA006A695D /* SceneDelegate.swift */; };
 		503479ED242FA6DA006A695D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503479EC242FA6DA006A695D /* GameView.swift */; };
@@ -433,8 +435,8 @@
 		505D1A5E23A2FA2C00813A05 /* Game Engine-macOS */ = {
 			isa = PBXGroup;
 			children = (
-				505D1A5F23A2FCCF00813A05 /* GameView.swift */,
 				505D1A3823A2F4EA00813A05 /* Main.storyboard */,
+				505D1A5F23A2FCCF00813A05 /* GameView.swift */,
 				505D1A3223A2F4E800813A05 /* AppDelegate.swift */,
 				505D1A3623A2F4EA00813A05 /* Assets.xcassets */,
 				505D1A3B23A2F4EA00813A05 /* Info.plist */,
@@ -763,6 +765,8 @@
 				50347A38242FAA01006A695D /* WaterQuad.swift in Sources */,
 				50347A23242FA9F0006A695D /* LightManager.swift in Sources */,
 				50347A3E242FAA09006A695D /* Renderable.swift in Sources */,
+				503401652449A76500BFA35E /* FalloffGenerator.swift in Sources */,
+				503401642449A74C00BFA35E /* FPSCameraQuaternion.swift in Sources */,
 				50347A18242FA987006A695D /* MeshLibrary.swift in Sources */,
 				50347A35242FAA01006A695D /* LightObject.swift in Sources */,
 				50347A26242FA9F8006A695D /* Noise.swift in Sources */,

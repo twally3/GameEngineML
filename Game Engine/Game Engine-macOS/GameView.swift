@@ -22,8 +22,6 @@ class GameView: MTKView {
         self.delegate = renderer
         
         Controller.ignite()
-        
-        CGDisplayHideCursor(CGMainDisplayID())
     }
     
     override var acceptsFirstResponder: Bool { return true }
@@ -62,7 +60,6 @@ class GameView: MTKView {
     
     override func mouseMoved(with event: NSEvent) {
         setMousePositionChanged(event: event)
-        CGWarpMouseCursorPosition(CGPoint(x: self.bounds.width, y: self.bounds.height))
     }
     
     override func scrollWheel(with event: NSEvent) {
