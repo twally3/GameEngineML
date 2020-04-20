@@ -29,6 +29,8 @@
 		5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 50377189244E423900DE5076 /* TheSuzannes.mtl */; };
 		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
 		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
+		50377192244E5BEC00DE5076 /* chest.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50377191244E5BEC00DE5076 /* chest.obj */; };
+		50377194244E5D4A00DE5076 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50377193244E5D4A00DE5076 /* Chest.swift */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
 		505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A3223A2F4E800813A05 /* AppDelegate.swift */; };
@@ -105,6 +107,8 @@
 		50377189244E423900DE5076 /* TheSuzannes.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.mtl; sourceTree = "<group>"; };
 		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
 		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
+		50377191244E5BEC00DE5076 /* chest.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.obj; sourceTree = "<group>"; };
+		50377193244E5D4A00DE5076 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
 		505D1A2F23A2F4E800813A05 /* Game Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +240,7 @@
 		50215E3423A80B2100B0C166 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				50377190244E5BE200DE5076 /* chest */,
 				5037718D244E424D00DE5076 /* suzannes */,
 				50215E4C23A8365900B0C166 /* sphere.obj */,
 				50215E3D23A824F200B0C166 /* cruiser */,
@@ -261,6 +266,14 @@
 				50377189244E423900DE5076 /* TheSuzannes.mtl */,
 			);
 			path = suzannes;
+			sourceTree = "<group>";
+		};
+		50377190244E5BE200DE5076 /* chest */ = {
+			isa = PBXGroup;
+			children = (
+				50377191244E5BEC00DE5076 /* chest.obj */,
+			);
+			path = chest;
 			sourceTree = "<group>";
 		};
 		505D1A2623A2F4E800813A05 = {
@@ -411,6 +424,7 @@
 				50215E4623A8325C00B0C166 /* LightObject.swift */,
 				50215E4A23A8355B00B0C166 /* Sun.swift */,
 				5037718E244E426C00DE5076 /* TheSuzannes.swift */,
+				50377193244E5D4A00DE5076 /* Chest.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -549,6 +563,7 @@
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
 				5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */,
+				50377192244E5BEC00DE5076 /* chest.obj in Resources */,
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
 				50215E4323A8250700B0C166 /* cruiser.mtl in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
@@ -622,6 +637,7 @@
 				505D1A6A23A382D200813A05 /* Engine.swift in Sources */,
 				50BC8EC523A6771B003544A5 /* Renderable.swift in Sources */,
 				50215E3123A7F27500B0C166 /* GameTime.swift in Sources */,
+				50377194244E5D4A00DE5076 /* Chest.swift in Sources */,
 				5067174E23A6CC5700C31239 /* Mouse.swift in Sources */,
 				50A4646723A705B9000D562D /* DebugCamera.swift in Sources */,
 			);
