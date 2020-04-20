@@ -26,6 +26,9 @@
 		50215E4923A8337200B0C166 /* LightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4823A8337200B0C166 /* LightManager.swift */; };
 		50215E4B23A8355B00B0C166 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4A23A8355B00B0C166 /* Sun.swift */; };
 		50215E4D23A8365900B0C166 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50215E4C23A8365900B0C166 /* sphere.obj */; };
+		5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 50377189244E423900DE5076 /* TheSuzannes.mtl */; };
+		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
+		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
 		505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A3223A2F4E800813A05 /* AppDelegate.swift */; };
@@ -99,6 +102,9 @@
 		50215E4823A8337200B0C166 /* LightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightManager.swift; sourceTree = "<group>"; };
 		50215E4A23A8355B00B0C166 /* Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sun.swift; sourceTree = "<group>"; };
 		50215E4C23A8365900B0C166 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		50377189244E423900DE5076 /* TheSuzannes.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.mtl; sourceTree = "<group>"; };
+		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
+		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
 		505D1A2F23A2F4E800813A05 /* Game Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +236,7 @@
 		50215E3423A80B2100B0C166 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				5037718D244E424D00DE5076 /* suzannes */,
 				50215E4C23A8365900B0C166 /* sphere.obj */,
 				50215E3D23A824F200B0C166 /* cruiser */,
 				50215E3523A80B6800B0C166 /* PartyPirateParot.png */,
@@ -245,6 +252,15 @@
 				50215E3E23A8250700B0C166 /* cruiser.obj */,
 			);
 			path = cruiser;
+			sourceTree = "<group>";
+		};
+		5037718D244E424D00DE5076 /* suzannes */ = {
+			isa = PBXGroup;
+			children = (
+				5037718A244E423900DE5076 /* TheSuzannes.obj */,
+				50377189244E423900DE5076 /* TheSuzannes.mtl */,
+			);
+			path = suzannes;
 			sourceTree = "<group>";
 		};
 		505D1A2623A2F4E800813A05 = {
@@ -394,6 +410,7 @@
 				50215E4423A82A0300B0C166 /* Cruiser.swift */,
 				50215E4623A8325C00B0C166 /* LightObject.swift */,
 				50215E4A23A8355B00B0C166 /* Sun.swift */,
+				5037718E244E426C00DE5076 /* TheSuzannes.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -531,10 +548,12 @@
 			files = (
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
+				5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */,
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
 				50215E4323A8250700B0C166 /* cruiser.mtl in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
 				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
+				5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +594,7 @@
 				50215E2F23A7F20700B0C166 /* InstancedShaders.metal in Sources */,
 				5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */,
 				50BC8EC223A67591003544A5 /* Node.swift in Sources */,
+				5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */,
 				505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */,
 				50215E4523A82A0300B0C166 /* Cruiser.swift in Sources */,
 				503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */,
