@@ -120,13 +120,16 @@ class Mesh {
     
     func drawPrimitives(renderCommandEncoder: MTLRenderCommandEncoder,
                         material: Material? = nil,
-                        baseColourTextureType: TextureTypes = .None) {
+                        baseColourTextureType: TextureTypes = .None,
+                        baseColourSamplerStateType: SamplerStateTypes = .Linear) {
         if _vertexBuffer != nil {
             renderCommandEncoder.setVertexBuffer(_vertexBuffer, offset: 0, index: 0)
             
             if _submeshes.count > 0 {
                 for submesh in _submeshes {
-                    submesh.applyTextures(renderCommandEncoder: renderCommandEncoder, customBaseColourTextureType: baseColourTextureType)
+                    submesh.applyTextures(renderCommandEncoder: renderCommandEncoder,
+                                          customBaseColourTextureType: baseColourTextureType,
+                                          baseColourSamplerStateType: baseColourSamplerStateType)
                     submesh.applyMaterials(renderCommandEncoder: renderCommandEncoder, customMaterial: material)
                     
                     renderCommandEncoder.drawIndexedPrimitives(type: submesh.primitiveType,
@@ -210,8 +213,8 @@ class Submesh {
         return tex
     }
     
-    func applyTextures(renderCommandEncoder: MTLRenderCommandEncoder, customBaseColourTextureType: TextureTypes) {
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
+    func applyTextures(renderCommandEncoder: MTLRenderCommandEncoder, customBaseColourTextureType: TextureTypes, baseColourSamplerStateType: SamplerStateTypes) {
+        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[baseColourSamplerStateType], index: 0)
         
         let baseColourTex = customBaseColourTextureType == .None ? _baseColourTexture : Entities.textures[customBaseColourTextureType]
         renderCommandEncoder.setFragmentTexture(baseColourTex, index: 0)

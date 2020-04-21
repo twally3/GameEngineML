@@ -7,7 +7,7 @@ class GameObject: Node {
     private var _material: Material? = nil
     private var _baseColourTextureType: TextureTypes = .None
     
-		var moveFactor: Float = 0;
+    var moveFactor: Float = 0;
     
     init(name: String, meshType: MeshTypes) {
         super.init(name: name)
@@ -44,7 +44,7 @@ extension GameObject {
         _material = material
     }
 
-		public func setMesh(_ mesh: Mesh) {
+    public func setMesh(_ mesh: Mesh) {
         self._mesh = mesh
     }
 }

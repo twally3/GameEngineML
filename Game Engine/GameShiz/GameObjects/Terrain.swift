@@ -2,11 +2,9 @@ import MetalKit
 
 class Terrain: Node {
     private var _modelConstants = ModelConstants()
-    private var _material = Material()
-    private var _textureType: TextureTypes = .None
     private var _mesh: Mesh!
     
-    private var _texture: MTLTexture!
+    private var _material: Material? = nil
         
     var _baseColours: [TerrainLayer] = [
         // Water Deep
@@ -51,11 +49,17 @@ class Terrain: Node {
         super.init(name: "Terrain")
         _mesh = Entities.meshes[.None]
         
-//        setMaterialIsLit(true)
-//        setMaterialAmbient(0.3)
-//        setMaterialDiffuse(1)
-//        setMaterialSpecular(0)
-//        setMaterialShininess(0)
+        addMaterial()
+    }
+    
+    func addMaterial() {
+        var material = Material()
+        material.isLit = true
+        material.ambient = SIMD3<Float>(repeating: 0.3)
+        material.diffuse = SIMD3<Float>(repeating: 1)
+        material.specular = SIMD3<Float>(repeating: 0)
+        material.shininess = 0
+        _material = material
     }
     
     override func update() {
@@ -72,9 +76,6 @@ extension Terrain: Renderable {
 
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
 
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Terrain], index: 0)
-        renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
-
         var terrainDatas = _baseColours
         var terrainCount = terrainDatas.count
         var maxTerrainHeight: Float = 117
@@ -84,9 +85,7 @@ extension Terrain: Renderable {
 
         //TODO: 117 is a hack, this needs to be passed in!
         renderCommandEncoder.setFragmentBytes(&maxTerrainHeight, length: Float.size, index: 6)
-        
-        renderCommandEncoder.setFragmentTexture(Entities.textures[.Terrain], index: 0)
-        
+                
         renderCommandEncoder.setFragmentTextures([Entities.textures[.Water],
                                                   Entities.textures[.SandyGrass],
                                                   Entities.textures[.Grass],
@@ -95,28 +94,14 @@ extension Terrain: Renderable {
                                                   Entities.textures[.Snow]
                                                 ], range: 1..<7)
         
-        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
+        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder,
+                             material: _material,
+                             baseColourSamplerStateType: .Terrain)
     }
 }
 
 
 extension Terrain {
-//    public func setMaterialColour(_ colour: SIMD4<Float>) {
-//        self._material.colour = colour
-//    }
-//
-//    public func setMaterialColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
-//        setMaterialColour(SIMD4<Float>(r, g, b, a))
-//    }
-//
-//    public func setTexture(_ textureType: TextureTypes) {
-//        self._textureType = textureType
-//    }
-
-    public func setTexture(_ texture: MTLTexture) {
-        self._texture = texture
-    }
-
     public func setMesh(_ mesh: Mesh) {
         self._mesh = mesh
     }

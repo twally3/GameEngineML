@@ -34,11 +34,11 @@ fragment half4 water_fragment_shader(WaterRasterizerData rd [[ stage_in ]],
                                      constant LightData *lightDatas [[ buffer(3)]],
                                      constant float &moveFactor [[ buffer(4) ]],
                                      sampler sampler2d [[ sampler(0) ]],
-                                     texture2d<float> reflectTexture [[ texture(0) ]],
-                                     texture2d<float> refractTexture [[ texture(1) ]],
-                                     texture2d<float> dudvTexture [[ texture(2) ]],
-                                     texture2d<float> normalMapTexture [[ texture(3) ]],
-                                     depth2d<float> refrationDepthTexture [[ texture(4) ]] ){
+                                     texture2d<float> reflectTexture [[ texture(1) ]],
+                                     texture2d<float> refractTexture [[ texture(2) ]],
+                                     texture2d<float> dudvTexture [[ texture(3) ]],
+                                     texture2d<float> normalMapTexture [[ texture(4) ]],
+                                     depth2d<float> refrationDepthTexture [[ texture(5) ]] ){
 
     float2 textureCoords = rd.textureCoordinate * 4.0;
     float4 clipSpace = rd.clipSpace;

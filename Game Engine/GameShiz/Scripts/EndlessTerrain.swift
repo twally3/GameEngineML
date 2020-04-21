@@ -103,7 +103,7 @@ class EndlessTerrain {
             node = Terrain()
             node.setPosition(SIMD3<Float>(positionV3) * self.parent.scale)
             node.setScale(SIMD3<Float>(repeating: self.parent.scale))
-            node.setTexture(mapData.texture)
+//            node.setTexture(mapData.texture)
             
             updateTerrainChunk()
         }

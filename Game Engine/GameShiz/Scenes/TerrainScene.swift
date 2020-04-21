@@ -6,11 +6,6 @@ class TerrainScene: Scene {
     let sun = Sun()
     let waterQuad: WaterQuad = {
         let waterQuad = WaterQuad()
-        waterQuad.setMaterialIsLit(true)
-        waterQuad.setMaterialDiffuse(0)
-        waterQuad.setMaterialSpecular(0.3)
-        waterQuad.setMaterialShininess(40)
-        waterQuad.setMaterialAmbient(1)
         waterQuad.rotateX(-Float.pi / 2)
         waterQuad.setScale(SIMD3<Float>(repeating: 120 * 2))
         waterQuad.setPositionY(0.4*110)
@@ -22,7 +17,7 @@ class TerrainScene: Scene {
         let mapGenerator = MapGenerator()
         let mapData = mapGenerator.generateMapData(centre: SIMD2<Int>(repeating: 0))
         let terrainMesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: 0)
-        terrain.setTexture(mapData.texture)
+//        terrain.setTexture(mapData.texture)
         terrain.setMesh(terrainMesh)
         terrain.setScaleX(2)
         terrain.setScaleZ(2)
@@ -40,7 +35,6 @@ class TerrainScene: Scene {
         addCamera(camera)
         
         sun.setPosition(0, 150, 0)
-//        sun.setMaterialIsLit(false)
         addLight(sun)
         
         addChild(skybox)

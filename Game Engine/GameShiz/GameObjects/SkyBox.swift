@@ -3,14 +3,11 @@ import MetalKit
 class SkyBox: Node {
     private var _modelConstants = ModelConstants()
     private var _mesh: Mesh!
-    private var _texture: MTLTexture!
     
     init() {
         super.init(name: "Skybox")
         
         self._mesh = Entities.meshes[.SkyBox_Custom]
-        self._texture = Entities.textures[.SkyBox]
-//        self._texture = Entities.textures[.PartyPirateParot]
     }
     
     override func update(){
@@ -28,9 +25,6 @@ extension SkyBox: Renderable{
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
-        renderCommandEncoder.setFragmentTexture(_texture, index: 0)
-
-        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
+        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder, baseColourTextureType: .SkyBox)
     }
 }
