@@ -51,11 +51,11 @@ class Terrain: Node {
         super.init(name: "Terrain")
         _mesh = Entities.meshes[.None]
         
-        setMaterialIsLit(true)
-        setMaterialAmbient(0.3)
-        setMaterialDiffuse(1)
-        setMaterialSpecular(0)
-        setMaterialShininess(0)
+//        setMaterialIsLit(true)
+//        setMaterialAmbient(0.3)
+//        setMaterialDiffuse(1)
+//        setMaterialSpecular(0)
+//        setMaterialShininess(0)
     }
     
     override func update() {
@@ -101,51 +101,23 @@ extension Terrain: Renderable {
 
 
 extension Terrain {
-    public func setMaterialColour(_ colour: SIMD4<Float>) {
-        self._material.colour = colour
-        self._material.useMaterialColour = true
-        self._material.useTexture = false
-    }
-
-    public func setMaterialColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
-        setMaterialColour(SIMD4<Float>(r, g, b, a))
-    }
-
-    public func setTexture(_ textureType: TextureTypes) {
-        self._textureType = textureType
-        self._material.useTexture = true
-        self._material.useMaterialColour = false
-    }
+//    public func setMaterialColour(_ colour: SIMD4<Float>) {
+//        self._material.colour = colour
+//    }
+//
+//    public func setMaterialColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
+//        setMaterialColour(SIMD4<Float>(r, g, b, a))
+//    }
+//
+//    public func setTexture(_ textureType: TextureTypes) {
+//        self._textureType = textureType
+//    }
 
     public func setTexture(_ texture: MTLTexture) {
         self._texture = texture
-        self._material.useTexture = true
-        self._material.useMaterialColour = false
     }
 
     public func setMesh(_ mesh: Mesh) {
         self._mesh = mesh
     }
-
-
-    public func setMaterialIsLit(_ isLit: Bool) { self._material.isLit = isLit }
-    public func getMaterialIsLit() -> Bool { return self._material.isLit }
-
-    public func setMaterialAmbient(_ ambient: SIMD3<Float>) { self._material.ambient = ambient }
-    public func setMaterialAmbient(_ ambient: Float) { self._material.ambient = SIMD3<Float>(repeating: ambient) }
-    public func addMaterialAmbient(_ value: Float) { self._material.ambient += value }
-    public func getMaterialAmbient() -> SIMD3<Float> { return self._material.ambient }
-
-    public func setMaterialDiffuse(_ diffuse: SIMD3<Float>) { self._material.diffuse = diffuse }
-    public func setMaterialDiffuse(_ diffuse: Float) { self._material.diffuse = SIMD3<Float>(repeating: diffuse) }
-    public func addMaterialDiffuse(_ value: Float) { self._material.diffuse += value }
-    public func getMaterialDiffuse() -> SIMD3<Float> { return self._material.diffuse }
-
-    public func setMaterialSpecular(_ specular: SIMD3<Float>) { self._material.specular = specular }
-    public func setMaterialSpecular(_ specular: Float) { self._material.specular = SIMD3<Float>(repeating: specular) }
-    public func addMaterialSpecular(_ value: Float) { self._material.specular += value }
-    public func getMaterialSpecular() -> SIMD3<Float> { return self._material.specular }
-
-    public func setMaterialShininess(_ shininess: Float) { self._material.shininess = shininess }
-    public func getMaterialShininess() -> Float { return self._material.shininess }
 }

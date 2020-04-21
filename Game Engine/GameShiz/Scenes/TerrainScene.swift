@@ -40,7 +40,7 @@ class TerrainScene: Scene {
         addCamera(camera)
         
         sun.setPosition(0, 150, 0)
-        sun.setMaterialIsLit(false)
+//        sun.setMaterialIsLit(false)
         addLight(sun)
         
         addChild(skybox)

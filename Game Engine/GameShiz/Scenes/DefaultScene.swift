@@ -13,7 +13,7 @@ class DefaultScene: Scene {
         addCamera(camera)
         
         sun.setPosition(0, 5, 0)
-        sun.setMaterialIsLit(false)
+//        sun.setMaterialIsLit(false)
         addLight(sun)
         
         addPlane()
