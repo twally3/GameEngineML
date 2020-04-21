@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		501BB90E244F56F9007797BA /* chest.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90A244F56F8007797BA /* chest.mtl */; };
+		501BB90F244F56F9007797BA /* chest.obj in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90B244F56F8007797BA /* chest.obj */; };
+		501BB910244F56F9007797BA /* Chest_Wood_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */; };
+		501BB911244F56F9007797BA /* Chest_Metal_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */; };
 		50215E1D23A7E42B00B0C166 /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E1C23A7E42B00B0C166 /* Graphics.swift */; };
 		50215E1F23A7E43B00B0C166 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E1E23A7E43B00B0C166 /* Entities.swift */; };
 		50215E2223A7E5A300B0C166 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E2123A7E5A300B0C166 /* Library.swift */; };
@@ -29,7 +33,6 @@
 		5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 50377189244E423900DE5076 /* TheSuzannes.mtl */; };
 		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
 		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
-		50377192244E5BEC00DE5076 /* chest.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50377191244E5BEC00DE5076 /* chest.obj */; };
 		50377194244E5D4A00DE5076 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50377193244E5D4A00DE5076 /* Chest.swift */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
@@ -85,6 +88,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		501BB90A244F56F8007797BA /* chest.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.mtl; sourceTree = "<group>"; };
+		501BB90B244F56F8007797BA /* chest.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.obj; sourceTree = "<group>"; };
+		501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chest_Wood_Base_Color.png; sourceTree = "<group>"; };
+		501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chest_Metal_Base_Color.png; sourceTree = "<group>"; };
 		50215E1C23A7E42B00B0C166 /* Graphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphics.swift; sourceTree = "<group>"; };
 		50215E1E23A7E43B00B0C166 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		50215E2123A7E5A300B0C166 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
@@ -107,7 +114,6 @@
 		50377189244E423900DE5076 /* TheSuzannes.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.mtl; sourceTree = "<group>"; };
 		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
 		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
-		50377191244E5BEC00DE5076 /* chest.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.obj; sourceTree = "<group>"; };
 		50377193244E5D4A00DE5076 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
@@ -271,7 +277,10 @@
 		50377190244E5BE200DE5076 /* chest */ = {
 			isa = PBXGroup;
 			children = (
-				50377191244E5BEC00DE5076 /* chest.obj */,
+				501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */,
+				501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */,
+				501BB90A244F56F8007797BA /* chest.mtl */,
+				501BB90B244F56F8007797BA /* chest.obj */,
 			);
 			path = chest;
 			sourceTree = "<group>";
@@ -560,15 +569,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501BB90F244F56F9007797BA /* chest.obj in Resources */,
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
+				501BB910244F56F9007797BA /* Chest_Wood_Base_Color.png in Resources */,
 				5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */,
-				50377192244E5BEC00DE5076 /* chest.obj in Resources */,
+				501BB90E244F56F9007797BA /* chest.mtl in Resources */,
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
 				50215E4323A8250700B0C166 /* cruiser.mtl in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
 				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
 				5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */,
+				501BB911244F56F9007797BA /* Chest_Metal_Base_Color.png in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
