@@ -49,9 +49,10 @@ class DefaultScene: Scene {
     }
 }
 
-class Terrain_CustomMesh: CustomMesh {
+class Terrain_CustomMesh: Mesh {
     var heightMap: [[Float]]!
     var levelOfDetail: Int!
+    private var _indices: [UInt32] = []
     
     init(heightMap: [[Float]], levelOfDetail: Int) {
         self.heightMap = heightMap
@@ -101,12 +102,15 @@ class Terrain_CustomMesh: CustomMesh {
                         UInt32(x)
                     }
                     
-                    addIndices(idxs2)
+//                    addIndices(idxs2)
+                    _indices.append(contentsOf: idxs2)
                 }
                 
                 vertexIndex += 1
             }
         }
+        
+        addSubmesh(Submesh(indices: _indices))
     }
     
     private func calculateNormal(x: Int, z: Int) -> SIMD3<Float> {

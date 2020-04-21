@@ -246,7 +246,7 @@ class Cube_CustomMesh: Mesh {
     }
 }
 
-class Skybox_CustomMesh: CustomMesh {
+class Skybox_CustomMesh: Mesh {
     override func createMesh() {
         // + Y
         addVertex(position: SIMD3<Float>(-0.5,  0.5,  0.5), normal: SIMD3<Float>(0.0, -1.0,  0.0))
@@ -284,13 +284,13 @@ class Skybox_CustomMesh: CustomMesh {
         addVertex(position: SIMD3<Float>( 0.5,  0.5, -0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
         addVertex(position: SIMD3<Float>( 0.5,  0.5,  0.5), normal: SIMD3<Float>(-1.0,  0.0,  0.0))
 
-        addIndices([
+        addSubmesh(Submesh(indices: [
             0,  3,  2,  2,  1,  0,
             4,  7,  6,  6,  5,  4,
             8, 11, 10, 10,  9,  8,
             12, 15, 14, 14, 13, 12,
             16, 19, 18, 18, 17, 16,
             20, 23, 22, 22, 21, 20
-        ])
+        ]))
     }
 }
