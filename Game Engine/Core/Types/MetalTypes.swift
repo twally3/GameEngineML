@@ -47,8 +47,6 @@ struct SceneConstants: sizeable {
 
 struct Material: sizeable {
     var colour = SIMD4<Float>(0.4, 0.4, 0.4, 1.0)
-    var useMaterialColour: Bool = true
-    var useTexture: Bool = false
     var isLit: Bool = true
     var ambient: SIMD3<Float> = SIMD3<Float>(repeating: 0.1)
     var diffuse: SIMD3<Float> = SIMD3<Float>(repeating: 1)

@@ -35,8 +35,6 @@ struct SceneConstants {
 
 struct Material {
     float4 colour;
-    bool useMaterialColour;
-    bool useTexture;
     bool isLit;
     float3 ambient;
     float3 diffuse;
