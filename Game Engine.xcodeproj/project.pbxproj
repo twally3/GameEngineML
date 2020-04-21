@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5006CDD9242FB57E00AF58A7 /* PartyPirateParot.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006CDD8242FB57E00AF58A7 /* PartyPirateParot.png */; };
 		5006CDDA242FB57E00AF58A7 /* PartyPirateParot.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006CDD8242FB57E00AF58A7 /* PartyPirateParot.png */; };
+		501BB90E244F56F9007797BA /* chest.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90A244F56F8007797BA /* chest.mtl */; };
+		501BB90F244F56F9007797BA /* chest.obj in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90B244F56F8007797BA /* chest.obj */; };
+		501BB910244F56F9007797BA /* Chest_Wood_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */; };
+		501BB911244F56F9007797BA /* Chest_Metal_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */; };
 		50215E1D23A7E42B00B0C166 /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E1C23A7E42B00B0C166 /* Graphics.swift */; };
 		50215E1F23A7E43B00B0C166 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E1E23A7E43B00B0C166 /* Entities.swift */; };
 		50215E2223A7E5A300B0C166 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E2123A7E5A300B0C166 /* Library.swift */; };
@@ -111,6 +115,10 @@
 		50347A44242FAF17006A695D /* WaterShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 50BEE123240C2BB700DCCCD3 /* WaterShaders.metal */; };
 		50347A45242FAF17006A695D /* SkyBoxShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 505092B12410665A005EE0F5 /* SkyBoxShaders.metal */; };
 		50347A46242FAF17006A695D /* TerrainShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5069B0182414190E00B062EB /* TerrainShaders.metal */; };
+		5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 50377189244E423900DE5076 /* TheSuzannes.mtl */; };
+		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
+		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
+		50377194244E5D4A00DE5076 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50377193244E5D4A00DE5076 /* Chest.swift */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
 		505092B0241065C5005EE0F5 /* SkyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505092AF241065C5005EE0F5 /* SkyBox.swift */; };
@@ -183,6 +191,10 @@
 
 /* Begin PBXFileReference section */
 		5006CDD8242FB57E00AF58A7 /* PartyPirateParot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PartyPirateParot.png; sourceTree = "<group>"; };
+		501BB90A244F56F8007797BA /* chest.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.mtl; sourceTree = "<group>"; };
+		501BB90B244F56F8007797BA /* chest.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chest.obj; sourceTree = "<group>"; };
+		501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chest_Wood_Base_Color.png; sourceTree = "<group>"; };
+		501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chest_Metal_Base_Color.png; sourceTree = "<group>"; };
 		50215E1C23A7E42B00B0C166 /* Graphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphics.swift; sourceTree = "<group>"; };
 		50215E1E23A7E43B00B0C166 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		50215E2123A7E5A300B0C166 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
@@ -209,6 +221,10 @@
 		503479F1242FA6DC006A695D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503479F4242FA6DC006A695D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		503479F6242FA6DC006A695D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50377189244E423900DE5076 /* TheSuzannes.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.mtl; sourceTree = "<group>"; };
+		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
+		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
+		50377193244E5D4A00DE5076 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
 		505092AF241065C5005EE0F5 /* SkyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyBox.swift; sourceTree = "<group>"; };
@@ -370,6 +386,8 @@
 				5095227A2413E45D00124D30 /* skybox */,
 				509C9367240DD25B00500CA7 /* waterNormalMap.png */,
 				509C9365240DD25200500CA7 /* waterDUDV.png */,
+				50377190244E5BE200DE5076 /* chest */,
+				5037718D244E424D00DE5076 /* suzannes */,
 				50215E4C23A8365900B0C166 /* sphere.obj */,
 				50215E3D23A824F200B0C166 /* cruiser */,
 			);
@@ -398,6 +416,26 @@
 				503479F6242FA6DC006A695D /* Info.plist */,
 			);
 			path = "Game Engine-iOS";
+			sourceTree = "<group>";
+		};
+		5037718D244E424D00DE5076 /* suzannes */ = {
+			isa = PBXGroup;
+			children = (
+				5037718A244E423900DE5076 /* TheSuzannes.obj */,
+				50377189244E423900DE5076 /* TheSuzannes.mtl */,
+			);
+			path = suzannes;
+			sourceTree = "<group>";
+		};
+		50377190244E5BE200DE5076 /* chest */ = {
+			isa = PBXGroup;
+			children = (
+				501BB90D244F56F9007797BA /* Chest_Metal_Base_Color.png */,
+				501BB90C244F56F9007797BA /* Chest_Wood_Base_Color.png */,
+				501BB90A244F56F8007797BA /* chest.mtl */,
+				501BB90B244F56F8007797BA /* chest.obj */,
+			);
+			path = chest;
 			sourceTree = "<group>";
 		};
 		505D1A2623A2F4E800813A05 = {
@@ -564,6 +602,8 @@
 				505092AF241065C5005EE0F5 /* SkyBox.swift */,
 				50A0465C241077CE00B6E474 /* Water.swift */,
 				5069B016241417AB00B062EB /* Terrain.swift */,
+				5037718E244E426C00DE5076 /* TheSuzannes.swift */,
+				50377193244E5D4A00DE5076 /* Chest.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -724,8 +764,12 @@
 				5069B02324142EFD00B062EB /* Water.png in Resources */,
 				5069B02224142EFD00B062EB /* Sandy grass.png in Resources */,
 				509522822413E46700124D30 /* left.png in Resources */,
+				501BB90F244F56F9007797BA /* chest.obj in Resources */,
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
+				501BB910244F56F9007797BA /* Chest_Wood_Base_Color.png in Resources */,
+				5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */,
+				501BB90E244F56F9007797BA /* chest.mtl in Resources */,
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
 				50215E4323A8250700B0C166 /* cruiser.mtl in Resources */,
 				505D1A3A23A2F4EA00813A05 /* Main.storyboard in Resources */,
@@ -734,6 +778,9 @@
 				5006CDD9242FB57E00AF58A7 /* PartyPirateParot.png in Resources */,
 				5069B02524142EFD00B062EB /* Snow.png in Resources */,
 				509522812413E46700124D30 /* back.png in Resources */,
+				50215E3623A80B6800B0C166 /* PartyPirateParot.png in Resources */,
+				5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */,
+				501BB911244F56F9007797BA /* Chest_Metal_Base_Color.png in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
 				509522842413E46700124D30 /* front.png in Resources */,
 				5069B02624142EFD00B062EB /* Stony ground.png in Resources */,
@@ -847,6 +894,7 @@
 				5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */,
 				50BC8EC223A67591003544A5 /* Node.swift in Sources */,
 				505092B22410665A005EE0F5 /* SkyBoxShaders.metal in Sources */,
+				5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */,
 				505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */,
 				50215E4523A82A0300B0C166 /* Cruiser.swift in Sources */,
 				503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */,
@@ -883,6 +931,7 @@
 				50BEE124240C2BB700DCCCD3 /* WaterShaders.metal in Sources */,
 				50BC8EC523A6771B003544A5 /* Renderable.swift in Sources */,
 				50215E3123A7F27500B0C166 /* GameTime.swift in Sources */,
+				50377194244E5D4A00DE5076 /* Chest.swift in Sources */,
 				5067174E23A6CC5700C31239 /* Mouse.swift in Sources */,
 				50A4646723A705B9000D562D /* DebugCamera.swift in Sources */,
 			);
