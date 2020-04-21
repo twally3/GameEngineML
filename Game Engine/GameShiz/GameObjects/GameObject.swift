@@ -2,9 +2,10 @@ import MetalKit
 
 class GameObject: Node {
     private var _modelConstants = ModelConstants()
-    private var _material = Material()
-    private var _textureType: TextureTypes = .None
     private var _mesh: Mesh!
+    
+    private var _material: Material? = nil
+    private var _baseColourTextureType: TextureTypes = .None
     
     init(name: String, meshType: MeshTypes) {
         super.init(name: name)
@@ -25,53 +26,19 @@ extension GameObject: Renderable {
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
-        renderCommandEncoder.setFragmentSamplerState(Graphics.samplerStates[.Linear], index: 0)
-        renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
-        if (_material.useTexture) {
-            renderCommandEncoder.setFragmentTexture(Entities.textures[_textureType], index: 0)
-        }
-        
-        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
+        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder,
+                             material: _material,
+                             baseColourTextureType: _baseColourTextureType)
     }
 }
 
 
 extension GameObject {
-    public func setMaterialColour(_ colour: SIMD4<Float>) {
-        self._material.colour = colour
-        self._material.useMaterialColour = true
-        self._material.useTexture = false
+    public func useBaseColourTexture(_ textureType: TextureTypes) {
+        self._baseColourTextureType = textureType
     }
     
-    public func setMaterialColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
-        setMaterialColour(SIMD4<Float>(r, g, b, a))
+    public func useMaterial(_ material: Material) {
+        _material = material
     }
-    
-    public func setTexture(_ textureType: TextureTypes) {
-        self._textureType = textureType
-        self._material.useTexture = true
-        self._material.useMaterialColour = false
-    }
-    
-    
-    public func setMaterialIsLit(_ isLit: Bool) { self._material.isLit = isLit }
-    public func getMaterialIsLit() -> Bool { return self._material.isLit }
-    
-    public func setMaterialAmbient(_ ambient: SIMD3<Float>) { self._material.ambient = ambient }
-    public func setMaterialAmbient(_ ambient: Float) { self._material.ambient = SIMD3<Float>(repeating: ambient) }
-    public func addMaterialAmbient(_ value: Float) { self._material.ambient += value }
-    public func getMaterialAmbient() -> SIMD3<Float> { return self._material.ambient }
-    
-    public func setMaterialDiffuse(_ diffuse: SIMD3<Float>) { self._material.diffuse = diffuse }
-    public func setMaterialDiffuse(_ diffuse: Float) { self._material.diffuse = SIMD3<Float>(repeating: diffuse) }
-    public func addMaterialDiffuse(_ value: Float) { self._material.diffuse += value }
-    public func getMaterialDiffuse() -> SIMD3<Float> { return self._material.diffuse }
-    
-    public func setMaterialSpecular(_ specular: SIMD3<Float>) { self._material.specular = specular }
-    public func setMaterialSpecular(_ specular: Float) { self._material.specular = SIMD3<Float>(repeating: specular) }
-    public func addMaterialSpecular(_ value: Float) { self._material.specular += value }
-    public func getMaterialSpecular() -> SIMD3<Float> { return self._material.specular }
-    
-    public func setMaterialShininess(_ shininess: Float) { self._material.shininess = shininess }
-    public func getMaterialShininess() -> Float { return self._material.shininess }
 }
