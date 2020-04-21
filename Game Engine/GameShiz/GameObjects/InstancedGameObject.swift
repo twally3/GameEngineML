@@ -54,7 +54,6 @@ extension InstancedGameObject: Renderable {
 extension InstancedGameObject {
     public func setColour(_ colour: SIMD4<Float>) {
         self._material.colour = colour
-        self._material.useMaterialColour = true
     }
     
     public func setColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
