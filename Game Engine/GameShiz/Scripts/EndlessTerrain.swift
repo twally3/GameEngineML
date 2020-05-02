@@ -16,7 +16,7 @@ class EndlessTerrain {
     var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
     var terrainChunksVisibleLastUpdate: [TerrainChunk] = []
     
-    let mapGenerator = MapGenerator()
+    let mapGenerator = MapGenerator(useFallOffMap: false)
     
     var maxViewDistance: Float!
     let detailLevels: [LODInfo] = [
@@ -27,9 +27,9 @@ class EndlessTerrain {
     
     let queue = DispatchQueue(label: "Endless Terrain")
     
-    init(chunkSize: Int) {
+    init() {
         self.maxViewDistance = detailLevels.last?.visibleDstThreshold
-        self.chunkSize = chunkSize
+        self.chunkSize = mapGenerator.mapChunkSize - 1
         self.chunksVisibleInViewDst = Int((maxViewDistance / Float(chunkSize)).rounded(.toNearestOrEven))
     }
     

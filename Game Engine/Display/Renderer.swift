@@ -47,52 +47,52 @@ extension Renderer: MTKViewDelegate {
         let commandBuffer = Engine.commandQueue.makeCommandBuffer()
         commandBuffer?.label = "My Command Buffer"
         
-        // --- REFLECTION ---
-        let reflectionRenderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: reflectionRenderPassDescriptor)
-        reflectionRenderCommandEncoder?.setFrontFacing(.counterClockwise)
-        reflectionRenderCommandEncoder?.setCullMode(.back)
-        reflectionRenderCommandEncoder?.label = "Reflection render command encoder"
-
-        let currentScene = SceneManager.getCurrentScene()
-        let currentCamera = currentScene.getCameraManager().currentCamera
-        
-        let distanceToWater = 2 * (currentCamera!.getPositionY() - (0.4 * 110))
-        
-        currentCamera?.moveY(-distanceToWater)
-        currentCamera?.setRotationX(-currentCamera!.getRotationX())
-        currentScene.clippingPlane = SIMD4(x: 0, y: 1, z: 0, w: (-0.4 * 110) + 1.0)
-        currentScene.updateSceneConstants()
-
-        reflectionRenderCommandEncoder?.pushDebugGroup("Starting Reflection Render")
-        SceneManager.renderScene(renderCommandEncoder: reflectionRenderCommandEncoder!)
-        reflectionRenderCommandEncoder?.popDebugGroup()
-
-        currentCamera?.moveY(distanceToWater)
-        currentCamera?.setRotationX(-currentCamera!.getRotationX())
-        currentScene.clippingPlane = SIMD4(repeating: 0)
-        currentScene.updateSceneConstants()
-
-        reflectionRenderCommandEncoder?.endEncoding()
-        // --- END REFLECTION ---
-        
-        // --- REFRACTION ---
-        let refractionRenderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: refractionRenderPassDescriptor)
-        refractionRenderCommandEncoder?.setFrontFacing(.counterClockwise)
-        refractionRenderCommandEncoder?.setCullMode(.back)
-        refractionRenderCommandEncoder?.label = "Refraction Render Command Encoder"
-
-        currentScene.clippingPlane = SIMD4(x: 0, y: -1, z: 0, w: 0.4 * 110)
-        currentScene.updateSceneConstants()
-        
-        refractionRenderCommandEncoder?.pushDebugGroup("Starting Refraction Render")
-        SceneManager.renderScene(renderCommandEncoder: refractionRenderCommandEncoder!)
-        refractionRenderCommandEncoder?.popDebugGroup()
-        
-        currentScene.clippingPlane = SIMD4<Float>(repeating: 0)
-        currentScene.updateSceneConstants()
-
-        refractionRenderCommandEncoder?.endEncoding()
-        // --- END REFRACTION ---
+//        // --- REFLECTION ---
+//        let reflectionRenderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: reflectionRenderPassDescriptor)
+//        reflectionRenderCommandEncoder?.setFrontFacing(.counterClockwise)
+//        reflectionRenderCommandEncoder?.setCullMode(.back)
+//        reflectionRenderCommandEncoder?.label = "Reflection render command encoder"
+//
+//        let currentScene = SceneManager.getCurrentScene()
+//        let currentCamera = currentScene.getCameraManager().currentCamera
+//        
+//        let distanceToWater = 2 * (currentCamera!.getPositionY() - (0.4 * 110))
+//        
+//        currentCamera?.moveY(-distanceToWater)
+//        currentCamera?.setRotationX(-currentCamera!.getRotationX())
+//        currentScene.clippingPlane = SIMD4(x: 0, y: 1, z: 0, w: (-0.4 * 110) + 1.0)
+//        currentScene.updateSceneConstants()
+//
+//        reflectionRenderCommandEncoder?.pushDebugGroup("Starting Reflection Render")
+//        SceneManager.renderScene(renderCommandEncoder: reflectionRenderCommandEncoder!)
+//        reflectionRenderCommandEncoder?.popDebugGroup()
+//
+//        currentCamera?.moveY(distanceToWater)
+//        currentCamera?.setRotationX(-currentCamera!.getRotationX())
+//        currentScene.clippingPlane = SIMD4(repeating: 0)
+//        currentScene.updateSceneConstants()
+//
+//        reflectionRenderCommandEncoder?.endEncoding()
+//        // --- END REFLECTION ---
+//        
+//        // --- REFRACTION ---
+//        let refractionRenderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: refractionRenderPassDescriptor)
+//        refractionRenderCommandEncoder?.setFrontFacing(.counterClockwise)
+//        refractionRenderCommandEncoder?.setCullMode(.back)
+//        refractionRenderCommandEncoder?.label = "Refraction Render Command Encoder"
+//
+//        currentScene.clippingPlane = SIMD4(x: 0, y: -1, z: 0, w: 0.4 * 110)
+//        currentScene.updateSceneConstants()
+//        
+//        refractionRenderCommandEncoder?.pushDebugGroup("Starting Refraction Render")
+//        SceneManager.renderScene(renderCommandEncoder: refractionRenderCommandEncoder!)
+//        refractionRenderCommandEncoder?.popDebugGroup()
+//        
+//        currentScene.clippingPlane = SIMD4<Float>(repeating: 0)
+//        currentScene.updateSceneConstants()
+//
+//        refractionRenderCommandEncoder?.endEncoding()
+//        // --- END REFRACTION ---
 
         // --- MAIN RENDER ---
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)

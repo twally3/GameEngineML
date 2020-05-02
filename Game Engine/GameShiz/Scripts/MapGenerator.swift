@@ -2,7 +2,7 @@ import MetalKit
 
 class MapGenerator {
     // Divisble by all even numbers up to 12 (for LOD)
-    let mapChunkSize = 241
+    let mapChunkSize = 239
     var noiseScale: Float = 80
     
     let octaves: Int = 4
@@ -12,7 +12,7 @@ class MapGenerator {
     let seed: UInt64 = 1
     let offset = SIMD2<Int>(x: 0, y: 0)
     
-    let useFalloffMap: Bool = true
+    var useFalloffMap: Bool = true
     var falloffMap: [[Float]]
     
     var regions: [TerrainType] = [
@@ -29,7 +29,8 @@ class MapGenerator {
     let queue = DispatchQueue(label: "Map Generator")
     let dsem = DispatchSemaphore(value: 1)
     
-    init() {
+    init(useFallOffMap: Bool = true) {
+        self.useFalloffMap = useFallOffMap
         self.falloffMap = FalloffGenerator.generateFalloffMap(size: mapChunkSize)
     }
     
@@ -44,8 +45,8 @@ class MapGenerator {
     }
     
     func generateMapData(centre: SIMD2<Int>) -> MapData {
-        var noise = Noise.generateNoiseMap(mapWidth: mapChunkSize,
-                                            mapHeight: mapChunkSize,
+        var noise = Noise.generateNoiseMap(mapWidth: mapChunkSize + 2,
+                                            mapHeight: mapChunkSize + 2,
                                             seed: seed,
                                             scale: noiseScale,
                                             octaves: octaves,
