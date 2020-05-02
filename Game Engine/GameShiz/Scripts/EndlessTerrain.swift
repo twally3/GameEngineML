@@ -12,15 +12,15 @@ class EndlessTerrain {
     let viewerMoveThresholdForChunkUpdate: Float = 25;
     
     var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
-    var terrainChunksVisibleLastUpdate: [TerrainChunk] = []
+    var visibleTerrainChunks: [TerrainChunk] = []
     
     let mapGenerator = MapGenerator()
     
     var maxViewDistance: Float!
     let detailLevels: [LODInfo] = [
         LODInfo(lod: 0, visibleDstThreshold: 400),
-        LODInfo(lod: 4, visibleDstThreshold: 500),
-        LODInfo(lod: 6, visibleDstThreshold: 600)
+        LODInfo(lod: 1, visibleDstThreshold: 500),
+        LODInfo(lod: 4, visibleDstThreshold: 600)
     ]
     
     let queue = DispatchQueue(label: "Endless Terrain")
@@ -43,12 +43,13 @@ class EndlessTerrain {
     func updateVisibleChunks() {
         guard let viewerPosition = self.viewerPosition else { return }
         
-        for terrainChunk in terrainChunksVisibleLastUpdate {
-            terrainChunk.setVisibility(visible: false)
+        var alreadyUpdatedChunkCoords = Set<SIMD2<Int>>()
+        
+        for i in stride(from: visibleTerrainChunks.count - 1, to: 0, by: -1) {
+            alreadyUpdatedChunkCoords.insert(visibleTerrainChunks[i].coord)
+            visibleTerrainChunks[i].updateTerrainChunk()
         }
-        
-        terrainChunksVisibleLastUpdate.removeAll(keepingCapacity: false)
-        
+                
         let currentChunkX: Int = Int((viewerPosition.x / Float(chunkSize)).rounded(.toNearestOrEven))
         let currentChunkY: Int = Int((viewerPosition.y / Float(chunkSize)).rounded(.toNearestOrEven))
         
@@ -56,11 +57,13 @@ class EndlessTerrain {
             for xOffset in stride(from: -chunksVisibleInViewDst, to: chunksVisibleInViewDst, by: 1) {
                 let viewedChunkCoord = SIMD2<Int>(x: currentChunkX + xOffset, y: currentChunkY + yOffset)
                 
-                if let terrainChunk = terrainChunkDict[viewedChunkCoord] {
-                    terrainChunk.updateTerrainChunk()
-                } else {
-                    // Create chunk
-                    terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, size: self.chunkSize, detailLevels: detailLevels)
+                if !alreadyUpdatedChunkCoords.contains(viewedChunkCoord) {
+                    if let terrainChunk = terrainChunkDict[viewedChunkCoord] {
+                        terrainChunk.updateTerrainChunk()
+                    } else {
+                        // Create chunk
+                        terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, size: self.chunkSize, detailLevels: detailLevels)
+                    }
                 }
             }
         }
@@ -78,10 +81,13 @@ class EndlessTerrain {
         var previousLodIdx: Int = -1
         var mapData: MapData!
         
+        var coord: SIMD2<Int>
+        
         init(parent: EndlessTerrain, coord: SIMD2<Int>, size: Int, detailLevels: [LODInfo]) {
             self.position = coord &* size
             self.parent = parent
             self.size = size
+            self.coord = coord
             
             self.detailLevels = detailLevels
             
@@ -111,6 +117,7 @@ class EndlessTerrain {
             
             // Get distance to nearest bound
             let viewDstFromNearestEdge = distance(SIMD2<Float>(position), parent.viewerPosition!)
+            let wasVisible = self.visibility
             let visible = viewDstFromNearestEdge <= parent.maxViewDistance
             
             if visible {
@@ -134,11 +141,18 @@ class EndlessTerrain {
                         lodMesh.requestMesh(mapData: mapData)
                     }
                 }
-                
-                self.parent.terrainChunksVisibleLastUpdate.append(self)
             }
             
-            setVisibility(visible: visible)
+            if wasVisible != visible {
+                if (visible) {
+                    self.parent.visibleTerrainChunks.append(self)
+                } else {
+                    self.parent.visibleTerrainChunks.removeAll { (terrainChunk) -> Bool in
+                        self === terrainChunk
+                    }
+                }
+                setVisibility(visible: visible)
+            }
         }
         
         public func setVisibility(visible: Bool) {

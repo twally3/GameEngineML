@@ -1,8 +1,13 @@
 import MetalKit
 
 class MapGenerator {
-    // Divisble by all even numbers up to 12 (for LOD)
-    let mapChunkSize = 239
+    let chunkSizeIndex: Int = 4
+    
+    var mapChunkSize: Int {
+        get {
+            return Terrain_CustomMesh.supportedChunkSizes[self.chunkSizeIndex] - 1
+        }
+    }
     
     var falloffMap: [[Float]]?
     

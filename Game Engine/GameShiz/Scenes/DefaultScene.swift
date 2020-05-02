@@ -28,7 +28,7 @@ class DefaultScene: Scene {
     override func doUpdate() {
         // TODO: Move this into the endless terrain game object
         if let endlessTerrain = self.endlessTerrain {
-            for terrainChunk in endlessTerrain.terrainChunksVisibleLastUpdate {
+            for terrainChunk in endlessTerrain.visibleTerrainChunks {
                 guard let go = terrainChunk.node else { continue }
                 
                 removeChild(go)
@@ -54,6 +54,11 @@ class Terrain_CustomMesh: Mesh {
     var levelOfDetail: Int!
     var heightMultiplier: Float!
     private var _indices: [UInt32] = []
+    
+    let numSupportedLODs = 5
+    let numSupportedChunkSizes = 9
+    
+    public static let supportedChunkSizes: [Int] = [48, 72, 96, 120, 144, 168, 192, 216, 240]
     
     init(heightMap: [[Float]], levelOfDetail: Int, heightMultiplier: Float) {
         self.heightMap = heightMap
