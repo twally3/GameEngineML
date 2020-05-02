@@ -4,8 +4,6 @@ import Dispatch
 class EndlessTerrain {
     var viewer: Node!
     
-    let scale: Float = 1
-    
     var viewerPosition: SIMD2<Float>!
     var viewerPositionOld: SIMD2<Float>!
     var chunkSize: Int!
@@ -16,7 +14,7 @@ class EndlessTerrain {
     var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
     var terrainChunksVisibleLastUpdate: [TerrainChunk] = []
     
-    let mapGenerator = MapGenerator(useFallOffMap: false)
+    let mapGenerator = MapGenerator()
     
     var maxViewDistance: Float!
     let detailLevels: [LODInfo] = [
@@ -34,7 +32,7 @@ class EndlessTerrain {
     }
     
     func update() {
-        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ()) / scale
+        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ()) / mapGenerator._terrainData.uniformScale
         
         if viewerPositionOld == nil || simd_distance(viewerPositionOld, viewerPosition) > viewerMoveThresholdForChunkUpdate {
             viewerPositionOld = viewerPosition;
@@ -101,8 +99,8 @@ class EndlessTerrain {
             let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
 
             node = Terrain()
-            node.setPosition(SIMD3<Float>(positionV3) * self.parent.scale)
-            node.setScale(SIMD3<Float>(repeating: self.parent.scale))
+            node.setPosition(SIMD3<Float>(positionV3) * self.parent.mapGenerator._terrainData.uniformScale)
+            node.setScale(SIMD3<Float>(repeating: self.parent.mapGenerator._terrainData.uniformScale))
 //            node.setTexture(mapData.texture)
             
             updateTerrainChunk()
@@ -170,7 +168,7 @@ class EndlessTerrain {
             self.hasRequestedMesh = true
             
             self.parent.queue.async {
-                self.mesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: self.lod)
+                self.mesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: self.lod, heightMultiplier: self.parent.mapGenerator._terrainData.meshHeightMultiplier)
                 
                 DispatchQueue.main.async {
                     self.updateCallback()

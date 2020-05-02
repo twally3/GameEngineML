@@ -6,10 +6,8 @@ class Noise {
         case global
         case local
     }
-    
-    static let normaliseMode: NormaliseMode = .global
-    
-    public static func generateNoiseMap(mapWidth: Int, mapHeight: Int, seed: UInt64, scale: Float, octaves: Int, persistance: Float, lacunarity: Float, offset: SIMD2<Int>) -> [[Float]] {
+        
+    public static func generateNoiseMap(mapWidth: Int, mapHeight: Int, seed: UInt64, scale: Float, octaves: Int, persistance: Float, lacunarity: Float, offset: SIMD2<Int>, normaliseMode: NormaliseMode) -> [[Float]] {
         var noiseMap: [[Float]] = Array(repeating: Array(repeating: Float(0), count: mapHeight), count: mapWidth)
         
         var prng = SeededRandom(seed: seed)
@@ -73,9 +71,9 @@ class Noise {
         
         for y in 0..<mapHeight {
             for x in 0..<mapWidth {
-                if self.normaliseMode == .local {
+                if normaliseMode == .local {
                     noiseMap[x][y] = map(x: noiseMap[x][y], in_min: minLocalNoiseHeight, in_max: maxLocalNoiseHeight, out_min: 0, out_max: 1)
-                } else if self.normaliseMode == .global {
+                } else if normaliseMode == .global {
                     let normalisedHeight: Float = (noiseMap[x][y] + 1) / (2 * maxPossibleHeight / 2)
                     noiseMap[x][y] =  max(0, normalisedHeight)
                 }

@@ -16,7 +16,7 @@ class TerrainScene: Scene {
         let terrain = Terrain()
         let mapGenerator = MapGenerator()
         let mapData = mapGenerator.generateMapData(centre: SIMD2<Int>(repeating: 0))
-        let terrainMesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: 0)
+        let terrainMesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: 0, heightMultiplier: 110)
 //        terrain.setTexture(mapData.texture)
         terrain.setMesh(terrainMesh)
         terrain.setScaleX(2)

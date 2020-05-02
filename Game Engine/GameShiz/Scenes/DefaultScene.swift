@@ -52,17 +52,19 @@ class DefaultScene: Scene {
 class Terrain_CustomMesh: Mesh {
     var heightMap: [[Float]]!
     var levelOfDetail: Int!
+    var heightMultiplier: Float!
     private var _indices: [UInt32] = []
     
-    init(heightMap: [[Float]], levelOfDetail: Int) {
+    init(heightMap: [[Float]], levelOfDetail: Int, heightMultiplier: Float) {
         self.heightMap = heightMap
         self.levelOfDetail = levelOfDetail
+        self.heightMultiplier = heightMultiplier
         super.init()
     }
     
     // TODO: Clean this up as args and add curve support
     override func createMesh() {
-        let heightMultiplier: Float = 110
+//        let heightMultiplier: Float = 110
         
         let meshSimplificationIncrement = levelOfDetail == 0 ? 1 : (levelOfDetail * 2)
         

@@ -3,17 +3,12 @@ import MetalKit
 class MapGenerator {
     // Divisble by all even numbers up to 12 (for LOD)
     let mapChunkSize = 239
-    var noiseScale: Float = 80
     
-    let octaves: Int = 4
-    let persistance: Float = 0.5
-    let lacunarity: Float = 2
+    var falloffMap: [[Float]]?
     
-    let seed: UInt64 = 1
-    let offset = SIMD2<Int>(x: 0, y: 0)
-    
-    var useFalloffMap: Bool = true
-    var falloffMap: [[Float]]
+    // TODO: Change these to structs and eventually make a components system
+    let _noiseData: NoiseData = NoiseData()
+    let _terrainData: TerrainData = TerrainData()
     
     var regions: [TerrainType] = [
         TerrainType(height: 0, colour: SIMD4<Float>(46 / 255, 90 / 255, 182 / 255, 1.0)),        // Water Deep
@@ -28,12 +23,7 @@ class MapGenerator {
     
     let queue = DispatchQueue(label: "Map Generator")
     let dsem = DispatchSemaphore(value: 1)
-    
-    init(useFallOffMap: Bool = true) {
-        self.useFalloffMap = useFallOffMap
-        self.falloffMap = FalloffGenerator.generateFalloffMap(size: mapChunkSize)
-    }
-    
+       
     func requestMapData(centre: SIMD2<Int>, callback: @escaping (MapData) -> ()) {
         queue.async {
             let mapData = self.generateMapData(centre: centre)
@@ -47,17 +37,23 @@ class MapGenerator {
     func generateMapData(centre: SIMD2<Int>) -> MapData {
         var noise = Noise.generateNoiseMap(mapWidth: mapChunkSize + 2,
                                             mapHeight: mapChunkSize + 2,
-                                            seed: seed,
-                                            scale: noiseScale,
-                                            octaves: octaves,
-                                            persistance: persistance,
-                                            lacunarity: lacunarity,
-                                            offset: centre &+ offset)
+                                            seed: _noiseData.seed,
+                                            scale: _noiseData.noiseScale,
+                                            octaves: _noiseData.octaves,
+                                            persistance: _noiseData.persistance,
+                                            lacunarity: _noiseData.lacunarity,
+                                            offset: centre &+ _noiseData.offset,
+                                            normaliseMode: _noiseData.normaliseMode)
         
-        if self.useFalloffMap == true {
+        if _terrainData.useFalloffMap == true {
+            if self.falloffMap == nil {
+                self.falloffMap = FalloffGenerator.generateFalloffMap(size: mapChunkSize + 2)
+            }
+            
+            
             for i in 0..<noise.count {
                 for j in 0..<noise[0].count {
-                    noise[i][j] = min(max(noise[i][j] - self.falloffMap[i][j], 0), 1)
+                    noise[i][j] = min(max(noise[i][j] - self.falloffMap![i][j], 0), 1)
                 }
             }
         }
