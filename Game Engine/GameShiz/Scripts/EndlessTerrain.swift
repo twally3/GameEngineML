@@ -6,7 +6,7 @@ class EndlessTerrain {
     
     var viewerPosition: SIMD2<Float>!
     var viewerPositionOld: SIMD2<Float>!
-    var chunkSize: Int!
+    var meshWorldSize: Float!
     var chunksVisibleInViewDst: Int!
     
     let viewerMoveThresholdForChunkUpdate: Float = 25;
@@ -27,12 +27,12 @@ class EndlessTerrain {
     
     init() {
         self.maxViewDistance = detailLevels.last?.visibleDstThreshold
-        self.chunkSize = mapGenerator.mapChunkSize - 1
-        self.chunksVisibleInViewDst = Int((maxViewDistance / Float(chunkSize)).rounded(.toNearestOrEven))
+        self.meshWorldSize = mapGenerator.meshSettings.meshWorldSize
+        self.chunksVisibleInViewDst = Int((maxViewDistance / Float(meshWorldSize)).rounded(.toNearestOrEven))
     }
     
     func update() {
-        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ()) / mapGenerator._terrainData.uniformScale
+        self.viewerPosition = SIMD2<Float>(x: self.viewer.getPositionX(), y: self.viewer.getPositionZ())
         
         if viewerPositionOld == nil || simd_distance(viewerPositionOld, viewerPosition) > viewerMoveThresholdForChunkUpdate {
             viewerPositionOld = viewerPosition;
@@ -50,8 +50,8 @@ class EndlessTerrain {
             visibleTerrainChunks[i].updateTerrainChunk()
         }
                 
-        let currentChunkX: Int = Int((viewerPosition.x / Float(chunkSize)).rounded(.toNearestOrEven))
-        let currentChunkY: Int = Int((viewerPosition.y / Float(chunkSize)).rounded(.toNearestOrEven))
+        let currentChunkX: Int = Int((viewerPosition.x / Float(meshWorldSize)).rounded(.toNearestOrEven))
+        let currentChunkY: Int = Int((viewerPosition.y / Float(meshWorldSize)).rounded(.toNearestOrEven))
         
         for yOffset in stride(from: -chunksVisibleInViewDst, to: chunksVisibleInViewDst, by: 1) {
             for xOffset in stride(from: -chunksVisibleInViewDst, to: chunksVisibleInViewDst, by: 1) {
@@ -62,7 +62,7 @@ class EndlessTerrain {
                         terrainChunk.updateTerrainChunk()
                     } else {
                         // Create chunk
-                        terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, size: self.chunkSize, detailLevels: detailLevels)
+                        terrainChunkDict[viewedChunkCoord] = TerrainChunk(parent: self, coord: viewedChunkCoord, meshWorldSize: self.meshWorldSize, detailLevels: detailLevels)
                     }
                 }
             }
@@ -71,23 +71,24 @@ class EndlessTerrain {
     
     class TerrainChunk {
         var parent: EndlessTerrain!
-        var position: SIMD2<Int>!
+        var sampleCentre: SIMD2<Float>!
         var node: Terrain!
-        var visibility: Bool = false;
-        var size: Int!
+        var visibility: Bool = false
+        var position: SIMD2<Float>
         
         var detailLevels: [LODInfo]
         var lodMeshes: [LODMesh] = []
         var previousLodIdx: Int = -1
-        var mapData: MapData!
+        var mapData: HeightMap!
         
         var coord: SIMD2<Int>
         
-        init(parent: EndlessTerrain, coord: SIMD2<Int>, size: Int, detailLevels: [LODInfo]) {
-            self.position = coord &* size
+        init(parent: EndlessTerrain, coord: SIMD2<Int>, meshWorldSize: Float, detailLevels: [LODInfo]) {
+            self.sampleCentre = SIMD2<Float>(coord) * meshWorldSize / parent.mapGenerator.meshSettings.meshScale
             self.parent = parent
-            self.size = size
             self.coord = coord
+            
+            self.position = SIMD2<Float>(coord) * meshWorldSize
             
             self.detailLevels = detailLevels
             
@@ -97,17 +98,15 @@ class EndlessTerrain {
                 lodMeshes.append(LODMesh(lod: detailLevels[i].lod, callback: self.updateTerrainChunk, parent: parent))
             }
             
-            parent.mapGenerator.requestMapData(centre: self.position, callback: onMapDataRecieved(mapData:))
+            parent.mapGenerator.requestMapData(centre: self.sampleCentre, callback: onMapDataRecieved(mapData:))
         }
         
-        func onMapDataRecieved(mapData: MapData) {
+        func onMapDataRecieved(mapData: HeightMap) {
             self.mapData = mapData
-            let positionV3 = SIMD3<Int>(x: self.position.x, y: 0, z: self.position.y)
+            let positionV3 = SIMD3<Float>(x: self.position.x, y: 0, z: self.position.y)
 
             node = Terrain()
-            node.setPosition(SIMD3<Float>(positionV3) * self.parent.mapGenerator._terrainData.uniformScale)
-            node.setScale(SIMD3<Float>(repeating: self.parent.mapGenerator._terrainData.uniformScale))
-//            node.setTexture(mapData.texture)
+            node.setPosition(positionV3)
             
             updateTerrainChunk()
         }
@@ -116,7 +115,7 @@ class EndlessTerrain {
             guard let mapData = self.mapData, let node = self.node else { return }
             
             // Get distance to nearest bound
-            let viewDstFromNearestEdge = distance(SIMD2<Float>(position), parent.viewerPosition!)
+            let viewDstFromNearestEdge = distance(sampleCentre, parent.viewerPosition!)
             let wasVisible = self.visibility
             let visible = viewDstFromNearestEdge <= parent.maxViewDistance
             
@@ -178,11 +177,11 @@ class EndlessTerrain {
             self.parent = parent
         }
         
-        public func requestMesh(mapData: MapData) {
+        public func requestMesh(mapData: HeightMap) {
             self.hasRequestedMesh = true
             
             self.parent.queue.async {
-                self.mesh = Terrain_CustomMesh(heightMap: mapData.noiseMap, levelOfDetail: self.lod, heightMultiplier: self.parent.mapGenerator._terrainData.meshHeightMultiplier)
+                self.mesh = Terrain_CustomMesh(heightMap: mapData.values, levelOfDetail: self.lod, settings: self.parent.mapGenerator.meshSettings)
                 
                 DispatchQueue.main.async {
                     self.updateCallback()

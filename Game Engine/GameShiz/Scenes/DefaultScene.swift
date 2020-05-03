@@ -52,25 +52,19 @@ class DefaultScene: Scene {
 class Terrain_CustomMesh: Mesh {
     var heightMap: [[Float]]!
     var levelOfDetail: Int!
-    var heightMultiplier: Float!
+    var meshSettings: MeshSettings
+    
     private var _indices: [UInt32] = []
     
-    let numSupportedLODs = 5
-    let numSupportedChunkSizes = 9
-    
-    public static let supportedChunkSizes: [Int] = [48, 72, 96, 120, 144, 168, 192, 216, 240]
-    
-    init(heightMap: [[Float]], levelOfDetail: Int, heightMultiplier: Float) {
+    init(heightMap: [[Float]], levelOfDetail: Int, settings: MeshSettings) {
         self.heightMap = heightMap
         self.levelOfDetail = levelOfDetail
-        self.heightMultiplier = heightMultiplier
+        self.meshSettings = settings
         super.init()
     }
     
     // TODO: Clean this up as args and add curve support
     override func createMesh() {
-//        let heightMultiplier: Float = 110
-        
         let meshSimplificationIncrement = levelOfDetail == 0 ? 1 : (levelOfDetail * 2)
         
         let borderedSize = heightMap.count
@@ -80,25 +74,19 @@ class Terrain_CustomMesh: Mesh {
         let verticesPerLine = (meshSize - 1) / meshSimplificationIncrement + 1
         
         var vertexIndex = 0
-        
-        var max: Float = 0
-        
+                
         for y in stride(from: 0, to: borderedSize, by: meshSimplificationIncrement) {
             for x in stride(from: 0, to: borderedSize, by: meshSimplificationIncrement) {
                 if x == 0 || x == borderedSize - 1 || y == 0 || y == borderedSize - 1 {
                     continue
                 }
                 
-                if (max < heightMap[x][y] * heightMultiplier) {
-                    max = heightMap[x][y] * heightMultiplier
-                }
-                
                 let percent = SIMD2<Float>(Float(x - meshSimplificationIncrement) / Float(meshSize), Float(y - meshSimplificationIncrement) / Float(meshSize))
-                let height = heightMap[x][y] * heightMultiplier
+                let height = heightMap[x][y]
 
-                let position = SIMD3<Float>(percent.x * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2),
+                let position = SIMD3<Float>((percent.x * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2)) * self.meshSettings.meshScale,
                                             height,
-                                            percent.y * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2))
+                                            (percent.y * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2)) * self.meshSettings.meshScale)
                 
                 addVertex(position: position,
                           colour: SIMD4<Float>(1,0,0,1),
