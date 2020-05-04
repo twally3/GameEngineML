@@ -9,23 +9,26 @@ class TerrainGenerator {
     var meshWorldSize: Float!
     var chunksVisibleInViewDst: Int!
     
+    var meshSettings: MeshSettings
+    var heightMapSettings: HeightMapSettings
+    
     let viewerMoveThresholdForChunkUpdate: Float = 25;
     
     var terrainChunkDict: [SIMD2<Int> : TerrainChunk] = [:]
     var visibleTerrainChunks: [TerrainChunk] = []
     
-    let mapGenerator = MapGenerator()
-    
-    var maxViewDistance: Float!
     let detailLevels: [LODInfo] = [
         LODInfo(lod: 0, visibleDstThreshold: 400),
         LODInfo(lod: 1, visibleDstThreshold: 500),
         LODInfo(lod: 4, visibleDstThreshold: 600)
     ]
         
-    init() {
-        self.maxViewDistance = detailLevels.last?.visibleDstThreshold
-        self.meshWorldSize = mapGenerator.meshSettings.meshWorldSize
+    init(meshSettings: MeshSettings, heightMapSettings: HeightMapSettings) {
+        self.meshSettings = meshSettings
+        self.heightMapSettings = heightMapSettings
+        self.meshWorldSize = meshSettings.meshWorldSize
+        
+        let maxViewDistance = detailLevels.last!.visibleDstThreshold
         self.chunksVisibleInViewDst = Int((maxViewDistance / Float(meshWorldSize)).rounded(.toNearestOrEven))
     }
     
@@ -60,9 +63,26 @@ class TerrainGenerator {
                         terrainChunk.updateTerrainChunk()
                     } else {
                         // Create chunk
-                        terrainChunkDict[viewedChunkCoord] = TerrainChunk(coord: viewedChunkCoord, heightMapSettings: self.mapGenerator.heightMapSettings, meshSettings: self.mapGenerator.meshSettings, detailLevels: detailLevels)
+                        let newChunk = TerrainChunk(coord: viewedChunkCoord,
+                                                    heightMapSettings: heightMapSettings,
+                                                    meshSettings: meshSettings,
+                                                    detailLevels: detailLevels,
+                                                    viewer: self.viewer)
+                        terrainChunkDict[viewedChunkCoord] = newChunk
+                        newChunk.onVisibilityChanged = onTerrainChunkVisibilityChanged(chunk:isVisible:)
+                        newChunk.load()
                     }
                 }
+            }
+        }
+    }
+    
+    func onTerrainChunkVisibilityChanged(chunk: TerrainChunk, isVisible: Bool) {
+        if isVisible {
+            visibleTerrainChunks.append(chunk)
+        } else {
+            visibleTerrainChunks.removeAll { (terrainChunk) -> Bool in
+                terrainChunk === chunk
             }
         }
     }

@@ -5,7 +5,7 @@ class DefaultScene: Scene {
     let camera = FPSCameraQuaternion()
     let sun = Sun()
 
-    var endlessTerrain: EndlessTerrain!
+    var endlessTerrain: TerrainGenerator!
     
     override func buildScene() {
         camera.setPosition(0, 50, 10)
@@ -20,7 +20,7 @@ class DefaultScene: Scene {
     }
     
     func addPlane() {
-        endlessTerrain = EndlessTerrain()
+        endlessTerrain = TerrainGenerator(meshSettings: MeshSettings(), heightMapSettings: HeightMapSettings())
         endlessTerrain.viewer = camera
         endlessTerrain.updateVisibleChunks()
     }

@@ -14,7 +14,6 @@ class TerrainScene: Scene {
 
     let terrain: Terrain = {
         let terrain = Terrain()
-        let mapGenerator = MapGenerator()
         let meshSettings = MeshSettings()
         let heightMapSettings = HeightMapSettings()
 
