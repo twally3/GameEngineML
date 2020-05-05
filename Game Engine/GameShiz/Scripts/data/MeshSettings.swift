@@ -13,7 +13,7 @@ class MeshSettings {
     //    Number includes padding for normals (that arent in the mesh)
     var numVertsPerLine: Int {
         get {
-            return MeshSettings.supportedChunkSizes[chunkSizeIndex] + 1
+            return MeshSettings.supportedChunkSizes[chunkSizeIndex] + 5
         }
     }
     

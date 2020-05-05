@@ -63,48 +63,84 @@ class Terrain_CustomMesh: Mesh {
         super.init()
     }
     
-    // TODO: Clean this up as args and add curve support
+    // TODO: add curve support
     override func createMesh() {
-        let meshSimplificationIncrement = levelOfDetail == 0 ? 1 : (levelOfDetail * 2)
+        let skipIncrement = levelOfDetail == 0 ? 1 : (levelOfDetail * 2)
+        let numVertsPerLine = meshSettings.numVertsPerLine
         
-        let borderedSize = heightMap.count
-        let meshSize = borderedSize - 2 * meshSimplificationIncrement
-        let meshSizeUnsimplified = borderedSize - 2
+        var vertexIndicesMap: [[Int]] = Array(repeating: Array(repeating: Int(0), count: numVertsPerLine), count: numVertsPerLine)
+        var meshVertexIndex = 0;
+        var outOfMeshVertexIndex = -1;
         
-        let verticesPerLine = (meshSize - 1) / meshSimplificationIncrement + 1
-        
-        var vertexIndex = 0
+        for y in stride(from: 0, to: numVertsPerLine, by: 1) {
+            for x in stride(from: 0, to: numVertsPerLine, by: 1) {
+                let isOutOfMeshVertex = y == 0 || y == numVertsPerLine - 1 || x == 0 || x == numVertsPerLine - 1;
+                let isSkippedVertex = x > 2 && x < numVertsPerLine - 3 && y > 2 && y < numVertsPerLine - 3 && ((x - 2) % skipIncrement != 0 || (y - 2) % skipIncrement != 0);
+                if (isOutOfMeshVertex) {
+                    vertexIndicesMap [x][y] = outOfMeshVertexIndex;
+                    outOfMeshVertexIndex -= 1;
+                } else if (!isSkippedVertex) {
+                    vertexIndicesMap [x][y] = meshVertexIndex;
+                    meshVertexIndex += 1;
+                }
+            }
+        }
+                        
+        for y in stride(from: 0, to: numVertsPerLine, by: 1) {
+            for x in stride(from: 0, to: numVertsPerLine, by: 1) {
+                let isOutOfMeshVertex = x == 0 || x == numVertsPerLine - 1 || y == 0 || y == numVertsPerLine - 1
+                let isSkippedVertex = x > 2 && x < numVertsPerLine - 3 && y > 2 && y < numVertsPerLine - 3 && ((x - 2) % skipIncrement != 0 || (y - 2) % skipIncrement != 0)
                 
-        for y in stride(from: 0, to: borderedSize, by: meshSimplificationIncrement) {
-            for x in stride(from: 0, to: borderedSize, by: meshSimplificationIncrement) {
-                if x == 0 || x == borderedSize - 1 || y == 0 || y == borderedSize - 1 {
+                if isOutOfMeshVertex || isSkippedVertex {
                     continue
                 }
                 
-                let percent = SIMD2<Float>(Float(x - meshSimplificationIncrement) / Float(meshSize), Float(y - meshSimplificationIncrement) / Float(meshSize))
-                let height = heightMap[x][y]
+                let isMeshEdgeVertex = (y == 1 || y == numVertsPerLine - 2 || x == 1 || x == numVertsPerLine - 2) && !isOutOfMeshVertex;
+                let isMainVertex = (x - 2) % skipIncrement == 0 && (y - 2) % skipIncrement == 0 && !isOutOfMeshVertex && !isMeshEdgeVertex;
+                let isEdgeConnectionVertex = (y == 2 || y == numVertsPerLine - 3 || x == 2 || x == numVertsPerLine - 3) && !isOutOfMeshVertex && !isMeshEdgeVertex && !isMainVertex;
+                                
+                let percent = SIMD2<Float>(Float(x - 1), Float(y - 1)) / Float(numVertsPerLine - 3)
+                var height = heightMap[x][y]
+                
+                if (isEdgeConnectionVertex) {
+                    let isVertical = x == 2 || x == numVertsPerLine - 3
+                    let dstToMainVertexA = (isVertical ? y - 2 : x - 2) % skipIncrement
+                    let dstToMainVertexB = skipIncrement - dstToMainVertexA
+                    let dstPercentFromAToB = Float(dstToMainVertexA) / Float(skipIncrement)
 
-                let position = SIMD3<Float>((percent.x * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2)) * self.meshSettings.meshScale,
+                    let heightMainVertexA = heightMap [isVertical ? x : x - dstToMainVertexA][isVertical ? y - dstToMainVertexA : y]
+                    let heightMainVertexB = heightMap [isVertical ? x : x + dstToMainVertexB][isVertical ? y + dstToMainVertexB : y]
+
+                    height = heightMainVertexA * (1 - dstPercentFromAToB) + heightMainVertexB * dstPercentFromAToB;
+                }
+                                
+                let position = SIMD3<Float>(percent.x * self.meshSettings.meshWorldSize - self.meshSettings.meshWorldSize / 2,
                                             height,
-                                            (percent.y * Float(meshSizeUnsimplified) - (Float(borderedSize) / 2)) * self.meshSettings.meshScale)
+                                            percent.y * self.meshSettings.meshWorldSize - self.meshSettings.meshWorldSize / 2)
                 
                 addVertex(position: position,
                           colour: SIMD4<Float>(1,0,0,1),
                           textureCoordinate: percent,
                           normal: calculateNormal(x: x, z: y))
                 
-                if (x < meshSize && y < meshSize) {
-                    let startIndex = vertexIndex
-                    let idxs = [startIndex + 1, startIndex, startIndex + verticesPerLine,
-                                startIndex + 1, startIndex + verticesPerLine, startIndex + verticesPerLine + 1]
+                let createTriangle = x < numVertsPerLine - 2 && y < numVertsPerLine - 2 && (!isEdgeConnectionVertex || (x != 2 && y != 2));
+                
+                if createTriangle {
+                    let currentIncrement = (isMainVertex && x != numVertsPerLine - 3 && y != numVertsPerLine - 3) ? skipIncrement : 1;
+                    
+                    let a = vertexIndicesMap [x][y]
+                    let b = vertexIndicesMap [x + currentIncrement][y]
+                    let c = vertexIndicesMap [x][y + currentIncrement]
+                    let d = vertexIndicesMap [x + currentIncrement][y + currentIncrement]
+
+                    let idxs = [b, a, c, b, c, d]
+                    
                     let idxs2: [UInt32] = idxs.map { (x) -> UInt32 in
                         UInt32(x)
                     }
-                    
+
                     _indices.append(contentsOf: idxs2)
                 }
-                
-                vertexIndex += 1
             }
         }
         
