@@ -6,7 +6,7 @@ class Cube: GameObject {
     }
     
     override func doUpdate() {
-        self.rotateX(GameTime.deltaTime)
-        self.rotateZ(GameTime.deltaTime)
+//        self.rotateX(GameTime.deltaTime)
+//        self.rotateZ(GameTime.deltaTime)
     }
 }

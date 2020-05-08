@@ -257,53 +257,21 @@ class Quad_CustomMesh: Mesh {
 
 class Cube_CustomMesh: Mesh {
     override func createMesh() {
-        //Left
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(-1, 0, 0))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(-1, 0, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(1.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(-1, 0, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0,-1.0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0))
+        addVertex(position: SIMD3<Float>(0, 0, 0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 0
+        addVertex(position: SIMD3<Float>(0, 0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 1
+        addVertex(position: SIMD3<Float>(0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 2
+        addVertex(position: SIMD3<Float>(0, 1.0, 0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 3
+        addVertex(position: SIMD3<Float>(1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 0.5, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 4
+        addVertex(position: SIMD3<Float>(1.0, 0, 0), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 5
+        addVertex(position: SIMD3<Float>(1.0, 1.0, 0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 6
+        addVertex(position: SIMD3<Float>(1.0, 0, 1.0), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 7
         
-        //RIGHT
-        addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 0.5, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0,-1.0), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0,-1.0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0,-1.0), colour: SIMD4<Float>(1.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0))
-        
-        //TOP
-        addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 0.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0,-1.0), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0,-1.0), colour: SIMD4<Float>(0.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0,-1.0), colour: SIMD4<Float>(0.5, 1.0, 1.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, 1, 0))
-        
-        //BOTTOM
-        addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(0.5, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0,-1.0), colour: SIMD4<Float>(0.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(0, -1, 0))
-        
-        //BACK
-        addVertex(position: SIMD3<Float>( 1.0, 1.0,-1.0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(0.5, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0,-1.0), colour: SIMD4<Float>(0.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0,-1.0), colour: SIMD4<Float>(1.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0,-1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0,-1.0), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(0, 0, -1))
-        
-        //FRONT
-        addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(0, 0, 1))
-        addVertex(position: SIMD3<Float>(-1.0,-1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(0, 0, 1))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(0.5, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, 0, 1))
-        addVertex(position: SIMD3<Float>( 1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(0, 0, 1))
-        addVertex(position: SIMD3<Float>(-1.0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 1.0, 1.0), normal: SIMD3<Float>(0, 0, 1))
-        addVertex(position: SIMD3<Float>( 1.0,-1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(0, 0, 1))
+        addSubmesh(Submesh(indices: [0, 1, 2, 0, 2, 3,
+                                     4, 5, 6, 5, 4, 7,
+                                     4, 6, 3, 4, 3, 2,
+                                     7, 0, 5, 7, 1, 0,
+                                     6, 0, 3, 6, 5, 0,
+                                     2, 1, 7, 4, 2, 7]))
     }
 }
 

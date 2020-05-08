@@ -2,7 +2,7 @@ class HeightMapSettings {
     var noiseSettings = NoiseSettings()
     
     // meshHeightCurve
-    var useFalloffMap: Bool = false
+    var useFalloffMap: Bool = true
     let heightMultiplier: Float = 110
     
     var minHeight: Float {
