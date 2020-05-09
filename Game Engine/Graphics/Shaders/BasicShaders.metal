@@ -70,13 +70,46 @@ struct BoidData {
     int numFlockmates;
 };
 
-kernel void compute_boid_positions(constant BoidData *boidData [[ buffer(0) ]],
+kernel void compute_boid_positions(device BoidData *boidData [[ buffer(0) ]],
                                    constant int &numBoids [[ buffer(1) ]],
-                                   device float* result [[ buffer(2) ]],
+                                   constant float &viewRadius [[ buffer(2) ]],
+                                   constant float &avoidanceRadius [[ buffer(3) ]],
                                    uint boidIdx [[thread_position_in_grid]]) {
     for (int i = 0; i < numBoids; i++) {
-        result[i] = i;
+        if (((int)boidIdx) == i) { continue; }
+        
+        BoidData boidB = boidData[i];
+        float3 offset = boidB.position - boidData[boidIdx].position;
+        float sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
+        
+        if (sqrDst < viewRadius * viewRadius) {
+            boidData[boidIdx].numFlockmates += 1;
+            boidData[boidIdx].flockHeading += boidB.direction;
+            boidData[boidIdx].flockCentre += boidB.position;
+            
+            if (sqrDst < avoidanceRadius * avoidanceRadius) {
+                boidData[boidIdx].avoidanceHeading -= offset / sqrDst;
+            }
+        }
     }
+    
+//    for i in 0..<boidData.count {
+//        if boidIdx == i { continue }
+//
+//        let boidB = boidData[i]
+//        let offset = boidB.position  - boidData[boidIdx].position
+//        let sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z
+//
+//        if sqrDst < viewRadius * viewRadius {
+//            boidData[boidIdx].numFlockmates += 1
+//            boidData[boidIdx].flockHeading += boidB.direction
+//            boidData[boidIdx].flockCentre += boidB.position
+//
+//            if sqrDst > avoidanceRadius * avoidanceRadius { continue }
+//
+//            boidData[boidIdx].avoidanceHeading -= offset / sqrDst
+//        }
+//    }
 }
 
 //kernel void compute_boid_positions(constant BoidData *boidData [[ buffer(0) ]],

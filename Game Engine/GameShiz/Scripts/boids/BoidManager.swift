@@ -5,7 +5,7 @@ class BoidManager {
     public var boids: [Boid] = []
     
     let spawnRadius: Float = 10
-    let perceptionRadius: Float = 10
+    let perceptionRadius: Float = 15
     let avoidanceRadius: Float = 1
     
     init() {
@@ -26,36 +26,59 @@ class BoidManager {
             boidData.append(bd)
         }
         
-        for i in 0..<boids.count {
-            calc(boidIdx: i, boidData: &boidData, viewRadius: perceptionRadius, avoidanceRadius: avoidanceRadius)
+        let mapValuesBuffer = Engine.device!.makeBuffer(bytes: boidData,
+                                                        length: MemoryLayout<BoidData>.size * boidData.count,
+                                                        options: [])
+                
+        let computePipelineState = self.createComputePipelineState()
+        
+        let commandQueue = Engine.commandQueue
+        let commandBuffer = commandQueue!.makeCommandBuffer()
+        let computeCommandEncoder = commandBuffer?.makeComputeCommandEncoder()
+        computeCommandEncoder?.setComputePipelineState(computePipelineState)
+
+        computeCommandEncoder?.setBuffer(mapValuesBuffer, offset: 0, index: 0)
+        
+        var numBoids = boidData.count
+        computeCommandEncoder?.setBytes(&numBoids, length: Int32.size, index: 1)
+        
+        var perceptionRadius = self.perceptionRadius
+        computeCommandEncoder?.setBytes(&perceptionRadius, length: Float.size, index: 2)
+        
+        var avoidanceRadius = self.avoidanceRadius
+        computeCommandEncoder?.setBytes(&avoidanceRadius, length: Float.size, index: 3)
+        
+        let gridSize = MTLSizeMake(numBoids, 1, 1)
+        var threadGroupSize = computePipelineState.maxTotalThreadsPerThreadgroup
+        if threadGroupSize > numBoids {
+            threadGroupSize = numBoids;
         }
+        let threadgroupSize = MTLSizeMake(threadGroupSize, 1, 1);
+        
+        computeCommandEncoder?.dispatchThreads(gridSize, threadsPerThreadgroup: threadgroupSize)
+        
+        computeCommandEncoder?.endEncoding()
+        commandBuffer?.commit()
+        commandBuffer?.waitUntilCompleted()
+        
+        let ptr = mapValuesBuffer?.contents().bindMemory(to: BoidData.self, capacity: numBoids)
+        let floatBuffer = UnsafeBufferPointer(start: ptr, count: numBoids)
+        let resultArrOut = Array(floatBuffer)
         
         for i in 0..<boids.count {
-            boids[i].avgFlockHeading = boidData[i].flockHeading;
-            boids[i].centreOfFlockmates = boidData[i].flockCentre;
-            boids[i].avgAvoidanceHeading = boidData[i].avoidanceHeading;
-            boids[i].numPerceivedFlockmates = boidData[i].numFlockmates;
+            boids[i].avgFlockHeading = resultArrOut[i].flockHeading;
+            boids[i].centreOfFlockmates = resultArrOut[i].flockCentre;
+            boids[i].avgAvoidanceHeading = resultArrOut[i].avoidanceHeading;
+            boids[i].numPerceivedFlockmates = resultArrOut[i].numFlockmates;
             boids[i].updateBoid()
         }
     }
     
-    func calc(boidIdx: Int, boidData: inout [BoidData], viewRadius: Float, avoidanceRadius: Float) {
-        for i in 0..<boidData.count {
-            if boidIdx == i { continue }
-            
-            let boidB = boidData[i]
-            let offset = boidB.position  - boidData[boidIdx].position
-            let sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z
-            
-            if sqrDst < viewRadius * viewRadius {
-                boidData[boidIdx].numFlockmates += 1
-                boidData[boidIdx].flockHeading += boidB.direction
-                boidData[boidIdx].flockCentre += boidB.position
-                
-                if sqrDst > avoidanceRadius * avoidanceRadius { continue }
-                
-                boidData[boidIdx].avoidanceHeading -= offset / sqrDst
-            }
+    private func createComputePipelineState() -> MTLComputePipelineState {
+        do {
+            return try Engine.device!.makeComputePipelineState(function: Graphics.shaders[.ComputeBoidPositions])
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
         }
     }
 }
