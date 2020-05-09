@@ -136,7 +136,6 @@
 		505D1A6A23A382D200813A05 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A6923A382D200813A05 /* Engine.swift */; };
 		505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505D1A6B23A3842C00813A05 /* Preferences.swift */; };
 		50609BE924657B1700E9F734 /* BoidsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BE824657B1700E9F734 /* BoidsScene.swift */; };
-		50609BEC2465A5DB00E9F734 /* Boid2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BEB2465A5DB00E9F734 /* Boid2.swift */; };
 		50609BEE2465A60700E9F734 /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BED2465A60700E9F734 /* Boundary.swift */; };
 		50609BF02465A61B00E9F734 /* QuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BEF2465A61B00E9F734 /* QuadTree.swift */; };
 		50609BF22465F1A000E9F734 /* BoidManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BF12465F1A000E9F734 /* BoidManager.swift */; };
@@ -255,7 +254,6 @@
 		505D1A6923A382D200813A05 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		505D1A6B23A3842C00813A05 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		50609BE824657B1700E9F734 /* BoidsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsScene.swift; sourceTree = "<group>"; };
-		50609BEB2465A5DB00E9F734 /* Boid2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boid2.swift; sourceTree = "<group>"; };
 		50609BED2465A60700E9F734 /* Boundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
 		50609BEF2465A61B00E9F734 /* QuadTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadTree.swift; sourceTree = "<group>"; };
 		50609BF12465F1A000E9F734 /* BoidManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidManager.swift; sourceTree = "<group>"; };
@@ -537,7 +535,6 @@
 		50609BEA2465A5D100E9F734 /* boids */ = {
 			isa = PBXGroup;
 			children = (
-				50609BEB2465A5DB00E9F734 /* Boid2.swift */,
 				50609BED2465A60700E9F734 /* Boundary.swift */,
 				50609BEF2465A61B00E9F734 /* QuadTree.swift */,
 				50609BF12465F1A000E9F734 /* BoidManager.swift */,
@@ -914,7 +911,6 @@
 				50609BE924657B1700E9F734 /* BoidsScene.swift in Sources */,
 				50BC8ECE23A6BBCF003544A5 /* SandboxScene.swift in Sources */,
 				50BC8EBA23A669A8003544A5 /* GameObject.swift in Sources */,
-				50609BEC2465A5DB00E9F734 /* Boid2.swift in Sources */,
 				50973AEF2445102600B01109 /* FPSCameraQuaternion.swift in Sources */,
 				505092B0241065C5005EE0F5 /* SkyBox.swift in Sources */,
 				50BC8ED123A6BD65003544A5 /* SceneManager.swift in Sources */,

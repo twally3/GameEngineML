@@ -10,12 +10,14 @@ class InstancedGameObject: Node {
     internal var _nodes: [Node] = []    
     private var _modelConstantsBuffer: MTLBuffer!
     
-    init(meshType: MeshTypes, instanceCount: Int) {
+    init(meshType: MeshTypes, instanceCount: Int, generateNodes: Bool = true) {
         super.init(name: "Instantiated Game Object")
         
         self._mesh = Entities.meshes[meshType]
         self._mesh.setInstanceCount(instanceCount)
-        self.generateInstances(instanceCount: instanceCount)
+        if generateNodes {
+            self.generateInstances(instanceCount: instanceCount)
+        }
         self.createBuffers(instancCount: instanceCount)
     }
     

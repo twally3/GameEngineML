@@ -54,15 +54,13 @@ class Boid: GameObject {
         
         setPosition(pos)
         setRotation(dir)
+        
+        self.edges()
     }
     
     func steerTowards(vector: SIMD3<Float>) -> SIMD3<Float> {
         let v = normalize(vector) * maxSpeed - vel
         return clamp(v, min: 0, max: maxSteerForce)
-    }
-    
-    override func doUpdate() {
-        self.edges()
     }
     
     public func edges() {

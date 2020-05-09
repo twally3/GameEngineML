@@ -1,27 +1,32 @@
 import simd
 import MetalKit
 
-class BoidManager {
-    public var boids: [Boid] = []
-    
+class BoidManager: InstancedGameObject {
     let spawnRadius: Float = 10
     let perceptionRadius: Float = 15
     let avoidanceRadius: Float = 1
+    let boidCount: Int = 50
     
     init() {
-        for _ in 0..<50 {
+        super.init(meshType: .Cube_Custom, instanceCount: boidCount, generateNodes: false)
+        for _ in 0..<boidCount {
             let position = normalize(SIMD3<Float>.random(in: -1...1)) * spawnRadius
             let forward = normalize(SIMD3<Float>.random(in: -1...1))
             
             let boid = Boid(pos: position, forward: forward)
-            boids.append(boid)
+            _nodes.append(boid)
         }
+        
+        var material = Material()
+        material.colour = SIMD4<Float>(0,0,0,1)
+        material.isLit = false
+        useMaterial(material)
     }
     
-    func update() {
+    func updateBoids() {
         var boidData: [BoidData] = []
 
-        for boid in boids {
+        for boid in _nodes as! [Boid] {
             let bd = BoidData(position: boid.pos, direction: boid.forward)
             boidData.append(bd)
         }
@@ -65,12 +70,12 @@ class BoidManager {
         let floatBuffer = UnsafeBufferPointer(start: ptr, count: numBoids)
         let resultArrOut = Array(floatBuffer)
         
-        for i in 0..<boids.count {
-            boids[i].avgFlockHeading = resultArrOut[i].flockHeading;
-            boids[i].centreOfFlockmates = resultArrOut[i].flockCentre;
-            boids[i].avgAvoidanceHeading = resultArrOut[i].avoidanceHeading;
-            boids[i].numPerceivedFlockmates = resultArrOut[i].numFlockmates;
-            boids[i].updateBoid()
+        for i in 0..<_nodes.count {
+            (_nodes as! [Boid])[i].avgFlockHeading = resultArrOut[i].flockHeading;
+            (_nodes as! [Boid])[i].centreOfFlockmates = resultArrOut[i].flockCentre;
+            (_nodes as! [Boid])[i].avgAvoidanceHeading = resultArrOut[i].avoidanceHeading;
+            (_nodes as! [Boid])[i].numPerceivedFlockmates = resultArrOut[i].numFlockmates;
+            (_nodes as! [Boid])[i].updateBoid()
         }
     }
     
