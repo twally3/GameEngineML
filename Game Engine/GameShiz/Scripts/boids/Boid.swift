@@ -43,6 +43,13 @@ class Boid: GameObject {
             acc += (alignmentForce + cohesionForce + seperationForce)
         }
         
+        if isHeadingForCollision() {            
+            let dir = self.headingDir()
+            let collisionForce = steerTowards(vector: dir) * 5
+            
+            acc += collisionForce
+        }
+        
         vel += acc * GameTime.deltaTime
         var speed: Float = length(vel)
         let dir = vel / speed
@@ -54,32 +61,71 @@ class Boid: GameObject {
         
         setPosition(pos)
         setRotation(dir)
-        
-        self.edges()
     }
     
     func steerTowards(vector: SIMD3<Float>) -> SIMD3<Float> {
-        let v = normalize(vector) * maxSpeed - vel
-        return clamp(v, min: 0, max: maxSteerForce)
+        let _v = normalize(vector)
+        let _len = length(_v)
+        let isBroke = _len == Float.nan || _len == -Float.nan
+        
+        let newV = isBroke ? SIMD3<Float>(0,0,0) : vector
+        
+        let v = newV * maxSpeed - vel
+        
+        let len = length(v)
+        var multiplier: Float = 1
+        if len > maxSteerForce {
+            multiplier = maxSteerForce / len
+        }
+        return v * multiplier
     }
     
-    public func edges() {
-        if self.pos.x < -self.bounds {
-            self.pos.x = self.bounds
-        } else if self.pos.x > self.bounds {
-            self.pos.x = -self.bounds
+    func isHeadingForCollision() -> Bool {
+        let dstThreshold: Float = 3
+        
+        if self.pos.x - dstThreshold < -self.bounds {
+            return true
+        } else if self.pos.x + dstThreshold > self.bounds {
+            return true
         }
         
-        if self.pos.y < -self.bounds {
-            self.pos.y = self.bounds
-        } else if self.pos.y > self.bounds {
-            self.pos.y = -self.bounds
+        if self.pos.y - dstThreshold < -self.bounds {
+            return true
+        } else if self.pos.y + dstThreshold > self.bounds {
+            return true
         }
         
-        if self.pos.z < -self.bounds {
-            self.pos.z = self.bounds
-        } else if self.pos.z > self.bounds {
-            self.pos.z = -self.bounds
+        if self.pos.z - dstThreshold < -self.bounds {
+            return true
+        } else if self.pos.z + dstThreshold > self.bounds {
+            return true
         }
+        
+        return false
+    }
+    
+    func headingDir() -> SIMD3<Float> {
+        let dstThreshold: Float = 10
+        var dir = SIMD3<Float>(0, 0, 0)
+        
+        if self.pos.x - dstThreshold < -self.bounds {
+            dir.x = -self.pos.x
+        } else if self.pos.x + dstThreshold > self.bounds {
+            dir.x = -self.pos.x
+        }
+
+        if self.pos.y - dstThreshold < -self.bounds {
+            dir.y = -self.pos.y
+        } else if self.pos.y + dstThreshold > self.bounds {
+            dir.y = -self.pos.y
+        }
+
+        if self.pos.z - dstThreshold < -self.bounds {
+            dir.z = -self.pos.z
+        } else if self.pos.z + dstThreshold > self.bounds {
+            dir.z = -self.pos.z
+        }
+        
+        return dir
     }
 }

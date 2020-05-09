@@ -4,7 +4,7 @@ import MetalKit
 class BoidManager: InstancedGameObject {
     let spawnRadius: Float = 10
     let perceptionRadius: Float = 15
-    let avoidanceRadius: Float = 1
+    let avoidanceRadius: Float = 10
     let boidCount: Int = 50
     
     init() {
@@ -19,11 +19,12 @@ class BoidManager: InstancedGameObject {
         
         var material = Material()
         material.colour = SIMD4<Float>(0,0,0,1)
-        material.isLit = false
+        material.isLit = true
         useMaterial(material)
     }
     
     func updateBoids() {
+//    override func doUpdate() {
         var boidData: [BoidData] = []
 
         for boid in _nodes as! [Boid] {
@@ -32,7 +33,7 @@ class BoidManager: InstancedGameObject {
         }
         
         let mapValuesBuffer = Engine.device!.makeBuffer(bytes: boidData,
-                                                        length: MemoryLayout<BoidData>.size * boidData.count,
+                                                        length: MemoryLayout<BoidData>.stride * boidData.count,
                                                         options: [])
                 
         let computePipelineState = self.createComputePipelineState()

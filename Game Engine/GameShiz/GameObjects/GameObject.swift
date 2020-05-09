@@ -28,8 +28,6 @@ extension GameObject: Renderable {
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         
-        renderCommandEncoder.setTriangleFillMode(.lines)
-        
         _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder,
                              material: _material,
                              baseColourTextureType: _baseColourTextureType)

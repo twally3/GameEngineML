@@ -16,9 +16,7 @@ class BoidsScene: Scene {
     }()
     
     let boidManager = BoidManager()
-    
-    var boids: [Boid] = []
-    
+
     override func buildScene() {
         camera.setPosition(-80, 100, 80)
         camera.rotateX(Float.pi / 4)
@@ -27,9 +25,7 @@ class BoidsScene: Scene {
         
         sun.setPosition(0, 150, 0)
         addLight(sun)
-        
-        addChild(cube2)
-        
+                
         addChild(boidManager)
     }
     
