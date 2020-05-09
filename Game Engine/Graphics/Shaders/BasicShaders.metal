@@ -50,3 +50,59 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     return half4(colour.r, colour.g, colour.b, colour.a);
 }
+
+//public struct BoidData {
+//    var position: SIMD3<Float>
+//    var direction: SIMD3<Float>
+//
+//    var flockHeading: SIMD3<Float> = SIMD3<Float>(repeating: 0)
+//    var flockCentre: SIMD3<Float> = SIMD3<Float>(repeating: 0)
+//    var avoidanceHeading: SIMD3<Float> = SIMD3<Float>(repeating: 0)
+//    var numFlockmates: Int = 0
+//}
+
+struct BoidData {
+    float3 position;
+    float3 direction;
+    float3 flockHeading;
+    float3 flockCentre;
+    float3 avoidanceHeading;
+    int numFlockmates;
+};
+
+kernel void compute_boid_positions(constant BoidData *boidData [[ buffer(0) ]],
+                                   constant int &numBoids [[ buffer(1) ]],
+                                   device float* result [[ buffer(2) ]],
+                                   uint boidIdx [[thread_position_in_grid]]) {
+    for (int i = 0; i < numBoids; i++) {
+        result[i] = i;
+    }
+}
+
+//kernel void compute_boid_positions(constant BoidData *boidData [[ buffer(0) ]],
+//                                   constant int &numBoids [[ buffer(1) ]],
+//                                   device float* result [[ buffer(2) ]],
+//                                   uint boidIdx [[thread_position_in_grid]]) {
+//    for (int i = 0; i < numBoids; i++) {
+//        result[i] = i;
+//    }
+//}
+
+//kernel void compute_boid_positions(texture2d<float, access::write> outputTexture [[texture(0)]],
+//                                   constant float *heights [[ buffer(0) ]],
+//                                   constant TerrainType *regions [[ buffer(1) ]],
+//                                   constant int &regionCount [[ buffer(2) ]],
+//                                   uint2 position [[thread_position_in_grid]]) {
+//    float heightValue = heights[position.y * outputTexture.get_width() + position.x];
+//
+//    float4 heightColour = float4(0.0, 0.0, 0.0, 1.0);
+//    for (int i = 0; i < regionCount; i++) {
+//        if (heightValue >= regions[i].height) {
+//            heightColour = regions[i].colour;
+//        } else {
+//            break;
+//        }
+//    }
+//
+//    outputTexture.write(heightColour, position);
+//}

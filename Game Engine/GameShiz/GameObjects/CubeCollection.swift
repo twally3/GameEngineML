@@ -14,7 +14,11 @@ class CubeCollection: InstancedGameObject {
         
         self.setName("Cube Collection")
         
-        setColour(ColourUtil.randomColour)
+//        setColour(ColourUtil.randomColour)
+        var material = Material()
+        material.isLit = false
+        material.colour = SIMD4<Float>(1, 0, 0, 1)
+        useMaterial(material)
     }
     
     var time: Float = 0.0

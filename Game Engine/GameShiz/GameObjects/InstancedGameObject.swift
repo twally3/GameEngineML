@@ -1,7 +1,10 @@
 import MetalKit
 
 class InstancedGameObject: Node {
-    private var _material = Material()
+//    private var _material = Material()
+    private var _material: Material? = nil
+    private var _baseColourTextureType: TextureTypes = .None
+    
     private var _mesh: Mesh!
     
     internal var _nodes: [Node] = []    
@@ -47,16 +50,26 @@ extension InstancedGameObject: Renderable {
         
         renderCommandEncoder.setFragmentBytes(&_material, length: Material.stride, index: 1)
         
-        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder)
+        _mesh.drawPrimitives(renderCommandEncoder: renderCommandEncoder,
+                             material: _material,
+                             baseColourTextureType: _baseColourTextureType)
     }
 }
 
 extension InstancedGameObject {
-    public func setColour(_ colour: SIMD4<Float>) {
-        self._material.colour = colour
+//    public func setColour(_ colour: SIMD4<Float>) {
+//        self._material.colour = colour
+//    }
+//    
+//    public func setColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
+//        setColour(SIMD4<Float>(r, g, b, a))
+//    }
+    
+    public func useBaseColourTexture(_ textureType: TextureTypes) {
+        self._baseColourTextureType = textureType
     }
     
-    public func setColour(_ r: Float, _ g: Float, _ b: Float, _ a: Float) {
-        setColour(SIMD4<Float>(r, g, b, a))
+    public func useMaterial(_ material: Material) {
+        _material = material
     }
 }

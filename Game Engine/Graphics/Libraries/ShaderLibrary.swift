@@ -19,6 +19,8 @@ enum ShaderTypes {
     
     case Terrain_Vertex
     case Terrain_Fragment
+    
+    case ComputeBoidPositions
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -70,6 +72,11 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "Terrain Fragment Shader", functionName: "terrain_fragment_shader"),
             forKey: .Terrain_Fragment
+        )
+        
+        _library.updateValue(
+            Shader(name: "Compute Boid Positions Shader", functionName: "compute_boid_positions"),
+            forKey: .ComputeBoidPositions
         )
     }
     
