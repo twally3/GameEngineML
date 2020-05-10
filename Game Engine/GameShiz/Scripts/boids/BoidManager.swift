@@ -4,7 +4,7 @@ import MetalKit
 class BoidManager: InstancedGameObject {
     let spawnRadius: Float = 10
     let perceptionRadius: Float = 15
-    let avoidanceRadius: Float = 10
+    let avoidanceRadius: Float = 20
     let boidCount: Int = 50
     
     init() {
@@ -24,7 +24,6 @@ class BoidManager: InstancedGameObject {
     }
     
     func updateBoids() {
-//    override func doUpdate() {
         var boidData: [BoidData] = []
 
         for boid in _nodes as! [Boid] {
@@ -71,12 +70,14 @@ class BoidManager: InstancedGameObject {
         let floatBuffer = UnsafeBufferPointer(start: ptr, count: numBoids)
         let resultArrOut = Array(floatBuffer)
         
+        let nodes = _nodes as! [Boid]
+        
         for i in 0..<_nodes.count {
-            (_nodes as! [Boid])[i].avgFlockHeading = resultArrOut[i].flockHeading;
-            (_nodes as! [Boid])[i].centreOfFlockmates = resultArrOut[i].flockCentre;
-            (_nodes as! [Boid])[i].avgAvoidanceHeading = resultArrOut[i].avoidanceHeading;
-            (_nodes as! [Boid])[i].numPerceivedFlockmates = resultArrOut[i].numFlockmates;
-            (_nodes as! [Boid])[i].updateBoid()
+            nodes[i].avgFlockHeading = resultArrOut[i].flockHeading;
+            nodes[i].centreOfFlockmates = resultArrOut[i].flockCentre;
+            nodes[i].avgAvoidanceHeading = resultArrOut[i].avoidanceHeading;
+            nodes[i].numPerceivedFlockmates = resultArrOut[i].numFlockmates;
+            nodes[i].updateBoid()
         }
     }
     
