@@ -266,14 +266,14 @@ class Quad_CustomMesh: Mesh {
 
 class Cube_CustomMesh: Mesh {
     override func createMesh() {
-        addVertex(position: SIMD3<Float>(-0.5, -0.5, -0.5), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 0
-        addVertex(position: SIMD3<Float>(-0.5, -0.5, 0.5), colour: SIMD4<Float>(0.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 1
-        addVertex(position: SIMD3<Float>(-0.5, 0.5, 0.5), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 2
-        addVertex(position: SIMD3<Float>(-0.5, 0.5, 0.5), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 3
-        addVertex(position: SIMD3<Float>(0.5, 0.5, 0.5), colour: SIMD4<Float>(1.0, 0.0, 0.5, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 4
-        addVertex(position: SIMD3<Float>(0.5, -0.5, -0.5), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 5
-        addVertex(position: SIMD3<Float>(0.5, 0.5, -0.5), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 6
-        addVertex(position: SIMD3<Float>(0.5, -0.5, 0.5), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 7
+        addVertex(position: SIMD3<Float>(0, 0, 0), colour: SIMD4<Float>(1.0, 0.5, 0.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 0
+        addVertex(position: SIMD3<Float>(0, 0, 1.0), colour: SIMD4<Float>(0.0, 1.0, 0.5, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 1
+        addVertex(position: SIMD3<Float>(0, 1.0, 1.0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 2
+        addVertex(position: SIMD3<Float>(0, 1.0, 0), colour: SIMD4<Float>(1.0, 0.0, 1.0, 1.0), normal: SIMD3<Float>(-1, 0, 0)) // 3
+        addVertex(position: SIMD3<Float>(1.0, 1.0, 1.0), colour: SIMD4<Float>(1.0, 0.0, 0.5, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 4
+        addVertex(position: SIMD3<Float>(1.0, 0, 0), colour: SIMD4<Float>(0.0, 1.0, 0.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 5
+        addVertex(position: SIMD3<Float>(1.0, 1.0, 0), colour: SIMD4<Float>(0.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 6
+        addVertex(position: SIMD3<Float>(1.0, 0, 1.0), colour: SIMD4<Float>(1.0, 0.5, 1.0, 1.0), normal: SIMD3<Float>(1, 0, 0)) // 7
         
         addSubmesh(Submesh(indices: [0, 1, 2, 0, 2, 3,
                                      4, 5, 6, 5, 4, 7,
