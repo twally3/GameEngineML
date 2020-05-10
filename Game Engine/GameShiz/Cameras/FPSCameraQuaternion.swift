@@ -57,7 +57,7 @@ class FPSCameraQuaternion: Camera {
         let strafe = SIMD3<Float>(x: mat[0][0], y: mat[1][0], z: mat[2][0])
         
         
-        let speed: Float = 20
+        let speed: Float = 2
 
         self.move(delta: (-dz * forward + dx * strafe) * speed * GameTime.deltaTime)
     }

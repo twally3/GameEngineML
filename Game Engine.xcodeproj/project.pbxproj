@@ -125,6 +125,8 @@
 		50472A82245F7D5000A7B89B /* TerrainChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50472A81245F7D5000A7B89B /* TerrainChunk.swift */; };
 		505092B0241065C5005EE0F5 /* SkyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505092AF241065C5005EE0F5 /* SkyBox.swift */; };
 		505092B22410665A005EE0F5 /* SkyBoxShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 505092B12410665A005EE0F5 /* SkyBoxShaders.metal */; };
+		50559C55246872BC00AD7351 /* BoundingSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50559C54246872BC00AD7351 /* BoundingSphere.swift */; };
+		50559C57246873FE00AD7351 /* HitResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50559C56246873FE00AD7351 /* HitResult.swift */; };
 		5057803A23BC21BD0088F513 /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057803923BC21BD0088F513 /* SeededRandom.swift */; };
 		50599180245E083600EAA702 /* HeightMapSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059917F245E083600EAA702 /* HeightMapSettings.swift */; };
 		50599182245E095000EAA702 /* MeshSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50599181245E095000EAA702 /* MeshSettings.swift */; };
@@ -140,6 +142,10 @@
 		50609BF02465A61B00E9F734 /* QuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BEF2465A61B00E9F734 /* QuadTree.swift */; };
 		50609BF22465F1A000E9F734 /* BoidManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BF12465F1A000E9F734 /* BoidManager.swift */; };
 		50609BF42465F54000E9F734 /* Boid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BF32465F54000E9F734 /* Boid.swift */; };
+		50609BF82468528800E9F734 /* SphereScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BF72468528800E9F734 /* SphereScene.swift */; };
+		50609BFA246853EA00E9F734 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BF9246853EA00E9F734 /* Sphere.swift */; };
+		50609BFC2468677A00E9F734 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BFB2468677A00E9F734 /* Ray.swift */; };
+		50609BFE2468704E00E9F734 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50609BFB2468677A00E9F734 /* Ray.swift */; };
 		5067174A23A6C8A500C31239 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174923A6C8A500C31239 /* Keyboard.swift */; };
 		5067174C23A6C9BE00C31239 /* Keycodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174B23A6C9BE00C31239 /* Keycodes.swift */; };
 		5067174E23A6CC5700C31239 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5067174D23A6CC5700C31239 /* Mouse.swift */; };
@@ -240,6 +246,8 @@
 		50472A81245F7D5000A7B89B /* TerrainChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainChunk.swift; sourceTree = "<group>"; };
 		505092AF241065C5005EE0F5 /* SkyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyBox.swift; sourceTree = "<group>"; };
 		505092B12410665A005EE0F5 /* SkyBoxShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SkyBoxShaders.metal; sourceTree = "<group>"; };
+		50559C54246872BC00AD7351 /* BoundingSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingSphere.swift; sourceTree = "<group>"; };
+		50559C56246873FE00AD7351 /* HitResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitResult.swift; sourceTree = "<group>"; };
 		5057803923BC21BD0088F513 /* SeededRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandom.swift; sourceTree = "<group>"; };
 		5059917F245E083600EAA702 /* HeightMapSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightMapSettings.swift; sourceTree = "<group>"; };
 		50599181245E095000EAA702 /* MeshSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshSettings.swift; sourceTree = "<group>"; };
@@ -258,6 +266,9 @@
 		50609BEF2465A61B00E9F734 /* QuadTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadTree.swift; sourceTree = "<group>"; };
 		50609BF12465F1A000E9F734 /* BoidManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidManager.swift; sourceTree = "<group>"; };
 		50609BF32465F54000E9F734 /* Boid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boid.swift; sourceTree = "<group>"; };
+		50609BF72468528800E9F734 /* SphereScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereScene.swift; sourceTree = "<group>"; };
+		50609BF9246853EA00E9F734 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
+		50609BFB2468677A00E9F734 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		5067174923A6C8A500C31239 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		5067174B23A6C9BE00C31239 /* Keycodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycodes.swift; sourceTree = "<group>"; };
 		5067174D23A6CC5700C31239 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
@@ -543,6 +554,16 @@
 			path = boids;
 			sourceTree = "<group>";
 		};
+		50609BFD2468677F00E9F734 /* hitTest */ = {
+			isa = PBXGroup;
+			children = (
+				50609BFB2468677A00E9F734 /* Ray.swift */,
+				50559C54246872BC00AD7351 /* BoundingSphere.swift */,
+				50559C56246873FE00AD7351 /* HitResult.swift */,
+			);
+			path = hitTest;
+			sourceTree = "<group>";
+		};
 		5067174823A6C89500C31239 /* Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +662,7 @@
 				5069B016241417AB00B062EB /* Terrain.swift */,
 				5037718E244E426C00DE5076 /* TheSuzannes.swift */,
 				50377193244E5D4A00DE5076 /* Chest.swift */,
+				50609BF9246853EA00E9F734 /* Sphere.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -661,6 +683,7 @@
 				50DABBF623BA77D400E95FDE /* DefaultScene.swift */,
 				50C94CFD240BF2FD00A56AD8 /* TerrainScene.swift */,
 				50609BE824657B1700E9F734 /* BoidsScene.swift */,
+				50609BF72468528800E9F734 /* SphereScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -678,6 +701,7 @@
 		50DABBFA23BAA02C00E95FDE /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				50609BFD2468677F00E9F734 /* hitTest */,
 				50609BEA2465A5D100E9F734 /* boids */,
 				5059917E245E081F00EAA702 /* data */,
 				50DABBFB23BAA0D200E95FDE /* Noise.swift */,
@@ -856,6 +880,7 @@
 				503401652449A76500BFA35E /* FalloffGenerator.swift in Sources */,
 				503401642449A74C00BFA35E /* FPSCameraQuaternion.swift in Sources */,
 				50347A18242FA987006A695D /* MeshLibrary.swift in Sources */,
+				50609BFE2468704E00E9F734 /* Ray.swift in Sources */,
 				50347A35242FAA01006A695D /* LightObject.swift in Sources */,
 				50347A26242FA9F8006A695D /* Noise.swift in Sources */,
 				50347A33242FAA01006A695D /* Quad.swift in Sources */,
@@ -941,7 +966,9 @@
 				5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */,
 				505D1A6C23A3842C00813A05 /* Preferences.swift in Sources */,
 				50215E4523A82A0300B0C166 /* Cruiser.swift in Sources */,
+				50609BF82468528800E9F734 /* SphereScene.swift in Sources */,
 				503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */,
+				50559C55246872BC00AD7351 /* BoundingSphere.swift in Sources */,
 				50BC8ECC23A6B5D6003544A5 /* Scene.swift in Sources */,
 				50215E2B23A7F19400B0C166 /* Shared.metal in Sources */,
 				50BC8EB723A545BF003544A5 /* RenderPipelineStateLibrary.swift in Sources */,
@@ -956,6 +983,8 @@
 				50A4646B23A710F7000D562D /* Cube.swift in Sources */,
 				50609BF42465F54000E9F734 /* Boid.swift in Sources */,
 				5069B017241417AB00B062EB /* Terrain.swift in Sources */,
+				50609BFA246853EA00E9F734 /* Sphere.swift in Sources */,
+				50609BFC2468677A00E9F734 /* Ray.swift in Sources */,
 				509A6BD2243D00CB002B556E /* FalloffGenerator.swift in Sources */,
 				5069B0192414190E00B062EB /* TerrainShaders.metal in Sources */,
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,
@@ -982,6 +1011,7 @@
 				50377194244E5D4A00DE5076 /* Chest.swift in Sources */,
 				5067174E23A6CC5700C31239 /* Mouse.swift in Sources */,
 				50599180245E083600EAA702 /* HeightMapSettings.swift in Sources */,
+				50559C57246873FE00AD7351 /* HitResult.swift in Sources */,
 				50A4646723A705B9000D562D /* DebugCamera.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

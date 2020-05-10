@@ -18,5 +18,5 @@ class Preferences {
 
     public static var mainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
     
-    public static var startingSceneType: SceneTypes = .Boids
+    public static var startingSceneType: SceneTypes = .Sphere
 }

@@ -43,6 +43,10 @@ extension GameObject {
     public func useMaterial(_ material: Material) {
         _material = material
     }
+    
+    public func getMaterial() -> Material? {
+        return _material
+    }
 
     public func setMesh(_ mesh: Mesh) {
         self._mesh = mesh

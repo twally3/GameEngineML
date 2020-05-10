@@ -5,6 +5,7 @@ enum SceneTypes {
     case Default
     case Terrain
     case Boids
+    case Sphere
 }
 
 class SceneManager {
@@ -24,6 +25,8 @@ class SceneManager {
             _currentScene = TerrainScene(name: "Terrain")
         case .Boids:
             _currentScene = BoidsScene(name: "Boids")
+        case .Sphere:
+            _currentScene = SphereScene(name: "Sphere")
         }
     }
     
