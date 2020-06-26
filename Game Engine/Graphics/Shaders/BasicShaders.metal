@@ -14,8 +14,12 @@ vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
     rd.colour = vIn.colour;
     rd.textureCoordinate = vIn.textureCoordinate;
     rd.worldPosition = worldPosition.xyz;
-    rd.surfaceNormal = (modelConstants.modelMatrix * float4(vIn.normal, 0.0)).xyz;
     rd.toCameraVector = sceneConstants.cameraPosition - worldPosition.xyz;
+    
+    rd.surfaceNormal = (modelConstants.modelMatrix * float4(vIn.normal, 0.0)).xyz;
+    rd.surfaceTangent = (modelConstants.modelMatrix * float4(vIn.tangent, 0.0)).xyz;
+    rd.surfaceBitangent = (modelConstants.modelMatrix * float4(vIn.bitangent, 0.0)).xyz;
+    
     
     return rd;
 }
@@ -25,7 +29,8 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
                                      constant int &lightCount [[ buffer(2) ]],
                                      constant LightData *lightDatas [[ buffer(3)]],
                                      sampler sampler2d [[ sampler(0) ]],
-                                     texture2d<float> baseColourMap [[ texture(0) ]]) {
+                                     texture2d<float> baseColourMap [[ texture(0) ]],
+                                     texture2d<float> baseNormalMap [[ texture(1) ]]) {
     
     float2 textCoord = rd.textureCoordinate;
     
@@ -36,6 +41,12 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     if (material.isLit) {
         float3 unitNormal = normalize(rd.surfaceNormal);
+        if (!is_null_texture(baseNormalMap)) {
+            float3 sampleNormal = baseNormalMap.sample(sampler2d, textCoord).rgb * 2 - 1;
+            float3x3 tbn = { rd.surfaceTangent, rd.surfaceBitangent, rd.surfaceNormal };
+            unitNormal = tbn * sampleNormal;
+        }
+        
         float3 unitToCameraVector = normalize(rd.toCameraVector);
         
 //        float3 phongIntensity = totalAmbient + totalDiffuse + totalSpecular;

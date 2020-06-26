@@ -25,6 +25,8 @@ struct Vertex: sizeable {
     var colour: SIMD4<Float>
     var textureCoordinate: SIMD2<Float>
     var normal: SIMD3<Float>
+    var tangent: SIMD3<Float>
+    var bitangent: SIMD3<Float>
 }
 
 extension Int32: sizeable {}
