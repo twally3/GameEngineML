@@ -4,6 +4,12 @@ enum TextureTypes{
     case None
     case PartyPirateParot
     case Cruiser
+    
+    case MetalPlate_Diffuse
+    case MetalPlate_Normal
+    
+    case Well_Diffuse
+    case Well_Normal
 }
 
 class TextureLibrary: Library<TextureTypes, MTLTexture> {
@@ -12,6 +18,12 @@ class TextureLibrary: Library<TextureTypes, MTLTexture> {
     override func fillLibrary() {
         _library.updateValue(Texture("PartyPirateParot"), forKey: .PartyPirateParot)
         _library.updateValue(Texture("cruiser", ext: "bmp", origin: .bottomLeft), forKey: .Cruiser)
+        
+        _library.updateValue(Texture("metal_plate_diff"), forKey: .MetalPlate_Diffuse)
+        _library.updateValue(Texture("metal_plate_nor"), forKey: .MetalPlate_Normal)
+        
+        _library.updateValue(Texture("well-diff"), forKey: .Well_Diffuse)
+        _library.updateValue(Texture("well-normal"), forKey: .Well_Normal)
     }
     
     override subscript(_ type: TextureTypes) -> MTLTexture? {
