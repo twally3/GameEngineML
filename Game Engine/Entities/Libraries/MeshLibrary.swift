@@ -11,6 +11,15 @@ enum MeshTypes {
     case TheSuzannes
     case Quad
     case Well
+    
+    // Terrain pack stuff
+    case GroundGrass
+    case TreePineA
+    case TreePineB
+    case TreePineC
+    case FlowerRed
+    case FlowerYellow
+    case FlowerPurple
 }
 
 class MeshLibrary: Library<MeshTypes, Mesh> {
@@ -27,6 +36,15 @@ class MeshLibrary: Library<MeshTypes, Mesh> {
         _library.updateValue(Mesh(modelName: "chest"), forKey: .Chest)
         _library.updateValue(Mesh(modelName: "TheSuzannes"), forKey: .TheSuzannes)
         _library.updateValue(Mesh(modelName: "well"), forKey: .Well)
+        
+        // Terrain pack stuff
+        _library.updateValue(Mesh(modelName: "ground_grass"), forKey: .GroundGrass)
+        _library.updateValue(Mesh(modelName: "tree_pineTallA_detailed"), forKey: .TreePineA)
+        _library.updateValue(Mesh(modelName: "tree_pineDefaultB"), forKey: .TreePineB)
+        _library.updateValue(Mesh(modelName: "tree_pineRoundC"), forKey: .TreePineC)
+        _library.updateValue(Mesh(modelName: "flower_redA"), forKey: .FlowerRed)
+        _library.updateValue(Mesh(modelName: "flower_yellowA"), forKey: .FlowerYellow)
+        _library.updateValue(Mesh(modelName: "flower_purpleA"), forKey: .FlowerPurple)
     }
     
     override subscript(_ type: MeshTypes) -> Mesh {
@@ -240,7 +258,7 @@ class Submesh {
         let baseColourTex = customBaseColourTextureType == .None ? _baseColourTexture : Entities.textures[customBaseColourTextureType]
         renderCommandEncoder.setFragmentTexture(baseColourTex, index: 0)
         
-        let baseNormalMapTex = customBaseColourTextureType == .None ? _baseNormalMapTexture : Entities.textures[customBaseNormalMapTextureType]
+        let baseNormalMapTex = customBaseNormalMapTextureType == .None ? _baseNormalMapTexture : Entities.textures[customBaseNormalMapTextureType]
         renderCommandEncoder.setFragmentTexture(baseNormalMapTex, index: 1)
     }
     
