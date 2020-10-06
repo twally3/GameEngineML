@@ -30,6 +30,10 @@
 		50215E4923A8337200B0C166 /* LightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4823A8337200B0C166 /* LightManager.swift */; };
 		50215E4B23A8355B00B0C166 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50215E4A23A8355B00B0C166 /* Sun.swift */; };
 		50215E4D23A8365900B0C166 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 50215E4C23A8365900B0C166 /* sphere.obj */; };
+		5028F894252D123A007FFA03 /* Trees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5028F893252D123A007FFA03 /* Trees.swift */; };
+		5028F899252D13F8007FFA03 /* Flowers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5028F898252D13F8007FFA03 /* Flowers.swift */; };
+		5028F89F252D15A5007FFA03 /* tent_smallOpen.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 5028F89E252D15A5007FFA03 /* tent_smallOpen.mtl */; };
+		5028F8A7252D15DA007FFA03 /* tent_smallOpen.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5028F8A6252D15DA007FFA03 /* tent_smallOpen.obj */; };
 		5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 50377189244E423900DE5076 /* TheSuzannes.mtl */; };
 		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
 		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
@@ -136,6 +140,10 @@
 		50215E4823A8337200B0C166 /* LightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightManager.swift; sourceTree = "<group>"; };
 		50215E4A23A8355B00B0C166 /* Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sun.swift; sourceTree = "<group>"; };
 		50215E4C23A8365900B0C166 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		5028F893252D123A007FFA03 /* Trees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trees.swift; sourceTree = "<group>"; };
+		5028F898252D13F8007FFA03 /* Flowers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flowers.swift; sourceTree = "<group>"; };
+		5028F89E252D15A5007FFA03 /* tent_smallOpen.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = tent_smallOpen.mtl; sourceTree = "<group>"; };
+		5028F8A6252D15DA007FFA03 /* tent_smallOpen.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = tent_smallOpen.obj; sourceTree = "<group>"; };
 		50377189244E423900DE5076 /* TheSuzannes.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.mtl; sourceTree = "<group>"; };
 		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
 		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 		50215E3423A80B2100B0C166 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				5028F89D252D1582007FFA03 /* tent */,
 				503D8D202522248900E9DF13 /* terrain */,
 				503D8D1F2522248500E9DF13 /* trees */,
 				503D8D1E2522247A00E9DF13 /* flowers */,
@@ -319,6 +328,15 @@
 				50215E3E23A8250700B0C166 /* cruiser.obj */,
 			);
 			path = cruiser;
+			sourceTree = "<group>";
+		};
+		5028F89D252D1582007FFA03 /* tent */ = {
+			isa = PBXGroup;
+			children = (
+				5028F89E252D15A5007FFA03 /* tent_smallOpen.mtl */,
+				5028F8A6252D15DA007FFA03 /* tent_smallOpen.obj */,
+			);
+			path = tent;
 			sourceTree = "<group>";
 		};
 		5037718D244E424D00DE5076 /* suzannes */ = {
@@ -556,6 +574,8 @@
 				5037718E244E426C00DE5076 /* TheSuzannes.swift */,
 				50377193244E5D4A00DE5076 /* Chest.swift */,
 				508BF71224A68BAA004570B7 /* Well.swift */,
+				5028F893252D123A007FFA03 /* Trees.swift */,
+				5028F898252D13F8007FFA03 /* Flowers.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -694,6 +714,7 @@
 			files = (
 				501BB90F244F56F9007797BA /* chest.obj in Resources */,
 				50215E4D23A8365900B0C166 /* sphere.obj in Resources */,
+				5028F8A7252D15DA007FFA03 /* tent_smallOpen.obj in Resources */,
 				50215E4123A8250700B0C166 /* cruiser.obj in Resources */,
 				503D8D2B2522249200E9DF13 /* tree_pineDefaultB.obj in Resources */,
 				503D8D272522249200E9DF13 /* tree_pineTallA_detailed.mtl in Resources */,
@@ -706,6 +727,7 @@
 				503D8D3D252224A300E9DF13 /* flower_redA.mtl in Resources */,
 				503D8D41252224A300E9DF13 /* flower_purpleA.obj in Resources */,
 				503D8D332522249B00E9DF13 /* ground_grass.obj in Resources */,
+				5028F89F252D15A5007FFA03 /* tent_smallOpen.mtl in Resources */,
 				50B4556E24A68B1E00241CA4 /* well-normal.png in Resources */,
 				504D89F424A664F2002F9BFE /* quad.obj in Resources */,
 				505D1A3723A2F4EA00813A05 /* Assets.xcassets in Resources */,
@@ -784,11 +806,13 @@
 				50215E3823A80D0E00B0C166 /* TextureLibrary.swift in Sources */,
 				50A4647223A7BF00000D562D /* InstancedGameObject.swift in Sources */,
 				50A4646B23A710F7000D562D /* Cube.swift in Sources */,
+				5028F894252D123A007FFA03 /* Trees.swift in Sources */,
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
 				50215E1F23A7E43B00B0C166 /* Entities.swift in Sources */,
 				50215E4923A8337200B0C166 /* LightManager.swift in Sources */,
 				505D1A6423A313B100813A05 /* MetalTypes.swift in Sources */,
+				5028F899252D13F8007FFA03 /* Flowers.swift in Sources */,
 				50BC8EBE23A670ED003544A5 /* MeshLibrary.swift in Sources */,
 				5067174A23A6C8A500C31239 /* Keyboard.swift in Sources */,
 				50BC8EC923A6AAF9003544A5 /* Maths.swift in Sources */,

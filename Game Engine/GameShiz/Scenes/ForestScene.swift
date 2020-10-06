@@ -25,66 +25,17 @@ class ForestScene: Scene {
         addLight(light)
         
         let terrain = GameObject(name: "Terrain", meshType: .GroundGrass)
-        terrain.setScale(SIMD3<Float>(repeating: 100))
-        
-        let treeCount = 200
-        let radius: Float = 10
-        
-        let well = GameObject(name: "Well", meshType: .Well)
-        well.setScale(SIMD3<Float>(repeating: 0.3))
-        addChild(well)
-        
-        for i in 0..<treeCount {
-            let tree = GameObject(name: "Tree", meshType: selectRandomTreeMeshType())
-            let pos = SIMD3<Float>(cos(Float(i)) * radius + Float.random(in: -2...2),
-                                   0,
-                                   sin(Float(i)) * radius + Float.random(in: -5...5))
-            tree.setPosition(pos)
-            tree.setScale(SIMD3<Float>(repeating: Float.random(in: 1...2)))
-            tree.rotateY(Float.random(in: 0...360))
-            addChild(tree)
-        }
-        
-        let flowerCount = 200
-        for _ in 0..<flowerCount {
-            let flower = GameObject(name: "Flower", meshType: selectRandomFlowerMeshType())
-            let pos = SIMD3<Float>(Float.random(in: -(radius - 1)...(radius + 1)),
-                                   0,
-                                   Float.random(in: -(radius - 1)...(radius + 1)))
-            
-            flower.setPosition(pos)
-            flower.rotateY(Float.random(in: 0...360))
-            addChild(flower)
-        }
-        
+        terrain.setScale(SIMD3<Float>(repeating: 200))
         addChild(terrain)
-    }
-    
-    private func selectRandomTreeMeshType() -> MeshTypes {
-        let rand = Int.random(in: 0..<3)
-        switch rand {
-        case 0:
-            return .TreePineA
-        case 1:
-            return .TreePineB
-        case 2:
-            return .TreePineC
-        default:
-            return .TreePineA
-        }
-    }
-    
-    private func selectRandomFlowerMeshType() -> MeshTypes {
-        let rand = Int.random(in: 0..<3)
-        switch rand {
-        case 0:
-            return .FlowerRed
-        case 1:
-            return .FlowerYellow
-        case 2:
-            return .FlowerPurple
-        default:
-            return .FlowerRed
-        }
+        
+        let tent = GameObject(name: "Tent", meshType: .Tent_Opened)
+        tent.rotateY(Float(20).toRadians)
+        addChild(tent)
+        
+        let trees = Trees(treeACount: 1000, treeBCount: 1000, treeCCount: 1000)
+        addChild(trees)
+        
+        let flowers = Flowers(flowerRedCount: 1000, flowerPurpleCount: 1000, flowerYellowCount: 1000)
+        addChild(flowers)   
     }
 }

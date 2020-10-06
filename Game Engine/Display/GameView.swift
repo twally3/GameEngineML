@@ -9,13 +9,13 @@ class GameView: MTKView {
         
         self.device = MTLCreateSystemDefaultDevice()
         
+        self.renderer = Renderer(self)
         Engine.ignite(device: device!)
         
         self.clearColor = Preferences.clearColour
         self.colorPixelFormat = Preferences.mainPixelFormat
         self.depthStencilPixelFormat = Preferences.mainDepthPixelFormat
         
-        self.renderer = Renderer(self)
         self.delegate = renderer
     }
     

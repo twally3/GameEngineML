@@ -11,12 +11,16 @@ vertex RasterizerData instanced_vertex_shader(const VertexIn vIn [[ stage_in ]],
     ModelConstants modelConstant = modelConstants[instanceId];
     
     float4 worldPosition = modelConstant.modelMatrix * float4(vIn.position, 1);
+    
     rd.position = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * worldPosition;
     rd.colour = vIn.colour;
     rd.textureCoordinate = vIn.textureCoordinate;
     rd.worldPosition = worldPosition.xyz;
-    rd.surfaceNormal = (modelConstant.modelMatrix * float4(vIn.normal, 1.0)).xyz;
     rd.toCameraVector = sceneConstants.cameraPosition - worldPosition.xyz;
+    
+    rd.surfaceNormal = normalize(modelConstant.modelMatrix * float4(vIn.normal, 0.0)).xyz;
+    rd.surfaceTangent = normalize(modelConstant.modelMatrix * float4(vIn.tangent, 0.0)).xyz;
+    rd.surfaceBitangent = normalize(modelConstant.modelMatrix * float4(vIn.bitangent, 0.0)).xyz;
     
     return rd;
 }
