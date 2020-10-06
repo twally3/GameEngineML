@@ -25,12 +25,16 @@ public:
             
             float3 ambientness = material.ambient * lightData.ambientIntensity;
             float3 ambientColour = clamp(ambientness * lightData.colour * lightData.brightness, 0.0, 1.0);
-            totalAmbient += ambientColour;
             
             float3 diffuseness = material.diffuse * lightData.diffuseIntensity;
-            float nDotL = max(dot(unitNormal, unitToLightVector), 0.0);
-            float3 diffuseColour = clamp(diffuseness * nDotL * lightData.colour * lightData.brightness, 0.0, 1.0);
+            float nDotL = dot(unitNormal, unitToLightVector);
+            float correctedNDotL = max(nDotL, 0.3);
+            float3 diffuseColour = clamp(diffuseness * correctedNDotL * lightData.colour * lightData.brightness, 0.0, 1.0);
             totalDiffuse += diffuseColour;
+            
+            if (nDotL <= 0) {
+                totalAmbient += ambientColour;
+            }
             
             float3 specularness = material.specular * lightData.specularIntensity;
             float rDotV = max(dot(unitReflectionVector, unitToCameraVector), 0.0);
