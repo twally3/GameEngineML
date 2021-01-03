@@ -38,6 +38,10 @@
 		5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5037718A244E423900DE5076 /* TheSuzannes.obj */; };
 		5037718F244E426C00DE5076 /* TheSuzannes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037718E244E426C00DE5076 /* TheSuzannes.swift */; };
 		50377194244E5D4A00DE5076 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50377193244E5D4A00DE5076 /* Chest.swift */; };
+		503A983A25A25380009DD93C /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = 503A983925A25380009DD93C /* clouds.png */; };
+		503A983F25A25389009DD93C /* skysphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 503A983E25A25389009DD93C /* skysphere.obj */; };
+		503A984725A2540D009DD93C /* SkySphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A984625A2540D009DD93C /* SkySphere.swift */; };
+		503A984C25A255A5009DD93C /* SkySphereShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503A984B25A255A5009DD93C /* SkySphereShaders.metal */; };
 		503B90DC23AF9C4800F30DBE /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */; };
 		503B90DE23AFCA7600F30DBE /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 503B90DD23AFCA7600F30DBE /* Lighting.metal */; };
 		503D8D122522236F00E9DF13 /* ForestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D8D112522236F00E9DF13 /* ForestScene.swift */; };
@@ -148,6 +152,10 @@
 		5037718A244E423900DE5076 /* TheSuzannes.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheSuzannes.obj; sourceTree = "<group>"; };
 		5037718E244E426C00DE5076 /* TheSuzannes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheSuzannes.swift; sourceTree = "<group>"; };
 		50377193244E5D4A00DE5076 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
+		503A983925A25380009DD93C /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		503A983E25A25389009DD93C /* skysphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skysphere.obj; sourceTree = "<group>"; };
+		503A984625A2540D009DD93C /* SkySphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkySphere.swift; sourceTree = "<group>"; };
+		503A984B25A255A5009DD93C /* SkySphereShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SkySphereShaders.metal; sourceTree = "<group>"; };
 		503B90DB23AF9C4800F30DBE /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
 		503B90DD23AFCA7600F30DBE /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
 		503D8D112522236F00E9DF13 /* ForestScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestScene.swift; sourceTree = "<group>"; };
@@ -297,6 +305,7 @@
 				50215E2C23A7F1C400B0C166 /* BasicShaders.metal */,
 				50215E2E23A7F20700B0C166 /* InstancedShaders.metal */,
 				503B90DD23AFCA7600F30DBE /* Lighting.metal */,
+				503A984B25A255A5009DD93C /* SkySphereShaders.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -304,6 +313,7 @@
 		50215E3423A80B2100B0C166 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				503A983825A2532C009DD93C /* skysphere */,
 				5028F89D252D1582007FFA03 /* tent */,
 				503D8D202522248900E9DF13 /* terrain */,
 				503D8D1F2522248500E9DF13 /* trees */,
@@ -357,6 +367,15 @@
 				501BB90B244F56F8007797BA /* chest.obj */,
 			);
 			path = chest;
+			sourceTree = "<group>";
+		};
+		503A983825A2532C009DD93C /* skysphere */ = {
+			isa = PBXGroup;
+			children = (
+				503A983E25A25389009DD93C /* skysphere.obj */,
+				503A983925A25380009DD93C /* clouds.png */,
+			);
+			path = skysphere;
 			sourceTree = "<group>";
 		};
 		503D8D1E2522247A00E9DF13 /* flowers */ = {
@@ -576,6 +595,7 @@
 				508BF71224A68BAA004570B7 /* Well.swift */,
 				5028F893252D123A007FFA03 /* Trees.swift */,
 				5028F898252D13F8007FFA03 /* Flowers.swift */,
+				503A984625A2540D009DD93C /* SkySphere.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -719,6 +739,7 @@
 				503D8D2B2522249200E9DF13 /* tree_pineDefaultB.obj in Resources */,
 				503D8D272522249200E9DF13 /* tree_pineTallA_detailed.mtl in Resources */,
 				503D8D2A2522249200E9DF13 /* tree_pineDefaultB.mtl in Resources */,
+				503A983A25A25380009DD93C /* clouds.png in Resources */,
 				501BB910244F56F9007797BA /* Chest_Wood_Base_Color.png in Resources */,
 				5037718B244E423900DE5076 /* TheSuzannes.mtl in Resources */,
 				503D8D2C2522249200E9DF13 /* tree_pineTallA_detailed.obj in Resources */,
@@ -745,6 +766,7 @@
 				503D8D3E252224A300E9DF13 /* flower_yellowA.mtl in Resources */,
 				5037718C244E423900DE5076 /* TheSuzannes.obj in Resources */,
 				503D8D282522249200E9DF13 /* tree_pineRoundC.obj in Resources */,
+				503A983F25A25389009DD93C /* skysphere.obj in Resources */,
 				501BB911244F56F9007797BA /* Chest_Metal_Base_Color.png in Resources */,
 				504D89F924A664FB002F9BFE /* metal_plate_nor.png in Resources */,
 				50215E4223A8250700B0C166 /* cruiser.bmp in Resources */,
@@ -809,6 +831,7 @@
 				5028F894252D123A007FFA03 /* Trees.swift in Sources */,
 				50A4646923A707F5000D562D /* CameraManager.swift in Sources */,
 				505D1A3323A2F4E800813A05 /* AppDelegate.swift in Sources */,
+				503A984C25A255A5009DD93C /* SkySphereShaders.metal in Sources */,
 				50215E1F23A7E43B00B0C166 /* Entities.swift in Sources */,
 				50215E4923A8337200B0C166 /* LightManager.swift in Sources */,
 				505D1A6423A313B100813A05 /* MetalTypes.swift in Sources */,
@@ -824,6 +847,7 @@
 				50377194244E5D4A00DE5076 /* Chest.swift in Sources */,
 				5067174E23A6CC5700C31239 /* Mouse.swift in Sources */,
 				50A4646723A705B9000D562D /* DebugCamera.swift in Sources */,
+				503A984725A2540D009DD93C /* SkySphere.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

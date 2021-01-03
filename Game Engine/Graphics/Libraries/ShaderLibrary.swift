@@ -4,9 +4,11 @@ enum ShaderTypes {
     // Vertex
     case Basic_Vertex
     case Instanced_Vertex
+    case SkySphere_Vertex
 
     // Fragment
     case Basic_Fragment
+    case SkySphere_Fragment
 }
 
 class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
@@ -26,6 +28,16 @@ class ShaderLibrary: Library<ShaderTypes, MTLFunction> {
         _library.updateValue(
             Shader(name: "Basic Fragment Shader", functionName: "basic_fragment_shader"),
             forKey: .Basic_Fragment
+        )
+        
+        _library.updateValue(
+            Shader(name: "SkySphere Vertex Shader", functionName: "skysphere_vertex_shader"),
+            forKey: .SkySphere_Vertex
+        )
+        
+        _library.updateValue(
+            Shader(name: "SkySphere Fragment Shader", functionName: "skysphere_fragment_shader"),
+            forKey: .SkySphere_Fragment
         )
     }
     

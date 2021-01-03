@@ -32,6 +32,7 @@ struct ModelConstants {
 struct SceneConstants {
     float4x4 viewMatrix;
     float4x4 projectionMatrix;
+    float4x4 skyViewMatrix;
     float3 cameraPosition;
 };
 

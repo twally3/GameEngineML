@@ -1,6 +1,8 @@
 import MetalKit
 
 class GameObject: Node {
+    var renderPipelineStateType: RenderPipelineStateTypes { .Basic }
+
     private var _modelConstants = ModelConstants()
     private var _mesh: Mesh!
     
@@ -22,7 +24,7 @@ class GameObject: Node {
 
 extension GameObject: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[.Basic])
+        renderCommandEncoder.setRenderPipelineState(Graphics.renderPipelineStates[self.renderPipelineStateType])
         renderCommandEncoder.setDepthStencilState(Graphics.depthStencilStates[.Less])
         
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)

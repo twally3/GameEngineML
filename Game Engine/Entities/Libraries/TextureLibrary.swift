@@ -10,6 +10,8 @@ enum TextureTypes{
     
     case Well_Diffuse
     case Well_Normal
+    
+    case Clouds_Skysphere
 }
 
 class TextureLibrary: Library<TextureTypes, MTLTexture> {
@@ -24,6 +26,8 @@ class TextureLibrary: Library<TextureTypes, MTLTexture> {
         
         _library.updateValue(Texture("well-diff"), forKey: .Well_Diffuse)
         _library.updateValue(Texture("well-normal"), forKey: .Well_Normal)
+        
+        _library.updateValue(Texture("clouds", origin: .bottomLeft), forKey: .Clouds_Skysphere)
     }
     
     override subscript(_ type: TextureTypes) -> MTLTexture? {
