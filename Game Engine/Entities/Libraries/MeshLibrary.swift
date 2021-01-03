@@ -21,6 +21,8 @@ enum MeshTypes {
     case FlowerYellow
     case FlowerPurple
     case Tent_Opened
+    
+    case SkySphere
 }
 
 class MeshLibrary: Library<MeshTypes, Mesh> {
@@ -47,6 +49,8 @@ class MeshLibrary: Library<MeshTypes, Mesh> {
         _library.updateValue(Mesh(modelName: "flower_yellowA"), forKey: .FlowerYellow)
         _library.updateValue(Mesh(modelName: "flower_purpleA"), forKey: .FlowerPurple)
         _library.updateValue(Mesh(modelName: "tent_smallOpen"), forKey: .Tent_Opened)
+        
+        _library.updateValue(Mesh(modelName: "skysphere"), forKey: .SkySphere)
     }
     
     override subscript(_ type: MeshTypes) -> Mesh {

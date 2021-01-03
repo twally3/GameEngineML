@@ -42,6 +42,7 @@ struct ModelConstants: sizeable {
 struct SceneConstants: sizeable {
     var viewMatrix = matrix_identity_float4x4
     var projectionMatrix = matrix_identity_float4x4
+    var skyViewMatrix = matrix_identity_float4x4
     var cameraPosition = SIMD3<Float>(repeating: 0)
 }
 

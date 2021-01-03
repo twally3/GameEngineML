@@ -3,6 +3,7 @@ import MetalKit
 enum RenderPipelineStateTypes {
     case Basic
     case Instanced
+    case SkySphere
 }
 
 class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPipelineState> {
@@ -11,6 +12,7 @@ class RenderPipelineStateLibrary: Library<RenderPipelineStateTypes, MTLRenderPip
     override func fillLibrary() {
         _library.updateValue(Basic_RenderPipelineState(), forKey: .Basic)
         _library.updateValue(Instanced_RenderPipelineState() , forKey: .Instanced)
+        _library.updateValue(SkySphere_RenderPipelineState(), forKey: .SkySphere)
     }
     
     override subscript(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState {
@@ -57,6 +59,22 @@ class Instanced_RenderPipelineState: RenderPipelineState {
         
         renderPipelineDescriptor.vertexFunction = Graphics.shaders[.Instanced_Vertex]
         renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.Basic_Fragment]
+        
+        super.init(renderPipelineDescriptor: renderPipelineDescriptor)
+    }
+}
+
+class SkySphere_RenderPipelineState: RenderPipelineState {
+    init() {
+        let renderPipelineDescriptor = MTLRenderPipelineDescriptor()
+        renderPipelineDescriptor.label = "SkySphere Render Pipeline Descriptor"
+
+        renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
+        renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
+        
+        renderPipelineDescriptor.vertexFunction = Graphics.shaders[.SkySphere_Vertex]
+        renderPipelineDescriptor.fragmentFunction = Graphics.shaders[.SkySphere_Fragment]
         
         super.init(renderPipelineDescriptor: renderPipelineDescriptor)
     }
