@@ -30,13 +30,21 @@ class TextureLibrary: Library<TextureTypes, MTLTexture> {
         _library.updateValue(Texture("clouds", origin: .bottomLeft), forKey: .Clouds_Skysphere)
     }
     
+    func setTexture(textureType: TextureTypes, texture: MTLTexture) {
+        _library.updateValue(Texture(texture: texture), forKey: textureType)
+    }
+    
     override subscript(_ type: TextureTypes) -> MTLTexture? {
         return _library[type]?.texture
     }
 }
 
-class Texture {
+private class Texture {
     var texture: MTLTexture!
+    
+    init(texture: MTLTexture) {
+        self.texture = texture
+    }
     
     init(_ textureName: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft){
         let textureLoader = TextureLoader(textureName: textureName, textureExtension: ext, origin: origin)

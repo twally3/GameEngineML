@@ -12,8 +12,6 @@ class Engine {
         
         Graphics.initialize()
         
-        Entities.initialise()
-        
-        SceneManager.initialize(Preferences.startingSceneType)
+        Assets.initialise()
     }
 }
