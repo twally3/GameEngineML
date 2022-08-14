@@ -38,6 +38,7 @@ class Basic_RenderPipelineState: RenderPipelineState {
         renderPipelineDescriptor.label = "Basic Render Pipeline Descriptor"
 
         renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.colorAttachments[1].pixelFormat = Preferences.mainPixelFormat
         renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
         renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
         
@@ -54,6 +55,7 @@ class Instanced_RenderPipelineState: RenderPipelineState {
         renderPipelineDescriptor.label = "Instanced Render Pipeline Descriptor"
 
         renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.colorAttachments[1].pixelFormat = Preferences.mainPixelFormat
         renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
         renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
         
@@ -70,6 +72,7 @@ class SkySphere_RenderPipelineState: RenderPipelineState {
         renderPipelineDescriptor.label = "SkySphere Render Pipeline Descriptor"
 
         renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat
+        renderPipelineDescriptor.colorAttachments[1].pixelFormat = Preferences.mainPixelFormat
         renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.mainDepthPixelFormat
         renderPipelineDescriptor.vertexDescriptor = Graphics.vertexDescriptors[.Basic]
         

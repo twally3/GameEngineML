@@ -17,6 +17,8 @@ class GameView: MTKView {
         self.colorPixelFormat = Preferences.mainPixelFormat
         self.depthStencilPixelFormat = Preferences.mainDepthPixelFormat
         
+        self.framebufferOnly = false
+        
         self.delegate = renderer
     }
     
