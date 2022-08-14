@@ -9,6 +9,7 @@ class Renderer: NSObject {
     init(_ mtkView: MTKView) {
         super.init()
         updateScreenSize(view: mtkView)
+        SceneManager.setScene(sceneType: Preferences.startingSceneType)
     }
 }
 
@@ -23,16 +24,17 @@ extension Renderer: MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
-        guard let drawable = view.currentDrawable, let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
+        guard let drawable = view.currentDrawable, let sceneRenderPassDescriptor = view.currentRenderPassDescriptor else { return }
+        SceneManager.update(deltaTime: 1.0 / Float(view.preferredFramesPerSecond))
         
         let commandBuffer = Engine.commandQueue.makeCommandBuffer()
-        commandBuffer?.label = "My Command Buffer"
+        commandBuffer?.label = "Base Command Buffer"
         
-        let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        renderCommandEncoder?.label = "My Render Command Encoder"
+        let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: sceneRenderPassDescriptor)
+        renderCommandEncoder?.label = "Scene Render Command Encoder"
         
-        renderCommandEncoder?.pushDebugGroup("Starting Render")
-        SceneManager.tickScene(renderCommandEncoder: renderCommandEncoder!, deltaTime: 1 / Float(view.preferredFramesPerSecond))
+        renderCommandEncoder?.pushDebugGroup("Starting Scene Render")
+        SceneManager.render(renderCommandEncoder: renderCommandEncoder!)
         renderCommandEncoder?.popDebugGroup()
         
         renderCommandEncoder?.endEncoding()
